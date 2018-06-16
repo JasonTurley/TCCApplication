@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCCApplication", "TCCApplication\TCCApplication.csproj", "{911C10ED-DDFB-4834-8A98-1E763E6B5CD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SmokeTest", "SmokeTest", "{48237D3F-EF79-40C8-B034-C99DC5DBFAFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmokeTest", "UnitTestProject1\SmokeTest.csproj", "{42518154-0D45-47DA-97C6-DB83D7167B98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{911C10ED-DDFB-4834-8A98-1E763E6B5CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911C10ED-DDFB-4834-8A98-1E763E6B5CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911C10ED-DDFB-4834-8A98-1E763E6B5CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911C10ED-DDFB-4834-8A98-1E763E6B5CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42518154-0D45-47DA-97C6-DB83D7167B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42518154-0D45-47DA-97C6-DB83D7167B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42518154-0D45-47DA-97C6-DB83D7167B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42518154-0D45-47DA-97C6-DB83D7167B98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42518154-0D45-47DA-97C6-DB83D7167B98} = {48237D3F-EF79-40C8-B034-C99DC5DBFAFE}
+	EndGlobalSection
+EndGlobal

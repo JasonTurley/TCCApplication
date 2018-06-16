@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dapplo.CaliburnMicro.Dapp</name>
+    </assembly>
+    <members>
+        <member name="T:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper">
+            <summary>
+                An implementation of the Caliburn Micro Bootstrapper which is started from the Dapplo ApplicationBootstrapper (MEF)
+                and uses this.
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.#ctor(Dapplo.Addons.IBootstrapper)">
+            <summary>
+            CaliburnMicroBootstrapper
+            </summary>
+            <param name="bootstrapper">Used to inject, export and locate</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.ShutdownAsync(System.Threading.CancellationToken)">
+            <summary>
+                Shutdown Caliburn
+            </summary>
+            <param name="token">CancellationToken</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.BuildUp(System.Object)">
+            <summary>
+                Fill imports of the supplied instance
+            </summary>
+            <param name="instance">some object to fill</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.Configure">
+            <summary>
+                Configure the Dapplo.Addon.Bootstrapper with the AssemblySource.Instance values
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.ConfigureViewLocator">
+            <summary>
+                Add logic to find the base viewtype if the default locator can't find a view.
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.GetAllInstances(System.Type)">
+            <summary>
+                Return all instances of a certain service type
+            </summary>
+            <param name="service">Type</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.GetInstance(System.Type,System.String)">
+            <summary>
+                Locate an instance of a service, used in Caliburn.
+            </summary>
+            <param name="service">Type for the service to locate</param>
+            <param name="contractName">string with the name of the contract</param>
+            <returns>instance of the service</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.CaliburnMicroBootstrapper.SelectAssemblies">
+            <summary>
+                Return all assemblies that the Dapplo bootstrapper knows, this is used to find your views and viewmodels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Dapp.Dapplication">
+            <summary>
+                This extends the System.Windows.Application to make it easier to startup you application.
+                It will initialize MEF, Caliburn.Micro, handle exceptions and more.
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Dapplication.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+                Create the Dapplication for the specified application name
+                The mutex is created and locked in the contructor, and some of your application logic might depend on this.
+                Additionally the current or a matching IniConfig and LanguageLoader are added to help resoving confiration and
+                language imports.
+            </summary>
+            <param name="applicationName">Name of your application</param>
+            <param name="mutexId">
+                string with an ID for your mutex, preferably a Guid. If the mutex can't be locked, the
+                bootstapper will not  be able to "bootstrap".
+            </param>
+            <param name="global">Is the mutex a global or local block (false means only in this Windows session)</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Dapplication.#ctor(Dapplo.Addons.Bootstrapper.ApplicationBootstrapper)">
+            <summary>
+                Create the Dapplication for the ApplicationBootstrapper
+            </summary>
+            <param name="applicationBootstrapper">a configured ApplicationBootstrapper</param>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Dapp.Dapplication.Bootstrapper">
+            <summary>
+                Allows access to the Dapplo.Addons.ApplicationBootstrapper
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Dapp.Dapplication.Current">
+            <summary>
+                Access the current Dapplication
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Dapp.Dapplication.OnAlreadyRunning">
+            <summary>
+                This function is called when the application is alreay running
+                Facts:
+                1: it will be run on the UI thread and
+                2: Caliburn.Micro is actually fully configured
+                3: Dapplo Startup is NOT made, so you have no access to ILanguage etc (yet?)
+                4: The application will be shut down for you, when the function returns and uses the returned error code for the exit
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Dapplication.OnStartup(System.Windows.StartupEventArgs)">
+            <summary>
+                Make sure we startup everything after WPF instanciated
+            </summary>
+            <param name="startupEventArgs">StartupEventArgs</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Dapplication.StopBootstrapperAsync">
+            <summary>
+                Helper method to stop the bootstrapper, if needed
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Dapp.Dapplication.OnUnhandledDispatcherException">
+            <summary>
+                This is called when exceptions occure inside a dispatched call
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Dapplication.HandleDispatcherException(System.Object,System.Windows.Threading.DispatcherUnhandledExceptionEventArgs)">
+            <summary>
+                This is called when Exceptions are not handled inside the applications dispatcher
+                It will call the OnUnhandledException action, which can be used to display a message.
+                Only when an action is assigned, and not throw an exception, the application will not be terminated.
+            </summary>
+            <param name="sender">Sender of this event</param>
+            <param name="eventArgs">DispatcherUnhandledExceptionEventArgs</param>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Dapp.Dapplication.OnUnhandledAppDomainException">
+            <summary>
+                This is called when exceptions occure inside the AppDomain (everywhere)
+                Exception is the reason, the boolean specifies if your application will be terminated.
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Dapplication.HandleAppDomainException(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+                This is called when Exceptions are not handled inside the (current) AppDomain
+                It will call the OnUnhandledAppDomainException action, which can be used to display a message.
+                Implementing an action can NOT prevent termination of your application!
+                It may, or may not, be terminated
+            </summary>
+            <param name="sender">Sender of this event</param>
+            <param name="eventArgs">UnhandledExceptionEventArgs</param>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Dapp.Dapplication.ObserveUnhandledTaskException">
+            <summary>
+                Specifies if an UnhandledTaskException is logged and processed
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Dapp.Dapplication.OnUnhandledTaskException">
+            <summary>
+                This is called when exceptions occure inside Tasks (everywhere)
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Dapplication.HandleTaskException(System.Object,System.Threading.Tasks.UnobservedTaskExceptionEventArgs)">
+            <summary>
+                This is called when Exceptions are not handled inside Tasks
+                It will call the OnUnhandledTaskException action, which can be used to display a message or do something else.
+                In .NET before 4.5 this would terminate your application, since 4.5 it does not.
+                Unless you change the configuration, see
+                <a
+                    href="https://msdn.microsoft.com/en-us/library/system.threading.tasks.taskscheduler.unobservedtaskexception.aspx">
+                    here
+                </a>
+            </summary>
+            <param name="sender">Sender of this event</param>
+            <param name="eventArgs">UnobservedTaskExceptionEventArgs</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Dapp.Services.ShellStartupAction">
+            <summary>
+            This takes care of showing the shell(s)
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Dapp.Services.ShellStartupAction.StartAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

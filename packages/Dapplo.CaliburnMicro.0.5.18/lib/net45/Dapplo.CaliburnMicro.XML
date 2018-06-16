@@ -1,0 +1,968 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dapplo.CaliburnMicro</name>
+    </assembly>
+    <members>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.AttachedBehavior">
+            <summary>
+                This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.AttachedBehavior.Register(System.Func{System.Windows.DependencyObject,Dapplo.CaliburnMicro.Behaviors.IBehavior})">
+            <summary>
+                Register a behavior to a DependencyObject
+            </summary>
+            <param name="behaviorFactory">Func with DependencyObject and IBehavior</param>
+            <returns>AttachedBehavior</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.AttachedBehavior.Update(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+                Update (or create) the Behavior for the DependencyObject
+            </summary>
+            <param name="host">DependencyObject</param>
+            <param name="propertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.Behavior`1">
+            <summary>
+                This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+            </summary>
+            <typeparam name="THost">DependencyObject</typeparam>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.#ctor(`0)">
+            <summary>
+                Constructor
+            </summary>
+            <param name="uiElement">DependencyObject</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.Attach(`0)">
+            <summary>
+                Attach this Behavior to the specified DependencyObject
+            </summary>
+            <param name="host">THost which extends DependencyObject</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.Detach(`0)">
+            <summary>
+                Remove this Behavior from the specified DependencyObject
+            </summary>
+            <param name="host">THost which extends DependencyObject</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.IsApplicable(`0)">
+            <summary>
+                Returns if the Behavior is applicable for the specified DependencyObject
+            </summary>
+            <param name="host">THost which extends DependencyObject</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.TryUpdate(System.Action{`0})">
+            <summary>
+                Let the behavior update it's "stuffT for the specified host
+            </summary>
+            <param name="updateAction">Action of THost (which extends DependencyObject)</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.Update(`0,System.Nullable{System.Windows.DependencyPropertyChangedEventArgs})">
+            <summary>
+                Let the behavior update it's "stuffT for the specified host
+            </summary>
+            <param name="uiElement">THost which extends DependencyObject</param>
+            <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.IsApplicable">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.Attach">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.Detach">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.Behavior`1.Update(System.Nullable{System.Windows.DependencyPropertyChangedEventArgs})">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility">
+            <summary>
+                Change the visibility of a UIElement depending on a boolean
+                This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.ValueProperty">
+            <summary>
+                The value to check
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.WhenTrueProperty">
+            <summary>
+                What needs to be done when true
+                Default is Visibility.Visible
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.WhenFalseProperty">
+            <summary>
+                What needs to be done when false
+                Default is Visibility.Collapsed
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.GetValue(System.Windows.UIElement)">
+            <summary>
+                Returns the value from the UIElement of the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>object which represents the value of the in ValueProperty specified DependencyProperty</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.GetWhenFalse(System.Windows.UIElement)">
+            <summary>
+                Returns the value which is used when the boolean is false
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>Visibility</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.GetWhenTrue(System.Windows.UIElement)">
+            <summary>
+                Returns the value which is used when the boolean is true
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>Visibility</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.SetValue(System.Windows.UIElement,System.Boolean)">
+            <summary>
+                Sets the value of the UIElement to the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="value">Value to assign to the in ValueProperty specified DependencyProperty</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.SetWhenFalse(System.Windows.UIElement,System.Windows.Visibility)">
+            <summary>
+                Sets the value which is used when the boolean is false
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="visibility">Visibility to use when matched</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.SetWhenTrue(System.Windows.UIElement,System.Windows.Visibility)">
+            <summary>
+                Sets the value which is used when the boolean is true
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="visibility">Visibility to use when matched</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.BooleanVisibility.BooleanVisibilityBehavior">
+            <summary>
+                Implementation of the actual behavior logic of the BooleanVisibilityBehavior
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.ValueChecker`1">
+            <summary>
+                This handles the checking of values
+                This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+            </summary>
+            <typeparam name="TValue">The type of the value to work with</typeparam>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Behaviors.ValueChecker`1.IsMatch">
+            <summary>
+                Returns if the value
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Behaviors.ValueChecker`1.TargetValue">
+            <summary>
+                The value to check against (this can be a comma separated list which will be parsed)
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Behaviors.ValueChecker`1.Value">
+            <summary>
+                The actual value of the property
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.ValueChecker`1.ParseTargetValues">
+            <summary>
+                Parse the target value(s), this also depends on the type of the value so it should be called no matter which
+                changes
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.ValueChecker`1.Update(`0,System.String)">
+            <summary>
+                Either the value or the targetValue has been changed, update this
+            </summary>
+            <param name="value">Value to check</param>
+            <param name="targetValue">possible value(s)</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.EnumVisibility">
+            <summary>
+                Change the visibility of a UIElement depending on an enum value
+                This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.ValueProperty">
+            <summary>
+                The value to check
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.TargetValueProperty">
+            <summary>
+                Possible value(s) which the target should have to match
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.WhenMatchedProperty">
+            <summary>
+                Visibility to use when the value matches
+                Default is Visibility.Visible
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.WhenNotMatchedProperty">
+            <summary>
+                Visibility to use when the value doesn't match
+                Default is Visibility.Collapsed
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.GetTargetValue(System.Windows.UIElement)">
+            <summary>
+                Returns the value from the UIElement of the DependencyProperty specified in TargetValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>object which represents the value of the in TargetValueProperty specified DependencyProperty</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.GetValue(System.Windows.UIElement)">
+            <summary>
+                Returns the value from the UIElement of the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>object which represents the value of the in ValueProperty specified DependencyProperty</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.GetWhenMatched(System.Windows.UIElement)">
+            <summary>
+                Returns the value which is used when the enum value matches
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>Visibility</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.GetWhenNotMatched(System.Windows.UIElement)">
+            <summary>
+                Returns the value which is used when the enum value doesn't match
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>Visibility</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.OnArgumentsChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+                When the arguments change, the Behavior.Update is called
+            </summary>
+            <param name="dependencyObject">DependencyObject</param>
+            <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.SetTargetValue(System.Windows.UIElement,System.String)">
+            <summary>
+                Sets the value of the UIElement to the DependencyProperty specified in TargetValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="value">Value to assign to the in TargetValueProperty specified DependencyProperty</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.SetValue(System.Windows.UIElement,System.Object)">
+            <summary>
+                Sets the value of the UIElement to the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="value">Value to assign to the in ValueProperty specified DependencyProperty</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.SetWhenMatched(System.Windows.UIElement,System.Windows.Visibility)">
+            <summary>
+                Sets the value which is used when the enum value matches
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="visibility">Visibility to use when matched</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.SetWhenNotMatched(System.Windows.UIElement,System.Windows.Visibility)">
+            <summary>
+                Sets the value which is used when the enum value doesn't match
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="visibility">Visibility to use when matched</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.EnumVisibility.EnumVisibilityBehavior">
+            <summary>
+                Implementation of the actual behavior logic of the EnumVisibilityBehavior
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.IBehavior">
+            <summary>
+                Interface for the behavior
+                This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.IBehavior.Attach">
+            <summary>
+                Attach the behavior
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.IBehavior.Detach">
+            <summary>
+                AttachDetach the behavior
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.IBehavior.IsApplicable">
+            <summary>
+                Can the behavior be used?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.IBehavior.Update(System.Nullable{System.Windows.DependencyPropertyChangedEventArgs})">
+            <summary>
+                Update the behavior
+            </summary>
+            <param name="dependencyPropertyChangedEventArgs">optional DependencyPropertyChangedEventArgs</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon">
+            <summary>
+                This class contains a behavior to assist in setting an Icon of a e.g. Window or TaskbarIcon via a FrameworkElement
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.ValueProperty">
+            <summary>
+                The icon to set
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.TargetValueProperty">
+            <summary>
+                What is the target property which should used for the icon
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.Behavior">
+            <summary>
+                Use the IconBehavior
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.GetTargetValue(System.Windows.UIElement)">
+            <summary>
+                Returns the value from the UIElement of the DependencyProperty specified in TargetValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>string which represents the name of the target property</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.GetValue(System.Windows.UIElement)">
+            <summary>
+                Returns the value from the UIElement of the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>object which represents the value of the in ValueProperty specified DependencyProperty</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.OnArgumentsChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+                When the arguments change, the Behavior.Update is called
+            </summary>
+            <param name="dependencyObject">DependencyObject</param>
+            <param name="dependencyPropertyChangedEventArgs">DependencyPropertyChangedEventArgs</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.SetTargetValue(System.Windows.UIElement,System.String)">
+            <summary>
+                Sets the value of the UIElement to the DependencyProperty specified in TargetValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="value">Value to assign to the in TargetValueProperty specified DependencyProperty</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.SetValue(System.Windows.UIElement,System.Windows.FrameworkElement)">
+            <summary>
+                Sets the value of the UIElement to the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="value">Value to assign to the in ValueProperty specified DependencyProperty</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.FrameworkElementIcon.IconBehavior">
+            <summary>
+                Implementation of the actual behavior logic of the EnumVisibilityBehavior
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.NullVisibility">
+            <summary>
+                Change the visibility of a UiElement depending on a target value
+                This code comes from <a href="http://www.executableintent.com/attached-behaviors-part-2-framework/">here</a>
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.NullVisibility.ValueProperty">
+            <summary>
+                The value to check
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.NullVisibility.WhenNullProperty">
+            <summary>
+                Visibility to use when the value is null
+                Default is Visibility.Collapsed
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.Behaviors.NullVisibility.WhenNotNullProperty">
+            <summary>
+                Visibility to use when the value is not null
+                Default is Visibility.Visible
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.NullVisibility.GetValue(System.Windows.UIElement)">
+            <summary>
+                Returns the value from the UIElement of the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>object which represents the value of the in ValueProperty specified DependencyProperty</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.NullVisibility.GetWhenNotNull(System.Windows.UIElement)">
+            <summary>
+                Returns the visibility which is used when the value is not null
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>Visibility</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.NullVisibility.GetWhenNull(System.Windows.UIElement)">
+            <summary>
+                Returns the visibility which is used when the value is null
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <returns>Visibility</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.NullVisibility.SetValue(System.Windows.UIElement,System.Object)">
+            <summary>
+                Sets the value of the UIElement to the DependencyProperty specified in ValueProperty.
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="value">Value to assign to the in ValueProperty specified DependencyProperty</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.NullVisibility.SetWhenNotNull(System.Windows.UIElement,System.Windows.Visibility)">
+            <summary>
+                Sets the visibility which is used when the value is not null
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="visibility">Visibility to use when matched</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Behaviors.NullVisibility.SetWhenNull(System.Windows.UIElement,System.Windows.Visibility)">
+            <summary>
+                Sets the visibility which is used when the value is null
+            </summary>
+            <param name="uiElement">UIElement</param>
+            <param name="visibility">Visibility to use when matched</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Behaviors.NullVisibility.NullVisibilityBehavior">
+            <summary>
+                Implementation of the NullVisibilityBehavior
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.CaliburnLogger">
+            <summary>
+                A logger for Caliburn
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.CaliburnLogger.#ctor(System.Type)">
+            <summary>
+                The constructor is called from the LogManager.GetLog function with the type to log for
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.CaliburnLogger.Error(System.Exception)">
+            <summary>
+                Log an error
+            </summary>
+            <param name="exception"></param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.CaliburnLogger.Info(System.String,System.Object[])">
+            <summary>
+                Log information, this is actually reduced to the Dapplo-Level debug as Caliburn speaks a lot!
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.CaliburnLogger.Warn(System.String,System.Object[])">
+            <summary>
+                Log warning
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Configuration.IUiConfiguration">
+            <summary>
+            This is a configuration for some of the UI behavior
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Configuration.IUiConfiguration.DefaultWindowStartupLocation">
+            <summary>
+            Defines the default value of the startup location for windows
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Configuration.IUiConfiguration.AreWindowLocationsStored">
+            <summary>
+            Defines if the locations of the windows are stored, so if they open again it's at the same location
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Configuration.IUiConfiguration.WindowLocations">
+            <summary>
+            A store for the window locations
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Configurers.PlacementViewConfigurer">
+            <summary>
+            This takes care that windows can store their locations, the ViewModel needs to extend IMaintainPosition
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.PlacementViewConfigurer.#ctor(Dapplo.CaliburnMicro.Configuration.IUiConfiguration)">
+            <summary>
+            The constructor for the PlacementViewConfigurer
+            </summary>
+            <param name="uiConfiguration">IUiConfiguration</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.PlacementViewConfigurer.ConfigureWindowView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.PlacementViewConfigurer.ConfigureDialogView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Configurers.DpiAwareViewConfigurer">
+            <summary>
+            This takes care that every window is DPI aware
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.DpiAwareViewConfigurer.ConfigureWindowView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.DpiAwareViewConfigurer.ConfigureDialogView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Configurers.CultureViewConfigurer">
+            <summary>
+            This takes care that every window is using the current culture for binding
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.CultureViewConfigurer.ConfigureWindowView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.CultureViewConfigurer.ConfigureDialogView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Configurers.IconViewConfigurer">
+            <summary>
+            This takes care that windows become their icons
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.IconViewConfigurer.ConfigureWindowView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Configurers.IconViewConfigurer.ConfigureDialogView(System.Windows.Window,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Converters.HasInterfaceConverter">
+            <summary>
+            This can be used to test if a value is a type which implements a certain interface
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Converters.HasInterfaceConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Converters.HasInterfaceConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Converters.InvertBooleanConverter">
+            <summary>
+            This helps to flip the boolean binding
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Converters.InvertBooleanConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Converters.InvertBooleanConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.DapploWindowManager">
+            <summary>
+                This extends the WindowManager to add some additional settings
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.DapploWindowManager.UiConfiguration">
+            <summary>
+            Defines the configuration for the UI
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.DapploWindowManager.ConfigureWindows">
+            <summary>
+            These imports make it possible to configure every window that is created
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.DapploWindowManager.ConfigureDialogs">
+            <summary>
+            These imports make it possible to configure every dialog that is created
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.ShowPopup(System.Object,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.ShowDialog(System.Object,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.ShowWindow(System.Object,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.CreatePage(System.Object,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.CreatePopup(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.CreateWindow(System.Object,System.Boolean,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.CreateCustomWindow(System.Object,System.Object,System.Boolean)">
+            <summary>
+                Create the window type for this window manager
+            </summary>
+            <param name="model">object with the model</param>
+            <param name="view">object with the view</param>
+            <param name="isDialog">specifies if this is a dialog</param>
+            <returns>Window</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.DapploWindowManager.EnsureWindow(System.Object,System.Object,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Extensions.DisplayNameBinding">
+            <summary>
+                Binding describing all information needed for binding names
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.DisplayNameBinding.#ctor(System.IObservable{System.Reactive.EventPattern{System.ComponentModel.PropertyChangedEventArgs}},System.ComponentModel.INotifyPropertyChanged)">
+            <summary>
+                Create the name binding object
+            </summary>
+            <param name="observable"></param>
+            <param name="notifyPropertyChanged"></param>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Extensions.DisplayNameBinding.Disposables">
+            <summary>
+                All bindings are stored here
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Extensions.DisplayNameBinding.NotifyPropertyChanged">
+            <summary>
+                The source of the events
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.Extensions.DisplayNameBinding.Observable">
+            <summary>
+                Observable as event provider for the name binding
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.DisplayNameBinding.Dispose">
+            <summary>
+                Dispose the underlying bindings which are stored in a CompositeDisposable
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Extensions.PropertyChangeExtensions">
+            <summary>
+                Extensions for DependencyObject s
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.PropertyChangeExtensions.OnPropertyChanged``1(``0,System.String)">
+            <summary>
+                Create an observable for the INotifyPropertyChanged
+            </summary>
+            <param name="source">INotifyPropertyChanged</param>
+            <param name="propertyNamePattern">Optional property name / pattern</param>
+            <typeparam name="T">INotifyPropertyChanged</typeparam>
+            <returns>IObservable with PropertyChangedEventArgs</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.PropertyChangeExtensions.OnPropertyChangedPattern``1(``0,System.String)">
+            <summary>
+                Create an observable for the INotifyPropertyChanged, which returns the EventPattern containing the source
+            </summary>
+            <param name="source">INotifyPropertyChanged</param>
+            <param name="propertyNamePattern">Optional property name / pattern</param>
+            <typeparam name="T">INotifyPropertyChanged</typeparam>
+            <returns>IObservable with EventPattern of PropertyChangedEventArgs</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.PropertyChangeExtensions.OnPropertyChanging``1(``0,System.String)">
+            <summary>
+                Create an observable for the INotifyPropertyChanging
+            </summary>
+            <param name="source">INotifyPropertyChanging</param>
+            <param name="propertyNamePattern">Optional property name / pattern</param>
+            <typeparam name="T">INotifyPropertyChanging</typeparam>
+            <returns>IObservable with PropertyChangingEventArgs</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.PropertyChangeExtensions.OnPropertyChangingPattern``1(``0,System.String)">
+            <summary>
+                Create an observable for the INotifyPropertyChanging, which returns the EventPattern containing the source
+            </summary>
+            <param name="source">INotifyPropertyChanging</param>
+            <param name="propertyNamePattern">Optional property name / pattern</param>
+            <typeparam name="T">INotifyPropertyChanging</typeparam>
+            <returns>IObservable with EventPattern of PropertyChangingEventArgs</returns>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Extensions.TaskExtensions">
+            <summary>
+                Helper extensions for tasks
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.TaskExtensions.WaitWithNestedMessageLoop``1(System.Threading.Tasks.Task{``0})">
+            <summary>
+                Wait for the supplied task, copied from
+                <a
+                    href="https://blogs.msdn.microsoft.com/pfxteam/2012/04/13/should-i-expose-synchronous-wrappers-for-asynchronous-methods/">
+                    here
+                </a>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="task">Task to wait for</param>
+            <returns>the result</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.TaskExtensions.WaitWithNestedMessageLoop(System.Threading.Tasks.Task)">
+            <summary>
+                Wait for the supplied task, copied from
+                <a
+                    href="https://blogs.msdn.microsoft.com/pfxteam/2012/04/13/should-i-expose-synchronous-wrappers-for-asynchronous-methods/">
+                    here
+                </a>
+            </summary>
+            <param name="task">Task to wait for</param>
+            <returns>the result</returns>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Extensions.HaveDisplayNameExtensions">
+            <summary>
+                Extensions for IHaveDisplayName
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.HaveDisplayNameExtensions.AddDisplayNameBinding(Dapplo.CaliburnMicro.Extensions.DisplayNameBinding,Caliburn.Micro.IHaveDisplayName,System.String)">
+            <summary>
+                Add a displayname binding to the NameBinding
+            </summary>
+            <param name="displayNameBinding">NameBinding to bind to</param>
+            <param name="haveDisplayName">IHaveDisplayName</param>
+            <param name="propertyName">Name of the property in the original INotifyPropertyChanged object</param>
+            <returns>binding</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.HaveDisplayNameExtensions.CopyValue(Caliburn.Micro.IHaveDisplayName,System.Reactive.EventPattern{System.ComponentModel.PropertyChangedEventArgs})">
+            <summary>
+                Copy the value specified by the property name from the source to the haveDisplayName
+            </summary>
+            <param name="haveDisplayName">IHaveDisplayName</param>
+            <param name="eventPattern"></param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.HaveDisplayNameExtensions.CreateDisplayNameBinding(System.ComponentModel.INotifyPropertyChanged,Caliburn.Micro.IHaveDisplayName,System.String)">
+            <summary>
+                Create a binding between the INotifyPropertyChanged and optional IHaveDisplayName objects.
+            </summary>
+            <param name="notifyPropertyChanged">INotifyPropertyChanged</param>
+            <param name="haveDisplayName">optional IHaveDisplayName for the first binding</param>
+            <param name="propertyName">optional property name for the first binding</param>
+            <returns>NameBinding</returns>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Extensions.HaveIconExtensions">
+            <summary>
+                Extensions to simplify the usage of IHaveIcon
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.HaveIconExtensions.ApplyIconForegroundColor(System.Collections.Generic.IEnumerable{Dapplo.CaliburnMicro.IHaveIcon},System.Windows.Media.Brush)">
+            <summary>
+                Apply the specified Brush as Foreground for the Icons in the IEnumerable with IHaveIcon
+            </summary>
+            <param name="hasIcons">IEnumerable with IHaveIcon</param>
+            <param name="foregroundBrush">Brush for the Foreground</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.HaveIconExtensions.ApplyIconForegroundColor(Dapplo.CaliburnMicro.IHaveIcon,System.Windows.Media.Brush)">
+            <summary>
+                Apply the specified Brush as Foreground for the icon of the IHaveIcon
+            </summary>
+            <param name="haveIcon">IHaveIcon</param>
+            <param name="foregroundBrush">Brush for the Foreground</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.HaveIconExtensions.ApplyIconMargin(System.Collections.Generic.IEnumerable{Dapplo.CaliburnMicro.IHaveIcon},System.Windows.Thickness)">
+            <summary>
+                Apply the specified Thickness as margin to the Icons in the IEnumerable with IHaveIcon
+            </summary>
+            <param name="hasIcons">IEnumerable with IHaveIcon</param>
+            <param name="thickness">Thickness for the marging</param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.HaveIconExtensions.ApplyIconMargin(Dapplo.CaliburnMicro.IHaveIcon,System.Windows.Thickness)">
+            <summary>
+                Apply the specified Thickness as margin to the Icon in the IHaveIcon
+            </summary>
+            <param name="haveIcon">IHaveIcon</param>
+            <param name="thickness">Thickness for the marging</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.Extensions.IconExtensions">
+            <summary>
+                Extension method to support Icon conversion
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.IconExtensions.RemoveChild(System.Windows.DependencyObject,System.Windows.UIElement)">
+            <summary>
+                Disassociate the child from the parent
+            </summary>
+            <param name="parent"></param>
+            <param name="child"></param>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.IconExtensions.ToBitmapSource(System.Windows.FrameworkElement,System.Nullable{System.Windows.Size},System.Double,System.Double)">
+            <summary>
+                Render the frameworkElement to a BitmapSource
+            </summary>
+            <param name="frameworkElement">FrameworkElement</param>
+            <param name="size">Size, using the bound as size by default</param>
+            <param name="dpiX">Horizontal DPI settings</param>
+            <param name="dpiY">Vertical DPI settings</param>
+            <returns>BitmapSource</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.IconExtensions.ToIcon(System.Windows.FrameworkElement,System.Nullable{System.Int32})">
+            <summary>
+                Render the frameworkElement to a "GDI" Icon with the default size.
+            </summary>
+            <param name="frameworkElement">FrameworkElement</param>
+            <param name="size">Optional, specifies the size, if not given the system default is used</param>
+            <returns>Icon</returns>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.Extensions.IconExtensions.WriteAsIconToStream(System.Windows.FrameworkElement,System.IO.Stream,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+                Create a "GDI" icon from the supplied FrameworkElement, it is possible to specify multiple icon sizes.
+                Note: this doesn't work on Windows versions BEFORE Windows Vista!
+            </summary>
+            <param name="frameworkElement">FrameworkElement to convert to an icon</param>
+            <param name="stream">Stream to write to</param>
+            <param name="optionalIconSizes">
+                Optional, IEnumerable with icon sizes, default Icon sizes (as specified by windows):
+                16x16, 32x32, 48x48, 256x256
+            </param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.CaliburnStartOrder">
+            <summary>
+                Helps to structure the order of starting Dappo StartupActions
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.CaliburnStartOrder.Bootstrapper">
+            <summary>
+                This is the order which the CaliburnMicroBootstrapper uses, if you depend on this take a higher order!
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.CaliburnStartOrder.TrayIcons">
+            <summary>
+                This is the order for opening the TrayIcons, IF Dapplo.CaliburnMicro.NotifyIconWpf is used
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.CaliburnStartOrder.Shell">
+            <summary>
+                This is the order for the Shell
+            </summary>
+        </member>
+        <member name="F:Dapplo.CaliburnMicro.CaliburnStartOrder.User">
+            <summary>
+            From here on, Dapplo.CaliburnMicro is started and user code can use everything
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IMaintainPosition">
+            <summary>
+                This interface is implemented by ViewModels who's view can store their position in the configuration
+                The logic for storing and restoring is inside the PlacementViewConfigurer
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IAmDisplayable">
+            <summary>
+                This interface is implemented by elements that can be displayed
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IAmDisplayable.IsEnabled">
+            <summary>
+                Returns if the element can be selected (visible but not usable)
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IAmDisplayable.IsVisible">
+            <summary>
+                Returns if the element is visible (not visible and not usable)
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.ICanBeClicked">
+            <summary>
+            Marker interface to define that the component can be clicked
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.ICanBeClicked`1">
+            <summary>
+            Defines that a component can be clicked
+            </summary>
+            <typeparam name="TClickContent">Type of the information which is passed in the Click</typeparam>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.ICanBeClicked`1.Click(`0)">
+            <summary>
+                Is called when the component is clicked
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IConfigureDialogViews">
+            <summary>
+            Export with this interface to be able to configure dialog views
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.IConfigureDialogViews.ConfigureDialogView(System.Windows.Window,System.Object)">
+            <summary>
+            This is called, so you can configure the dialog view
+            </summary>
+            <param name="view">Window for the view</param>
+            <param name="viewModel">object with the ViewModel</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IConfigureWindowViews">
+            <summary>
+            Export with this interface to be able to configure window views
+            </summary>
+        </member>
+        <member name="M:Dapplo.CaliburnMicro.IConfigureWindowViews.ConfigureWindowView(System.Windows.Window,System.Object)">
+            <summary>
+            This is called, so you can configure the window view
+            </summary>
+            <param name="view">Window for the view</param>
+            <param name="viewModel">object for the ViewModel</param>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IHaveId">
+            <summary>
+                Implement this interface to speficy that you have an Id
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IHaveId.Id">
+            <summary>
+                The Id used to identify an element
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IHaveIcon">
+            <summary>
+                Implement this interface to have an icon visible
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IHaveIcon.Icon">
+            <summary>
+                The icon, which can be used when the element is displayed.
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IHaveSettings">
+            <summary>
+            A ViewModel can supply settings for a dialog or window
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IHaveSettings.Settings">
+            <summary>
+            A IDictionary with properties for the window or dialog
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IShell">
+            <summary>
+                Implement (and export with) this interface on your main ViewModel, if available this will be started automatically.
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IUiService">
+            <summary>
+            Marker interface for UI Services, every class exported with this interface is automatically instanciated right after CaliburnMicro is.
+            Except for the constructor, nothing is called. All dependencies are injected.
+            </summary>
+        </member>
+        <member name="T:Dapplo.CaliburnMicro.IVersionProvider">
+            <summary>
+            This interface is used to display the current version, and check the latest version
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IVersionProvider.CurrentVersion">
+            <summary>
+            Returns the current version
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IVersionProvider.LatestVersion">
+            <summary>
+            Return the latest version
+            </summary>
+        </member>
+        <member name="P:Dapplo.CaliburnMicro.IVersionProvider.IsUpdateAvailable">
+            <summary>
+            Returns a boolean to specify if there is an update available
+            </summary>
+        </member>
+    </members>
+</doc>

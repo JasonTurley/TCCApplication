@@ -1,0 +1,545 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dapplo.Addons</name>
+    </assembly>
+    <members>
+        <member name="T:Dapplo.Addons.BootstrapperLocator">
+            <summary>
+                A helper class to get to the current IBootstrapper
+                Although this is bad practice, from my point of view this is better than having to add Dapplo.Addons.Bootstrapper
+                as a dependency.
+            </summary>
+        </member>
+        <member name="F:Dapplo.Addons.BootstrapperLocator.BootstrapperRegistry">
+            <summary>
+                Used to register / deregister the bootstrappers
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.BootstrapperLocator.Register(Dapplo.Addons.IBootstrapper)">
+            <summary>
+                Register the bootstrapper
+            </summary>
+            <param name="bootstrapper">IBootstrapper</param>
+        </member>
+        <member name="M:Dapplo.Addons.BootstrapperLocator.Unregister(Dapplo.Addons.IBootstrapper)">
+            <summary>
+                Unregister the bootstrapper
+            </summary>
+            <param name="bootstrapper">IBootstrapper</param>
+        </member>
+        <member name="P:Dapplo.Addons.BootstrapperLocator.Bootstrappers">
+            <summary>
+                All available bootstrappers
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.BootstrapperLocator.CurrentBootstrapper">
+            <summary>
+                Get the current IBootstrapper, if there are multiple than this is the latest.
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IAction">
+            <summary>
+                The IAction describes modules that execute
+                (Currently unused.)
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IAction.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+                Execute the action
+            </summary>
+            <param name="token"></param>
+            <returns>task with boolean</returns>
+        </member>
+        <member name="T:Dapplo.Addons.IStartupShutdownBootstrapper">
+            <summary>
+                Interface for the StartupShutdownBootstrapper
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IStartupShutdownBootstrapper.StartupAsync(System.Threading.CancellationToken)">
+            <summary>
+                Startup all "Startup actions"
+                Call this after run, it will find all IStartupAction's and start them in the specified order
+            </summary>
+            <param name="cancellationToken">CancellationToken</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IStartupShutdownBootstrapper.ShutdownAsync(System.Threading.CancellationToken)">
+            <summary>
+                Initiate Shutdown on all "Shutdown actions"
+            </summary>
+            <param name="cancellationToken">CancellationToken</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IStartupShutdownBootstrapper.CancelStartup">
+            <summary>
+                This cancels the startup
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IApplicationBootstrapper">
+            <summary>
+                Interface for the ApplicationBootstrapper
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IApplicationBootstrapper.ApplicationName">
+            <summary>
+                Name of the application for this bootstrapper
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IApplicationBootstrapper.IsMutexLocked">
+            <summary>
+                Is the mutex for the application locked=
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IDependencyProvider">
+            <summary>
+                This describes something which can provide dependencies
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IDependencyProvider.ProvideDependencies(System.Object)">
+            <summary>
+                Fill all the dependencies (imports) in the object instance
+            </summary>
+            <param name="objectWithDependencies">object to locate the dependencies for</param>
+        </member>
+        <member name="T:Dapplo.Addons.IServiceExporter">
+            <summary>
+                This interface is one of many which the Dapplo.Addon CompositionBootstrapper (ApplicationBootstrapper) implements.
+                The Bootstrapper will automatically export itself as IServiceExporter, so framework code can specify what exports
+                are available
+                A IServiceExporter should only be used for cases where a simple export can't work.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceExporter.Export``1(``0,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+                Export an object
+            </summary>
+            <typeparam name="T">Type to export</typeparam>
+            <param name="obj">object to add</param>
+            <param name="metadata">Metadata for the export</param>
+            <returns>ComposablePart, this can be used to remove the export later</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceExporter.Export(System.Type,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+                Export an object
+            </summary>
+            <param name="type">Type to export</param>
+            <param name="obj">object to add</param>
+            <param name="metadata">Metadata for the export</param>
+            <returns>ComposablePart, this can be used to remove the export later</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceExporter.Export``1(System.String,``0,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+                Export an object
+            </summary>
+            <typeparam name="T">Type to export</typeparam>
+            <param name="contractName">contractName under which the object of Type T is registered</param>
+            <param name="obj">object to add</param>
+            <param name="metadata">Metadata for the export</param>
+            <returns>ComposablePart, this can be used to remove the export later</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceExporter.Export(System.Type,System.String,System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+                Export an object
+            </summary>
+            <param name="type">Type to export</param>
+            <param name="contractName">contractName under which the object of Type T is registered</param>
+            <param name="obj">object to add</param>
+            <param name="metadata">Metadata for the export</param>
+            <returns>ComposablePart, this can be used to remove the export later</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceExporter.Release(System.ComponentModel.Composition.Primitives.ComposablePart)">
+            <summary>
+                Release an export which was previously added with the Export method
+            </summary>
+            <param name="part">ComposablePart from Export call</param>
+        </member>
+        <member name="P:Dapplo.Addons.IServiceExporter.ExportProviders">
+            <summary>
+                The list of export providers used when an export cannot be found, these need to be added before the bootstrapper is
+                started
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IServiceRepository">
+            <summary>
+                This interface is one of many which the Dapplo.Addon CompositionBootstrapper (ApplicationBootstrapper) implements.
+                The Bootstrapper will automatically export itself as IServiceRepository, so framework code can dlls and assemblies
+                A IServiceRepository should only be used for cases where assemblies need to be scanned or exported
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IServiceRepository.KnownAssemblies">
+            <summary>
+                all assemblies this bootstrapper knows
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IServiceRepository.KnownFiles">
+            <summary>
+                All addon files this bootstrapper knows
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.Add(System.Reflection.Assembly)">
+            <summary>
+                Add an assembly to the AggregateCatalog.Catalogs
+                In english: make the items in the assembly discoverable
+            </summary>
+            <param name="assembly">Assembly to add</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.Add(System.ComponentModel.Composition.Hosting.AssemblyCatalog)">
+            <summary>
+                Add an AssemblyCatalog AggregateCatalog.Catalogs
+                But only if the AssemblyCatalog has parts
+            </summary>
+            <param name="assemblyCatalog">AssemblyCatalog to add</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.Add(System.Type)">
+            <summary>
+                Add the assembly for the specified type
+            </summary>
+            <param name="type">The assembly for the type is retrieved add added via the Add(Assembly) method</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.AddScanDirectory(System.String)">
+            <summary>
+                Add a scan directory, which is used by the assembly resolving
+            </summary>
+            <param name="directory">string with the directory</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.AddScanDirectories(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+                Add scan directories, which is used by the assembly resolving
+            </summary>
+            <param name="directories">IEnumerable of string with the directories</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.FindAndLoadAssemblies(System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+                Find the assembly / assemblies (with parts) found in default directories, or embedded resources, matching the
+                specified
+                filepattern.
+            </summary>
+            <param name="pattern">File-Pattern to use for the scan, default all dlls will be found</param>
+            <param name="loadEmbedded">bool specifying if embedded resources should be used. default is true</param>
+            <param name="extensions">IEnumerable with extensions to look for, defaults will be set if null was passed</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.FindAndLoadAssembliesFromDirectory(System.String,System.Text.RegularExpressions.Regex,System.Boolean)">
+            <summary>
+                Find the assemblies (with parts) found in the specified directory, or manifest resources, matching the specified
+                regex.
+            </summary>
+            <param name="directory">Directory to scan</param>
+            <param name="pattern">Regex to use for the scan, when null all dlls will be found</param>
+            <param name="loadEmbedded">bool specifying if embedded resources should be used. default is true</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.FindAndLoadAssembliesFromDirectory(System.String,System.String,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+                Find the assemblies (with parts) found in the specified directory, or manifest resources, matching the specified
+                filepattern.
+            </summary>
+            <param name="directory">Directory to scan</param>
+            <param name="pattern">File-Pattern to use for the scan, default all dlls will be found</param>
+            <param name="loadEmbedded">bool specifying if embedded resources should be used. default is true</param>
+            <param name="extensions">IEnumerable with extensions to look for, defaults will be set if null was passed</param>
+        </member>
+        <member name="M:Dapplo.Addons.IServiceRepository.FindAndLoadAssemblies(System.Collections.Generic.IEnumerable{System.String},System.Text.RegularExpressions.Regex,System.Boolean)">
+            <summary>
+                Find the assemblies (with parts) found in the specified directories, or manifest resources, matching the specified
+                regex.
+            </summary>
+            <param name="directories">Directory to scan</param>
+            <param name="pattern">Regex to use for the scan, when null all dlls will be found</param>
+            <param name="loadEmbedded">bool specifying if embedded resources should be used. default is true</param>
+        </member>
+        <member name="T:Dapplo.Addons.IModule">
+            <summary>
+                Basic interface which every module should implement
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IBootstrapper">
+            <summary>
+                This is the interface for all bootstrappers
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IBootstrapper.AllowAssemblyCleanup">
+            <summary>
+                Specifies if the bootstrapper is allowed to remove assemblies which are already embedded from the file system.
+                This normally prevents issues with double loading of assemblies, like casts which do not work.
+                This is turned off by default.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IBootstrapper.RegisterForDisposal(System.IDisposable)">
+            <summary>
+                Register a disposable, to dispose when the IBootstrapper is disposed
+            </summary>
+            <param name="disposable">IDisposable to dispose together with the bootstapper</param>
+        </member>
+        <member name="P:Dapplo.Addons.IBootstrapper.IsInitialized">
+            <summary>
+                Is this IBootstrapper initialized?
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IBootstrapper.IsRunning">
+            <summary>
+                Is this IBootstrapper running?
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IBootstrapper.InitializeAsync(System.Threading.CancellationToken)">
+            <summary>
+                Initialize the bootstrapper
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IBootstrapper.RunAsync(System.Threading.CancellationToken)">
+            <summary>
+                Start the bootstrapper, initialize is automatically called when needed
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IBootstrapper.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+                Stop the bootstrapper, this cleans up resources and makes it possible to hook into it.
+                Is also called when being disposed, but as Dispose in not Async this could cause some issues.
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IMefServiceLocator">
+            <summary>
+                This interface is one of many which the Dapplo.Addon CompositionBootstrapper (ApplicationBootstrapper) implements.
+                The Bootstrapper will automatically export itself as IMefServiceLocator, so framework code can use imports to get
+                basic servicelocator support.
+                A IMefServiceLocator should only be used for cases where a simple import can't work.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IMefServiceLocator.GetExport``1(System.String)">
+            <summary>
+                Simple "service-locater"
+            </summary>
+            <typeparam name="T">Type to locate</typeparam>
+            <param name="contractName">Key/Name of the contract, null or an empty string</param>
+            <returns>Lazy T</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IMefServiceLocator.GetExport``2(System.String)">
+            <summary>
+                Simple "service-locater" with meta-data
+            </summary>
+            <typeparam name="T">Type to locate</typeparam>
+            <typeparam name="TMetaData">interface-type for the meta-data</typeparam>
+            <param name="contractName">Key/Name of the contract, null or an empty string</param>
+            <returns>Lazy T,TMetaData</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IMefServiceLocator.GetExport(System.Type,System.String)">
+            <summary>
+                Simple "service-locater"
+            </summary>
+            <param name="type">Type to locate</param>
+            <param name="contractName">Key/Name of the contract, null or an empty string</param>
+            <returns>object for type</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IMefServiceLocator.GetExports``1(System.String)">
+            <summary>
+                Simple "service-locater" to get multiple exports
+            </summary>
+            <typeparam name="T">Type to locate</typeparam>
+            <param name="contractName">Key/Name of the contract, null or an empty string</param>
+            <returns>IEnumerable of Lazy T</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IMefServiceLocator.GetExports(System.Type,System.String)">
+            <summary>
+                Simple "service-locater" to get multiple exports
+            </summary>
+            <param name="type">Type to locate</param>
+            <param name="contractName">Key/Name of the contract, null or an empty string</param>
+            <returns>IEnumerable of Lazy object</returns>
+        </member>
+        <member name="M:Dapplo.Addons.IMefServiceLocator.GetExports``2(System.String)">
+            <summary>
+                Simple "service-locater" to get multiple exports with meta-data
+            </summary>
+            <typeparam name="T">Type to locate</typeparam>
+            <typeparam name="TMetaData">interface-type for the meta-data</typeparam>
+            <param name="contractName">Key/Name of the contract, null or an empty string</param>
+            <returns>IEnumerable of Lazy T,TMetaData</returns>
+        </member>
+        <member name="T:Dapplo.Addons.IAsyncShutdownAction">
+            <summary>
+                The IAsyncShutdownAction describes modules that are called on shutdown
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IAsyncShutdownAction.ShutdownAsync(System.Threading.CancellationToken)">
+            <summary>
+                Perform a shutdown of whatever needs to be shutdown.
+                Make sure this can be called multiple times, e.g. do nothing when it was already started.
+            </summary>
+            <param name="token">CancellationToken</param>
+            <returns>Task</returns>
+        </member>
+        <member name="T:Dapplo.Addons.IStartupModule">
+            <summary>
+                The IStartupModule is a marker interface for modules that are called on startup
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IShutdownModule">
+            <summary>
+                The IShutdownModule is a marker interface for modules that are called on shutdown
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IShutdownAction">
+            <summary>
+                The IShutdownAction describes modules that are called on shutdown
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IShutdownAction.Shutdown">
+            <summary>
+                Perform a shutdown of whatever needs to be shutdown.
+                Make sure this can be called multiple times, e.g. do nothing when it was already started.
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IShutdownMetadata">
+            <summary>
+                Meta-data belonging to the AsyncShutdownActionAttribute or ShutdownActionAttribute, which makes it possible to
+                specify type-safe meta-data.
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IShutdownMetadata.ShutdownOrder">
+            <summary>
+                Order in which IShutdownAction.Shutdown / IAsyncShutdownAction.ShutdownAsync is called
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IAsyncStartupAction">
+            <summary>
+                The IAsyncStartupAction is an interface for modules that can be started when the application starts
+                Extend you module with this interface, and use the StartupActionAttribute to annotate the module
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IAsyncStartupAction.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+                Perform a start of whatever needs to be started.
+                Make sure this can be called multiple times, e.g. do nothing when it was already started.
+                throw a StartupException if something went terribly wrong and the application should NOT continue
+            </summary>
+            <param name="token">CancellationToken</param>
+            <returns>Task</returns>
+        </member>
+        <member name="T:Dapplo.Addons.IStartupAction">
+            <summary>
+                The IStartupAction is an interface for modules that can be started when the application starts
+                Extend you module with this interface, and use the StartupActionAttribute to annotate the module
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.IStartupAction.Start">
+            <summary>
+                Perform a start of whatever needs to be started.
+                Make sure this can be called multiple times, e.g. do nothing when it was already started.
+                throw a StartupException if something went terribly wrong and the application should NOT continue
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.IStartupMetadata">
+            <summary>
+                Meta-data belonging to the AsyncStartupActionAttribute / StartupActionAttribute, which makes it possible to specify
+                type-safe meta-data.
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IStartupMetadata.AwaitStart">
+            <summary>
+                Specify if the startup needs to be awaited, this could be set to false if you want to have a task doing something
+                in the background
+                In general you would like this to be true, otherwise depending code might be started to early
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.IStartupMetadata.StartupOrder">
+            <summary>
+                Order in which IStartupAction.Start or IAsyncStartupAction.StartAsyncis called
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.ModuleAttribute">
+            <summary>
+                This is the Module attribute which can be used to specify type-safe meta-data
+                Currently there are none in here, but it was made available so it's possible to add them at a later time
+                In general it is bad to import via a specific type, always try to use contract interfaces.
+                As the IModule is pretty much only a marker interface, it is not very usefull and this is why the attribute is
+                abstract
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.ModuleAttribute.#ctor(System.String,System.Type)">
+            <summary>
+                Constructor with a contractname, and a type
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.ModuleAttribute.#ctor(System.Type)">
+            <summary>
+                Constructor with the type
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="T:Dapplo.Addons.ShutdownActionAttribute">
+            <summary>
+                This is the attribute for a IShutdownModule module
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.ShutdownActionAttribute.#ctor">
+            <summary>
+                Default constructor
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.ShutdownActionAttribute.#ctor(System.String)">
+            <summary>
+                Constructor with a contract name
+            </summary>
+            <param name="contractName"></param>
+        </member>
+        <member name="P:Dapplo.Addons.ShutdownActionAttribute.ShutdownOrder">
+            <summary>
+                Order for the shutdowns to be called
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.StartupActionAttribute">
+            <summary>
+                This is the attribute for a IStartupModule module
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.StartupActionAttribute.#ctor">
+            <summary>
+                Default constructor
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.StartupActionAttribute.#ctor(System.String)">
+            <summary>
+                Use a specific contract name for the IStartupModule
+            </summary>
+            <param name="contractName"></param>
+        </member>
+        <member name="P:Dapplo.Addons.StartupActionAttribute.StartupOrder">
+            <summary>
+                Here the order of the startup action can be specified, starting with low values and ending with high.
+                With this a cheap form of "dependency" management is made.
+            </summary>
+        </member>
+        <member name="P:Dapplo.Addons.StartupActionAttribute.AwaitStart">
+            <summary>
+                Specify if the startup needs to be awaited, this could be set to false if you want to have a task doing something
+                in the background
+                In general you would like this to be true, otherwise depending code might be started to early
+            </summary>
+        </member>
+        <member name="T:Dapplo.Addons.StartupException">
+            <summary>
+                If this exception is thrown by an startup action, the startup of your application will be terminated.
+                A prerequisite is that your class has the StartupActionAttribute where AwaitStart is true (this is default)
+            </summary>
+        </member>
+        <member name="M:Dapplo.Addons.StartupException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+                Make serializazion possible
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="M:Dapplo.Addons.StartupException.#ctor(System.String)">
+            <summary>
+                Create a StartupException with a message
+            </summary>
+            <param name="message">string</param>
+        </member>
+        <member name="M:Dapplo.Addons.StartupException.#ctor(System.String,System.Exception)">
+            <summary>
+                Create a StartupException with a message and a cause
+            </summary>
+            <param name="message">string</param>
+            <param name="innerException">Exception which caused the StartupException</param>
+        </member>
+    </members>
+</doc>

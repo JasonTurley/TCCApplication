@@ -1,0 +1,1007 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dapplo.Ini</name>
+    </assembly>
+    <members>
+        <member name="T:Dapplo.Ini.Converters.StringEncryptionTypeConverter">
+            <summary>
+                This converter makes it possible to store values in an ini file, somewhat secure.
+                Please make sure to initialize the RgbKey/RgbIv before it is used.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Converters.StringEncryptionTypeConverter.#ctor">
+            <summary>
+                The constructor validates all settings
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.Converters.StringEncryptionTypeConverter.Algorithm">
+            <summary>
+                The algorithm to use for the encrypt/decrypt, default is Rijndael
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.Converters.StringEncryptionTypeConverter.RgbIv">
+            <summary>
+                The initialization vector to use for the symmetric algorithm.
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.Converters.StringEncryptionTypeConverter.RgbKey">
+            <summary>
+                The secret key to use for the symmetric algorithm.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Converters.StringEncryptionTypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+                Can we convert from? As we decrypt from a string, the sourceType needs to be string
+            </summary>
+            <param name="context">ITypeDescriptorContext</param>
+            <param name="sourceType">Type</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Converters.StringEncryptionTypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+                Can we convert to? As we create a string, the destinationType needs to be string
+            </summary>
+            <param name="context">ITypeDescriptorContext</param>
+            <param name="destinationType">Type</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Converters.StringEncryptionTypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+                To decrypt call this
+            </summary>
+            <param name="context">ITypeDescriptorContext</param>
+            <param name="culture">CultureInfo</param>
+            <param name="value">object</param>
+            <returns>object</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Converters.StringEncryptionTypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+                To encrypt call this
+            </summary>
+            <param name="context"></param>
+            <param name="culture"></param>
+            <param name="value"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapplo.Ini.Converters.StringEncryptionTypeConverter.Decrypt(System.String)">
+            <summary>
+                A simply decryption, can be used to store passwords
+            </summary>
+            <param name="encryptedText">a base64 encoded encrypted string</param>
+            <returns>Decrypeted text</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Converters.StringEncryptionTypeConverter.Encrypt(System.String)">
+            <summary>
+                A simply encryption, can be used to store passwords
+            </summary>
+            <param name="clearText">the string to call upon</param>
+            <returns>an encryped string in base64 form</returns>
+        </member>
+        <member name="T:Dapplo.Ini.IIniSectionInternal">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSectionInternal.OnLoaded">
+            <summary>
+                Generate the Loaded event
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSectionInternal.OnReset">
+            <summary>
+                Generate the Reset event
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSectionInternal.OnSaved">
+            <summary>
+                Generate the Saved event
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSectionInternal.OnSaving">
+            <summary>
+                Generate the Saving event
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IIniSection">
+            <summary>
+                By making your property proxy interface extend this, you will be able to write the property to an ini file
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IIniSection.Item(System.String)">
+            <summary>
+                Get the IniValue for a property, this is quicker and uses less memory than to iterate over the GetIniValues result
+            </summary>
+            <param name="propertyName">Name of the property</param>
+            <returns>IniValue</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSection.GetIniValue(System.String)">
+            <summary>
+                Get the IniValue for a property, this is quicker and uses less memory than to iterate over the GetIniValues result
+            </summary>
+            <param name="propertyName">Name of the property</param>
+            <returns>IniValue</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSection.GetIniValues">
+            <summary>
+                Retrieve all the ini values
+            </summary>
+            <returns>readonly dictionary</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSection.GetSectionDescription">
+            <summary>
+                Get the Description of the Ini-Section
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSection.GetSectionName">
+            <summary>
+                Name of the Ini-Section, should be set on your property interface with
+            </summary>
+        </member>
+        <member name="E:Dapplo.Ini.IIniSection.Loaded">
+            <summary>
+                The loaded event is triggered after the file was changed or reload was called
+            </summary>
+        </member>
+        <member name="E:Dapplo.Ini.IIniSection.Reset">
+            <summary>
+                The reset event is triggered when the IIniSection was reset
+            </summary>
+        </member>
+        <member name="E:Dapplo.Ini.IIniSection.Saved">
+            <summary>
+                The loaded event is triggered after the file was changed or reload was called
+            </summary>
+        </member>
+        <member name="E:Dapplo.Ini.IIniSection.Saving">
+            <summary>
+                The loaded event is triggered after the file was changed or reload was called
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSection.TryGetIniValue(System.String,Dapplo.Ini.IniValue@)">
+            <summary>
+                Try to get the IniValue for a property, this is quicker and uses less memory than to iterate over the GetIniValues
+                result
+            </summary>
+            <param name="propertyName">Name of the property</param>
+            <param name="value">out IniValue</param>
+            <returns>bool with true if found</returns>
+        </member>
+        <member name="T:Dapplo.Ini.IIniSection`1">
+            <summary>
+                Generic version of IIniSection
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSection`1.GetIniValue``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+                Get the IniValue for a property, this is quicker and uses less memory than to iterate over the GetIniValues result
+            </summary>
+            <typeparam name="TProp">Your interface</typeparam>
+            <param name="propertyExpression">expression for the property name</param>
+            <returns>IniValue</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IIniSection`1.TryGetIniValue``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Dapplo.Ini.IniValue@)">
+            <summary>
+                Try to get the IniValue for a property, this is quicker and uses less memory than to iterate over the GetIniValues
+                result
+            </summary>
+            <typeparam name="TProp">Your interface</typeparam>
+            <param name="propertyExpression">expression for the property name</param>
+            <param name="value">out IniValue</param>
+            <returns>bool with true if found</returns>
+        </member>
+        <member name="T:Dapplo.Ini.IIniSubSection">
+            <summary>
+                Marker interface for sub sections
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.Implementation.FileLocations">
+            <summary>
+                Some utils for managing the location of files
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.Implementation.FileLocations.StartupDirectory">
+            <summary>
+                Get the startup location, which is either the location of the entry assemby, or the executing assembly
+            </summary>
+            <returns>string with the directory of where the running code/applicationName was started</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.FileLocations.RoamingAppDataDirectory(System.String)">
+            <summary>
+                Get the roaming AppData directory
+            </summary>
+            <returns>string with the directory the appdata roaming directory</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.FileLocations.Scan(System.Collections.Generic.IEnumerable{System.String},System.Text.RegularExpressions.Regex,System.IO.SearchOption)">
+            <summary>
+                Scan the supplied directories for files which match the passed file pattern
+            </summary>
+            <param name="directories"></param>
+            <param name="filePattern">Regular expression for the filename</param>
+            <param name="searchOption">
+                Makes it possible to specify if the search is recursive, SearchOption.AllDirectories is
+                default, use SearchOption.TopDirectoryOnly for non recursive
+            </param>
+            <returns>IEnumerable with paths</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.FileLocations.Scan(System.Collections.Generic.IEnumerable{System.String},System.String,System.IO.SearchOption)">
+            <summary>
+                Scan the supplied directories for files which match the passed file pattern
+            </summary>
+            <param name="directories"></param>
+            <param name="simplePattern"></param>
+            <param name="searchOption">
+                Makes it possible to specify if the search is recursive, SearchOption.AllDirectories is
+                default, use SearchOption.TopDirectoryOnly for non recursive
+            </param>
+            <returns>IEnumerable with paths</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.FileLocations.DirectoriesFor(System.String,System.Boolean)">
+            <summary>
+                For the given directory this will return possible location.
+                It might be that multiple are returned, also normalization is made
+            </summary>
+            <param name="directory">A absolute or relative directory</param>
+            <param name="allowCurrentDirectory">true to allow relative to current working directory</param>
+            <returns>IEnumerable with possible directories</returns>
+        </member>
+        <member name="T:Dapplo.Ini.Implementation.IniFile">
+            <summary>
+                Functionality to read/write a .ini file
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniFile.ReadAsync(System.String,System.Text.Encoding,System.Threading.CancellationToken)">
+            <summary>
+                Read an ini file to a Dictionary, each key is a iniSection and the value is a Dictionary with name and values.
+            </summary>
+            <param name="path">Path to file</param>
+            <param name="encoding">Encoding</param>
+            <param name="cancellationToken">CancellationToken</param>
+            <returns>dictionary of sections - dictionaries with the properties</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniFile.ReadAsync(System.IO.Stream,System.Text.Encoding,System.Threading.CancellationToken)">
+            <summary>
+                Read an stream of an Ini-file to a Dictionary, each key is a iniSection and the value is a Dictionary with name and
+                values.
+            </summary>
+            <param name="stream">Stream e.g. fileStream with the ini content</param>
+            <param name="encoding">Encoding</param>
+            <param name="cancellationToken">CancellationToken</param>
+            <returns>dictionary of sections - dictionaries with the properties</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniFile.ReadEscape(System.String)">
+            <summary>
+                change escaped newlines to newlines, and any other conversions that might be needed
+            </summary>
+            <param name="iniValue">encoded string value</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniFile.WriteAsync(System.String,System.Text.Encoding,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,System.String}},System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,System.String}},System.Threading.CancellationToken)">
+            <summary>
+                Read an ini file to a Dictionary, each key is a iniSection and the value is a Dictionary with name and values.
+            </summary>
+            <param name="path">Path to file</param>
+            <param name="encoding">Encoding</param>
+            <param name="sections">A dictionary with dictionaries with values for every section</param>
+            <param name="sectionComments">A dictionary with the optional comments for the file</param>
+            <param name="cancellationToken">CancellationToken</param>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniFile.WriteAsync(System.IO.Stream,System.Text.Encoding,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,System.String}},System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,System.String}},System.Threading.CancellationToken)">
+            <summary>
+                Write the supplied properties to the stream
+            </summary>
+            <param name="stream">Stream</param>
+            <param name="encoding">Encoding</param>
+            <param name="sections">IDictionary</param>
+            <param name="sectionsComments">Optional IDictionary for comments</param>
+            <param name="cancellationToken">CancellationToken</param>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniFile.WriteEscape(System.String)">
+            <summary>
+                change newlines to escaped newlines, and any other conversions that might be needed
+            </summary>
+            <param name="iniValue">string</param>
+            <returns>encoded string value</returns>
+        </member>
+        <member name="T:Dapplo.Ini.Implementation.IniSection`1">
+            <summary>
+                Implementation for IIniSection
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.AfterInitialization(System.Collections.Generic.IEnumerable{Dapplo.InterfaceImpl.IInterceptorExtension})">
+            <summary>
+                This is called by the ExtensibleInterceptorImpl with a list of extensions
+            </summary>
+            <param name="extensions">list of extensions</param>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.InitProperty(System.Reflection.PropertyInfo,System.Collections.Generic.IEnumerable{Dapplo.InterfaceImpl.IInterceptorExtension})">
+            <summary>
+                Logic to generate an IniValue for every property
+            </summary>
+            <param name="propertyInfo"></param>
+            <param name="extensions"></param>
+        </member>
+        <member name="E:Dapplo.Ini.Implementation.IniSection`1.Reset">
+            <summary>
+                This is the reset event
+            </summary>
+        </member>
+        <member name="E:Dapplo.Ini.Implementation.IniSection`1.Loaded">
+            <summary>
+                This is the loaded event
+            </summary>
+        </member>
+        <member name="E:Dapplo.Ini.Implementation.IniSection`1.Saved">
+            <summary>
+                This is the saved event
+            </summary>
+        </member>
+        <member name="E:Dapplo.Ini.Implementation.IniSection`1.Saving">
+            <summary>
+                This is the saving event
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.GetSectionDescription">
+            <summary>
+                Get the description for the IniSection
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="P:Dapplo.Ini.Implementation.IniSection`1.Dapplo#Ini#IIniSection#Item(System.String)">
+            <summary>
+                Implementation of the indexer of the IIniSection
+            </summary>
+            <param name="propertyName"></param>
+            <returns>IniValue</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.GetIniValue(System.String)">
+            <summary>
+                Get a single ini value via the property name
+            </summary>
+            <param name="propertyName">Name of the property</param>
+            <returns>IniValue</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.GetIniValue``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+                Get a single ini value via an expression which defines the property name
+            </summary>
+            <param name="propertyExpression">LambdaExpression for the property</param>
+            <returns>IniValue</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.GetIniValues">
+            <summary>
+                Get all the ini values
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.GetSectionName">
+            <summary>
+                Supply the iniSection name
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.TryGetIniValue(System.String,Dapplo.Ini.IniValue@)">
+            <summary>
+                Try to get a single ini value
+            </summary>
+            <param name="propertyName">Name of the property</param>
+            <param name="value">IniValue out</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.IniSection`1.TryGetIniValue``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},Dapplo.Ini.IniValue@)">
+            <summary>
+                Try to get a single ini value
+            </summary>
+            <param name="propertyExpression">LambdaExpression</param>
+            <param name="value">IniValue out</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:Dapplo.Ini.Implementation.TypeDescriptorContext">
+            <summary>
+                Used internally for type conversion
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.TypeDescriptorContext.#ctor(System.Object,System.ComponentModel.PropertyDescriptor)">
+            <inheritdoc />
+        </member>
+        <member name="P:Dapplo.Ini.Implementation.TypeDescriptorContext.System#ComponentModel#ITypeDescriptorContext#Container">
+            <inheritdoc />
+        </member>
+        <member name="P:Dapplo.Ini.Implementation.TypeDescriptorContext.System#ComponentModel#ITypeDescriptorContext#Instance">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.TypeDescriptorContext.System#ComponentModel#ITypeDescriptorContext#OnComponentChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.TypeDescriptorContext.System#ComponentModel#ITypeDescriptorContext#OnComponentChanging">
+            <inheritdoc />
+        </member>
+        <member name="P:Dapplo.Ini.Implementation.TypeDescriptorContext.System#ComponentModel#ITypeDescriptorContext#PropertyDescriptor">
+            <inheritdoc />
+        </member>
+        <member name="M:Dapplo.Ini.Implementation.TypeDescriptorContext.System#IServiceProvider#GetService(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="T:Dapplo.Ini.IniConfig">
+            <summary>
+                The IniConfig is used to bind IIniSection proxy objects to an ini file.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.#ctor(System.String,System.String,System.String,System.UInt32,System.Boolean,System.Boolean)">
+            <summary>
+                Setup the management of an .ini file location
+            </summary>
+            <param name="applicationName"></param>
+            <param name="fileName"></param>
+            <param name="fixedDirectory">Specify a path if you don't want to use the default loading</param>
+            <param name="autoSaveInterval">0 to disable or the amount of milliseconds that pending changes are written</param>
+            <param name="watchFileChanges">True to enable file system watching</param>
+            <param name="saveOnExit">True to enable file system watching</param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.CreateAutosaveTimer(System.UInt32)">
+            <summary>
+            Create a time for the auto-save functionality
+            </summary>
+            <param name="autoSaveInterval">uint with the interval</param>
+            <returns>Timer</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.GetService(System.Type)">
+            <summary>
+                IServiceProvider implementation
+                Gets the service object of the specified type.
+            </summary>
+            <param name="configType">An object that specifies the type of inisection object to get. </param>
+            <returns>
+                A IniConfig of type <paramref name="configType" />.-or- null if there is no service object of type
+                <paramref name="configType" />.
+            </returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.CreateFileLocation(System.Boolean,System.String,System.String)">
+            <summary>
+                Helper to create the location of a file
+            </summary>
+            <param name="checkStartupDirectory"></param>
+            <param name="postfix"></param>
+            <param name="specifiedDirectory"></param>
+            <returns>File location</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.EnableFileWatcher(System.Boolean)">
+            <summary>
+                Create a FileSystemWatcher to detect changes
+            </summary>
+            <param name="enable">true to enable the watcher</param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.GetIniSectionValues">
+            <summary>
+                Helper method to get the values from the iniSections as list
+                This should be used, as it locks the _iniSections
+            </summary>
+            <returns>list IIniSection</returns>
+        </member>
+        <member name="T:Dapplo.Ini.IniConfig.ReadFrom">
+            <summary>
+                Used to detect if we have an intial read, and if so from where.
+                This is important for the auto-save and FileSystemWatcher
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.Current">
+            <summary>
+                Static helper to retrieve the first IniConfig, the result when multiple IniConfigs are used is undefined!
+            </summary>
+            <returns>IniConfig or null if none</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.Delete(System.String,System.String)">
+            <summary>
+                Static helper to remove the IniConfig from the store.
+                This is interal, mainly for tests, normally it should not be needed.
+            </summary>
+            <param name="applicationName"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.Get(System.String,System.String)">
+            <summary>
+                Static helper to retrieve the IniConfig that was created with the supplied parameters
+            </summary>
+            <param name="applicationName"></param>
+            <param name="fileName"></param>
+            <returns>IniConfig</returns>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.ReadErrorHandler">
+            <summary>
+                Assign your own error handler to get all the read errors
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.SectionNames">
+            <summary>
+                Get all the names (from the IniSection annotation) for the sections
+            </summary>
+            <returns>all keys</returns>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.Sections">
+            <summary>
+                Get all sections
+            </summary>
+            <returns>all keys</returns>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.WriteErrorHandler">
+            <summary>
+                Assign your own error handler to get all the write errors
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.IniLocation">
+            <summary>
+                Location of the file where the ini config is stored
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.AfterLoad``1(System.Action{``0})">
+            <summary>
+                Set the after load action for a IIniSection
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="afterLoadAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.AfterSave``1(System.Action{``0})">
+            <summary>
+                Set after save action for a IIniSection, this can be used to change value changed in before save back, after saving
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="afterSaveAction"></param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.BeforeSave``1(System.Action{``0})">
+            <summary>
+                Set before save action for a IIniSection, this can be used to chance values before they are stored
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="beforeSaveAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.FillSection(Dapplo.Ini.IIniSection)">
+            <summary>
+                Helper method to fill the values of one section
+            </summary>
+            <param name="iniSection"></param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.FillSection(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,System.String}},Dapplo.Ini.IIniSection)">
+            <summary>
+                Put the values from the iniProperties to the proxied object
+            </summary>
+            <param name="iniSections"></param>
+            <param name="iniSection"></param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.FillSections">
+            <summary>
+                Internal method, use the supplied ini-sections and properties to fill the sectoins
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.Item(System.String)">
+            <summary>
+                A simple indexer by name (from the IniSection annotation) for the IniSection
+            </summary>
+            <param name="sectionName"></param>
+            <returns>IIniSection</returns>
+        </member>
+        <member name="P:Dapplo.Ini.IniConfig.Item(System.Type)">
+            <summary>
+                Get the specified IIniSection type
+            </summary>
+            <param name="type">IIniSection to look for</param>
+            <returns>IIniSection</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.TryGet(System.String,Dapplo.Ini.IIniSection@)">
+            <summary>
+                A simple try get by name for the IniSection
+            </summary>
+            <param name="sectionName">Name of the section</param>
+            <param name="section">out parameter with the IIniSection</param>
+            <returns>bool with true if it worked</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.Get``1">
+            <summary>
+                Get the specified ini type
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns>T</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.GetSubSection``1">
+            <summary>
+                Get the IniSection which contains the specified sub section.
+            </summary>
+            <typeparam name="T">Type which extends ISubSection</typeparam>
+            <returns>T</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.GetSubSection(System.Type)">
+            <summary>
+                Get the IniSection which contains the specified sub section.
+            </summary>
+            <returns>IIniSection</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.Get(System.Type)">
+            <summary>
+                Get the specified ini type
+            </summary>
+            <param name="type">Type</param>
+            <returns>object (which is a IIniSection)</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.RegisterAndGetAsync``1(System.Threading.CancellationToken)">
+            <summary>
+                Register a Property Interface to this ini config, this method will return the property object
+            </summary>
+            <typeparam name="T">Your property interface, which extends IIniSection</typeparam>
+            <returns>instance of type T</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.LoadIfNeededAsync(System.Threading.CancellationToken)">
+            <summary>
+                This will do an intial load, if none was made
+            </summary>
+            <param name="cancellationToken">CancellationToken</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.ReadFromStreamAsync(System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+                Initialize the IniConfig by reading all the properties from the stream
+                If this is called directly after construction, no files will be read which is useful for testing!
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.ReloadAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+                This is reloading all the .ini files, and will refill the sections.
+                If reset = true, ALL setting are lost
+                Otherwise only the properties in the files will overwrite your settings.
+                Usually this should not directly be called, unless you know that the file was changed by an external process.
+            </summary>
+            <param name="reset">true: ALL setting are lost</param>
+            <param name="cancellationToken">CancellationToken</param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.ReloadInternalAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+                This is reloading all the .ini files, and will refill the sections.
+                If reset = true, ALL setting are lost
+                Otherwise only the properties in the files will overwrite your settings.
+                Usually this should not directly be called, unless you know that the file was changed by an external process.
+            </summary>
+            <param name="reset">true: ALL setting are lost</param>
+            <param name="cancellationToken">CancellationToken</param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.ResetAsync(System.Threading.CancellationToken)">
+            <summary>
+                Reset all the values, in all the registered ini sections, to their defaults
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.ResetInternal">
+            <summary>
+                Reset all the values, in all the registered ini sections, to their defaults
+                Important, this only works for types that extend IDefaultValue
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.WriteAsync(System.Threading.CancellationToken)">
+            <summary>
+                Write the ini file
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.WriteToStreamAsync(System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+                Write all the IIniSections to the stream, this is also used for testing
+            </summary>
+            <param name="stream">Stream to write to</param>
+            <param name="cancellationToken">CancellationToken</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.WriteToStreamInternalAsync(System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+                Store the ini to the supplied stream
+            </summary>
+            <param name="stream"></param>
+            <param name="cancellationToken">CancellationToken</param>
+            <returns>Task to await</returns>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.CreateSaveValues(Dapplo.Ini.IIniSection,System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,System.String}})">
+            <summary>
+                Helper method to create ini section values for writing.
+                The actual values are stored in the _ini
+            </summary>
+            <param name="iniSection">Section to write</param>
+            <param name="iniSectionsComments">Comments</param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.Dispose(System.Boolean)">
+            <summary>
+                Disposes the lock
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Dapplo.Ini.IniConfig.Dispose">
+            <summary>
+                Dispose implementation
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IniEventTypes">
+            <summary>
+                The different IniSection events
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniEventTypes.Reset">
+            <summary>
+                This is used to tell the subscriber that a reset was triggered on the IIniConfig
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniEventTypes.Loaded">
+            <summary>
+                This is used to tell the subscriber that the IIniConfig was (re)loaded
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniEventTypes.Saving">
+            <summary>
+                This is used to tell the subscriber that the IIniConfig is going to be saved
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniEventTypes.Saved">
+            <summary>
+                This is used to tell the subscriber that the IIniConfig was saved
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IniPropertyBehaviorAttribute">
+            <summary>
+                Use this attribute on Properties where you want to influence the ini config behavior.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniPropertyBehaviorAttribute.#ctor">
+            <summary>
+                Constructor
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniPropertyBehaviorAttribute.IgnoreErrors">
+            <summary>
+                Set ignore errors to false, if you want an exception when a parse error occurs.
+                Default this is set to true, which will cause the property to have the "default" value.
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniPropertyBehaviorAttribute.IsIgnoreErrorsSet">
+            <summary>
+                Specifies if the IgnoreErrors was specified or is default
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniPropertyBehaviorAttribute.Read">
+            <summary>
+                Default is true, set read to false to skip reading.
+                Although this might be unlikely, examples are:
+                1 A property with the last changed date, which might not be the date of the file
+                2 A property with the application or component version which "processed" the configuration
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniPropertyBehaviorAttribute.Write">
+            <summary>
+                Default is true, set write to false to skip serializing.
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IniRest">
+            <summary>
+                This class implements a "REST" API for the Ini configuration
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniRest.ProcessRestCommand(Dapplo.Ini.IniRestCommand)">
+            <summary>
+                Process the supplied IniRestCommand
+            </summary>
+            <param name="restCommand">IniRestCommand to process</param>
+        </member>
+        <member name="M:Dapplo.Ini.IniRest.ProcessRestUri(System.Uri)">
+            <summary>
+                Process an Rest URI, this can be used to read or write values via e.g. a HttpListener
+                format:
+                schema://hostname:port/IniConfig/Command/Applicationname/Configname/Section/Property/NewValue(optional)?query
+                schema is not important, this can be an application specific thing
+                hostname is not important, this can be an application specific thing
+                port is not important, this can be an application specific thing
+                The command is get/set/add/remove/reset
+                the Applicationname and Configname must be registered by new IniConfig(Applicationname,Configname)
+                The Section is that which is used in the IniSection
+                The property needs to be available
+                NewValue is optional (read) can be used to set the property (write)
+                The query can be used to add values to lists (?item1&amp;item2&amp;item2) or dictionaries (?key1=value1&amp;
+                key2=value2)
+                Or when removing from lists (?item1&amp;item2&amp;item2) or dictionaries (?key1&amp;key2)
+                P.S.
+                You can use the ProtocolHandler to register a custom URL protocol.
+            </summary>
+            <param name="restUri"></param>
+            <returns>IniRestCommand with all details and the result</returns>
+        </member>
+        <member name="T:Dapplo.Ini.IniRestCommands">
+            <summary>
+                The supported commands for the ini-REST api
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniRestCommands.Set">
+            <summary>
+                Set a value
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniRestCommands.Get">
+            <summary>
+                Get a value
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniRestCommands.Reset">
+            <summary>
+                Reset a value (to it's default)
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniRestCommands.Add">
+            <summary>
+                Add a value to a collection
+            </summary>
+        </member>
+        <member name="F:Dapplo.Ini.IniRestCommands.Remove">
+            <summary>
+                Remove a value from a collection
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IniRestCommand">
+            <summary>
+                This is a container for the IniRest, it has all the needed information to process
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniRestCommand.Application">
+            <summary>
+                The application for this rest command
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniRestCommand.Command">
+            <summary>
+                The command to process
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniRestCommand.File">
+            <summary>
+                The ini file for this rest command
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniRestCommand.Results">
+            <summary>
+                The IniValues that were specified for the get/set/reset or add/remove
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniRestCommand.Section">
+            <summary>
+                The ini-section for this rest command
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniRestCommand.Target">
+            <summary>
+                For add / remove we NEED a target, for set/reset it's possible to specify one
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniRestCommand.Values">
+            <summary>
+                These values are only keys when get, reset or remove, key/values when set or add
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IniSectionAttribute">
+            <summary>
+                This attribute should be used to mark a class as IniSection
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniSectionAttribute.#ctor(System.String)">
+            <summary>
+                Constructor
+            </summary>
+            <param name="name">Name of the ini-section</param>
+        </member>
+        <member name="P:Dapplo.Ini.IniSectionAttribute.IgnoreErrors">
+            <summary>
+                Set ignore errors to false, if you want an exception when a parse error occurs.
+                Default this is set to true, which will cause the property to have the "default" value.
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniSectionAttribute.Name">
+            <summary>
+                Name of the section in the ini file
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IniSectionEventArgs">
+            <summary>
+                IniSectionEventArgs has all the information on the Loaded, Saving or Saved events from a IniSection
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniSectionEventArgs.EventType">
+            <summary>
+                IniEventTypes specifies what kind of event was created: Loaded, Saving or Saved
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniSectionEventArgs.IniSection">
+            <summary>
+                The initiating IIniSection
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.IniValue">
+            <summary>
+                Container for supplying the properties to the Ini file
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniValue.#ctor(Dapplo.InterfaceImpl.IExtensibleInterceptor)">
+            <summary>
+                The constructor of an IniValue
+            </summary>
+            <param name="interceptor"></param>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.Behavior">
+            <summary>
+                Specific behavior of the ini-value
+                This describes if the value should be read or written
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.Category">
+            <summary>
+                Category, which was set via the CategoryAttribute on the property
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.Converter">
+            <summary>
+                Return the TypeConverter for this value, when not set defaults are used
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.DefaultValue">
+            <summary>
+                Default value, from the DefaultAttribute
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.Description">
+            <summary>
+                Description, which was set via the DescriptionAttribute on the property
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.EmitDefaultValue">
+            <summary>
+                If this is set to true, we also should write the default value to the file
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.HasValue">
+            <summary>
+                Check if this IniValue has a value
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.IniPropertyName">
+            <summary>
+                Name of the property in the file, this could be different
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.IsWriteNeeded">
+            <summary>
+                Check if this IniValue needs to be written.
+                This returns false if there is no value, or if the value is the default and if EmitDefaultValue is false (Default)
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.PropertyName">
+            <summary>
+                Name of the property in the interface
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.Value">
+            <summary>
+                Current value
+            </summary>
+        </member>
+        <member name="P:Dapplo.Ini.IniValue.ValueType">
+            <summary>
+                Type for the value, needed for conversion when reading.
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.IniValue.ResetToDefault">
+            <summary>
+                Reset the value to a default
+            </summary>
+        </member>
+        <member name="T:Dapplo.Ini.Extensions.PropertyInfoExtension">
+            <summary>
+                Extensions for PropertyInfo
+            </summary>
+        </member>
+        <member name="M:Dapplo.Ini.Extensions.PropertyInfoExtension.GetIniPropertyBehavior(System.Reflection.PropertyInfo)">
+            <summary>
+                Get the IniPropertyBehaviorAttribute
+            </summary>
+            <param name="propertyInfo">PropertyInfo</param>
+            <returns>IniPropertyBehaviorAttribute</returns>
+        </member>
+    </members>
+</doc>

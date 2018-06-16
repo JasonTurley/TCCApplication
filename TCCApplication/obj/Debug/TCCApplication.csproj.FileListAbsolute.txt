@@ -1,0 +1,8 @@
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\bin\Debug\TCCApplication.exe.config
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\bin\Debug\TCCApplication.exe
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\bin\Debug\TCCApplication.pdb
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\bin\Debug\WebDriver.dll
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\bin\Debug\WebDriver.xml
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\obj\Debug\TCCApplication.exe
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\obj\Debug\TCCApplication.pdb
+C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplication\obj\Debug\TCCApplication.csprojResolveAssemblyReference.cache
