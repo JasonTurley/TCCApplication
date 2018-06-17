@@ -18,10 +18,31 @@ namespace SmokeTest
         }
 
         [Test]
-        public void TestMethod1()
+        public void TestLogInUser()
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
-            appLoginLogout.LoginUser();
+            appLoginLogout.LogInUser();
+            Assert.AreEqual(Pages.MemberListPage, _driver.Url);
+        }
+
+        [Test]
+        public void TestLogOutUser()
+        {
+            AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
+
+            // First, sign in the applicant
+            appLoginLogout.LogInUser();
+
+            // Next, sign them out
+            appLoginLogout.LogOutUser();
+            Assert.AreEqual(Pages.MainPage, _driver.Url);
+        }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            _driver.Close();
+            _driver.Dispose();
         }
     }
 }
