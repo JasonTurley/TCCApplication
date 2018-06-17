@@ -6,9 +6,7 @@ namespace TCCApplication
 {
     public class AppLoginLogout
     {
-        private IWebDriver _driver;
-        private const string baseUrl = "https://tcc.alpha.devca.net/";
-
+        private IWebDriver _driver;        
 
         public AppLoginLogout(IWebDriver driver)
         {
@@ -18,7 +16,7 @@ namespace TCCApplication
         /// <summary>
         /// Logs into my TCC account
         /// </summary>
-        public void LoginUser()
+        public void LogInUser()
         {
             NavigateToLoginPage();
             ApplicantCredentials(string.Empty, string.Empty);
@@ -36,11 +34,20 @@ namespace TCCApplication
         }
 
         /// <summary>
+        /// Logs a user out of TCC
+        /// </summary>
+        public void LogOutUser()
+        {
+            // Click on the sign out button
+            _driver.FindElement(By.Id("logoutLink")).Click();
+        }
+
+        /// <summary>
         /// Navigate to TCC Login Page
         /// </summary>
         public void NavigateToLoginPage()
         {
-            _driver.Navigate().GoToUrl("https://tcc.alpha.devca.net/");    
+            _driver.Navigate().GoToUrl(Pages.MainPage);    
         }
 
         /// <summary>
