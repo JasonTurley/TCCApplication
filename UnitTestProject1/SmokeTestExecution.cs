@@ -29,6 +29,15 @@ namespace SmokeTest
         }
 
         [Test]
+        public void TestLoginUserWithCredentials()
+        {
+            AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
+            appLoginLogout.LoginUserWithCredentials("email", "password");
+            DriverUtilities.Wait(_driver, 5);
+            Assert.AreEqual(Pages.MemberListPage, _driver.Url);
+        }
+
+        [Test]
         public void TestLogOutUser()
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
@@ -47,7 +56,7 @@ namespace SmokeTest
         {
             AppSearch appSearch = new AppSearch(_driver);
             appSearch.SearchForApplicant("", "Paul");  // hard coded for now
-            //Console.ReadKey();                                                // stop window from closing
+            //Console.ReadKey();                       // stop window from closing
         }
 
         [Test]
