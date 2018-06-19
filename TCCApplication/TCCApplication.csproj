@@ -51,8 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppLoginLogout.cs" />
-    <Compile Include="DriverUtilities.cs" />
+    <Compile Include="AppSearch.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="DriverUtilities.cs" />
+    <Compile Include="Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserData.cs" />
   </ItemGroup>

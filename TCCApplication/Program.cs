@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace TCCApplication
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Email: " + UserData.Email);
-            Console.WriteLine("Password: " + UserData.Password);
-            Console.ReadKey();
+
         }
     }
 }

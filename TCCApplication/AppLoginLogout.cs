@@ -6,7 +6,9 @@ namespace TCCApplication
 {
     public class AppLoginLogout
     {
-        private IWebDriver _driver;        
+        private IWebDriver _driver;
+        private bool LoggedIn { get; set; }
+
 
         public AppLoginLogout(IWebDriver driver)
         {
@@ -20,6 +22,7 @@ namespace TCCApplication
         {
             NavigateToLoginPage();
             ApplicantCredentials(string.Empty, string.Empty);
+            this.LoggedIn = true;
         }
 
         /// <summary>
@@ -47,7 +50,8 @@ namespace TCCApplication
         /// </summary>
         public void NavigateToLoginPage()
         {
-            _driver.Navigate().GoToUrl(Pages.MainPage);    
+            _driver.Navigate().GoToUrl(Pages.MainPage);
+            _driver.Manage().Window.Maximize(); 
         }
 
         /// <summary>
@@ -69,6 +73,15 @@ namespace TCCApplication
             {
                 // Log into user's account
             }
+        }
+
+        /// <summary>
+        /// Check if user is already logged in
+        /// </summary>
+        /// <returns></returns>
+        public bool IsLoggedIn()
+        {
+            return this.LoggedIn;
         }
     }
 }
