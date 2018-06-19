@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using TCCApplication;
 using TCCApplication.Data;
 
@@ -11,14 +10,11 @@ namespace TCCApplication
         private IWebDriver _driver;
         private AppLoginLogout app;
 
-
         public AppSearch(IWebDriver driver)
         {
             this._driver = driver;
             this.app = new AppLoginLogout(_driver);
         }
-
-        
 
         /// <summary>
         /// Search for an applicant on TCC
@@ -27,15 +23,14 @@ namespace TCCApplication
         /// <param name="firstNameLike"></param>
         /// <param name="lastNameLike"></param>
         public void SearchForApplicant(string emailLike = "", string firstNameLike = "", string lastNameLike = "")
-        {       
+        {
             if (emailLike == string.Empty) { emailLike = UserData.Email; }
             if (firstNameLike == string.Empty) { firstNameLike = UserData.FirstName; }
             if (lastNameLike == string.Empty) { lastNameLike = UserData.LastName; }
 
             Navigate.NavigateToSearchPage(_driver);
-
-            // Enter search info
             EnterSearchInfo(emailLike, firstNameLike, lastNameLike);
+            DriverUtilities.ClickFirstLink(_driver);
         }
 
         /// <summary>
@@ -58,15 +53,15 @@ namespace TCCApplication
             _driver.FindElement(By.Id("selectSearchObject")).Click();
             _driver.FindElement(By.XPath("//option[@value='Rec']")).Click();
 
-            // Enter search info
             EnterSearchInfo(emailLike, firstNameLike, lastNameLike, IDIncludes);
+            DriverUtilities.ClickFirstLink(_driver);
         }
 
         public void SearchForMember(string memberName)
         {
             app.LogInUser();
-            DriverUtilities.Wait(_driver, 5);
             _driver.FindElement(By.Id("member-list-filter")).SendKeys(memberName + Keys.Enter);
+            DriverUtilities.ClickFirstLink(_driver);
         }
 
         /// <summary>
@@ -91,6 +86,7 @@ namespace TCCApplication
             {
                 // do nothing
             }
+
             // Try to fill RecommenderId
             try
             {

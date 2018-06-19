@@ -34,7 +34,7 @@ namespace SmokeTest
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LoginUserWithCredentials("email", "password");
             DriverUtilities.Wait(_driver, 5);
-            Assert.AreEqual(Pages.MemberListPage, _driver.Url);
+            Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expect to stay on main page since login fails
         }
 
         [Test]
@@ -55,8 +55,20 @@ namespace SmokeTest
         public void TestSearchForApplicant()
         {
             AppSearch appSearch = new AppSearch(_driver);
-            appSearch.SearchForApplicant("", "Paul");  // hard coded for now
-            //Console.ReadKey();                       // stop window from closing
+            appSearch.SearchForApplicant();  // FIXME: only searches for me
+            //Assert.AreEqual(Pages.JasonTurleyAppProfile, _driver.Url);
+        }
+
+        /// <summary>
+        /// Searches for a non-existent applicant. 
+        /// 
+        /// Catches and handles OpenQA.Selenium.NoSuchElementException
+        /// </summary>
+        [Test]
+        public void TestSearchForNonExistentApplicant()
+        {
+            AppSearch appSearch = new AppSearch(_driver);
+            appSearch.SearchForApplicant("goak@mailinator.com", "Gary", "Oak");
         }
 
         [Test]

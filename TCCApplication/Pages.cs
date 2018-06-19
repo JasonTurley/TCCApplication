@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TCCApplication
 {
@@ -10,5 +6,6 @@ namespace TCCApplication
     {
         public static string MainPage = "https://tcc.alpha.devca.net/";
         public static string MemberListPage = "https://tcc.alpha.devca.net/Member/List";
+        public static string JasonTurleyAppProfile = "https://tcc.alpha.devca.net/AppRec/SearchDetail?FirstName=Jason&LastName=&Email=&PostalCode=&CommonAppId=&CEEBCode=&SchoolName=&City=&State=&Type=&RecID=&IsPreviousSeason=false";
     }
 }
