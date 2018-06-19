@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Timers;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using TCCApplication;
-using NUnit.Framework;
+using TCCApplication.Data;
 
 namespace SmokeTest
 {
@@ -45,8 +46,8 @@ namespace SmokeTest
         public void TestSearchForApplicant()
         {
             AppSearch appSearch = new AppSearch(_driver);
-            appSearch.SearchForApplicant(UserData.Email, "Jason", "Turley");  // hard coded for now
-            Console.ReadKey();                                                // stop window from closing
+            appSearch.SearchForApplicant("", "Paul");  // hard coded for now
+            //Console.ReadKey();                                                // stop window from closing
         }
 
         [Test]
@@ -54,7 +55,14 @@ namespace SmokeTest
         {
             AppSearch appSearch = new AppSearch(_driver);
             appSearch.SearchForRecommender();
-            Console.ReadKey();
+            //Console.ReadKey();
+        }
+
+        [Test]
+        public void TestSearchForMembers()
+        {
+            AppSearch appSearch = new AppSearch(_driver);
+            appSearch.SearchForMember("Test");
         }
 
         [OneTimeTearDown]

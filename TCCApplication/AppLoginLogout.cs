@@ -21,7 +21,7 @@ namespace TCCApplication
         /// </summary>
         public void LogInUser()
         {
-            NavigateToLoginPage();
+            Navigate.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
             this.LoggedIn = true;
         }
@@ -33,7 +33,7 @@ namespace TCCApplication
         /// <param name="userPassword"></param>
         public void LoginUserWithInfo(string userEmail, string userPassword)
         {
-            NavigateToLoginPage();
+            Navigate.NavigateToLoginPage(_driver);
             ApplicantCredentials(userEmail, userPassword);
         }
 
@@ -46,14 +46,7 @@ namespace TCCApplication
             _driver.FindElement(By.Id("logoutLink")).Click();
         }
 
-        /// <summary>
-        /// Navigate to TCC Login Page
-        /// </summary>
-        public void NavigateToLoginPage()
-        {
-            _driver.Navigate().GoToUrl(Pages.MainPage);
-            _driver.Manage().Window.Maximize(); 
-        }
+        
 
         /// <summary>
         /// Enters the provided email and password into the login field.

@@ -9,9 +9,9 @@ namespace TCCApplication
 
         //private IWebDriver _driver;
 
-        public static void Wait(IWebDriver driver, double value)
+        public static void Wait(IWebDriver driver, double seconds)
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(value);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
         }
         
     }

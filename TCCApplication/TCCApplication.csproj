@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AppLoginLogout.cs" />
     <Compile Include="AppSearch.cs" />
+    <Compile Include="Navigate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DriverUtilities.cs" />
     <Compile Include="Pages.cs" />

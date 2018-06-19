@@ -16,3 +16,21 @@ C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\UnitTestPr
 C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\UnitTestProject1\obj\Debug\SmokeTest.csprojResolveAssemblyReference.cache
 C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\UnitTestProject1\obj\Debug\UnitTestProject1.dll
 C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\NUnit3.TestAdapter.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\NUnit3.TestAdapter.pdb
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.engine.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.engine.api.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\Mono.Cecil.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.framework.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\TCCApplication.exe
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\WebDriver.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\TCCApplication.pdb
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.framework.pdb
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.framework.xml
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\WebDriver.xml
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\obj\Debug\SmokeTest.csprojResolveAssemblyReference.cache
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\obj\Debug\UnitTestProject1.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
