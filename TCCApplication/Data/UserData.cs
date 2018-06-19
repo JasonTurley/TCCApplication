@@ -1,15 +1,15 @@
 ﻿using System;
 
 namespace TCCApplication.Data
-{
+{ 
     public class UserData
     {
-        /// <summary>
-        /// Required login information
-        /// </summary>
+        //TODO: change hard coded values
         public static string Email = "jturley@commonapp.org";
-
         public static string Password = "C0mm0n@1-2";
+        public static string FirstName = "Jason";
+        public static string LastName = "Turley";
+
 
         public UserData()
         {

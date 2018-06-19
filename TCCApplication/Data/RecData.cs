@@ -4,10 +4,11 @@ namespace TCCApplication.Data
 {
     public class RecData
     {
-        public static string Email;
-        public static string FirstName;
-        public static string LastName;
-        public static string ID;
+        // TODO: change hard coded values
+        public static string Email = "Helen_Brown_alpha@mailinator.com";
+        public static string FirstName = "Helen_";
+        public static string LastName = "Brown_alpha";
+        public static string ID = "2420";
 
         public RecData()
         {
