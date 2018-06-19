@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using TCCApplication.Data;
 
 namespace TCCApplication
@@ -27,11 +26,11 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Logs into TCC with provided email and password
+        /// Logs into TCC with the provided email and password
         /// </summary>
         /// <param name="userEmail"></param>
         /// <param name="userPassword"></param>
-        public void LoginUserWithInfo(string userEmail, string userPassword)
+        public void LoginUserWithCredentials(string userEmail, string userPassword)
         {
             Navigate.NavigateToLoginPage(_driver);
             ApplicantCredentials(userEmail, userPassword);
@@ -46,8 +45,6 @@ namespace TCCApplication
             _driver.FindElement(By.Id("logoutLink")).Click();
         }
 
-        
-
         /// <summary>
         /// Enters the provided email and password into the login field.
         /// If no email and password is provided, user default (my) info
@@ -56,17 +53,12 @@ namespace TCCApplication
         /// <param name="password"></param>
         public void ApplicantCredentials(string email, string password)
         {
-            if (email == string.Empty && password == string.Empty)
-            {
-                // Log into my TCC acount
-                _driver.FindElement(By.Id("Username")).SendKeys(UserData.Email);
-                _driver.FindElement(By.Id("Password")).SendKeys(UserData.Password);
-                _driver.FindElement(By.ClassName("btn-primary")).Click();
-            }
-            else
-            {
-                // Log into user's account
-            }
+            if (email == string.Empty) { email = UserData.Email; }
+            if (password == string.Empty) { password = UserData.Password; }
+                
+            _driver.FindElement(By.Id("Username")).SendKeys(email);
+            _driver.FindElement(By.Id("Password")).SendKeys(password);
+            _driver.FindElement(By.ClassName("btn-primary")).Click();
         }
 
         /// <summary>
