@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace TCCApplication
+namespace TCCApplication.Data
 {
     public class UserData
     {
-
         /// <summary>
         /// Required login information
         /// </summary>
