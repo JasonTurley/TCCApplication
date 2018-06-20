@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TCCApplication.Data
+﻿namespace TCCApplication.Data
 {
     public class PersonData
     {
@@ -14,18 +8,14 @@ namespace TCCApplication.Data
         protected string Password;
         protected string ID;
 
-        public static string defaultFirstName = "Blah";
-        public static string defaultLastName = "Lol";
-        public static string defaultEmail = "default-email@mailinator.com";
-        public static string defaultPassword = "$default-password1234";
 
         // Default constructor. Sets properties to junk default values
         public PersonData()
         {
-            FirstName = defaultFirstName;
-            LastName = defaultLastName;
-            Email = defaultEmail;
-            Password = defaultPassword;
+            FirstName = "Blah";
+            LastName = "Lol";
+            Email = "default-email@mailinator.com";
+            Password = "$default-password1234";
             ID = "123456";
         }
 
@@ -38,16 +28,46 @@ namespace TCCApplication.Data
             this.ID = id;
         }
 
-        public void UpdateName(string newFirstName, string newLastName)
+        public void UpdateInfo(string newFirstName, string newLastName, string id = "")
         {
             this.FirstName = newFirstName;
             this.LastName = newLastName;
+            this.ID = id;
         }
 
         public void UpdateLoginInfo(string newEmail, string newPassword)
         {
             this.Email = newEmail;
             this.Password = newPassword;
+        }
+
+        //=========================================================================================================
+        // GETTERS
+        //=========================================================================================================
+
+        public string GetEmail()
+        {
+            return this.Email;
+        }
+
+        public string GetPassword()
+        {
+            return this.Password;
+        }
+
+        public string GetFirstName()
+        {
+            return this.FirstName;
+        }
+
+        public string GetLastName()
+        {
+            return this.LastName;
+        }
+
+        public string GetID()
+        {
+            return this.ID;
         }
     }
 }

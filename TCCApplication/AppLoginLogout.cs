@@ -7,12 +7,15 @@ namespace TCCApplication
     public class AppLoginLogout
     {
         private IWebDriver _driver;
+        private UserData _user;
+
         private bool LoggedIn { get; set; }
 
 
         public AppLoginLogout(IWebDriver driver)
         {
             this._driver = driver;
+            this._user = new UserData();
         }
 
         /// <summary>
@@ -53,8 +56,8 @@ namespace TCCApplication
         /// <param name="password"></param>
         public void ApplicantCredentials(string email, string password)
         {
-            if (email == string.Empty) { email = AppData.Email; }
-            if (password == string.Empty) { password = AppData.Password; }
+            if (email == string.Empty) { email = _user.GetEmail(); }
+            if (password == string.Empty) { password = _user.GetPassword(); }
 
             _driver.FindElement(By.Id("Username")).SendKeys(email);
             _driver.FindElement(By.Id("Password")).SendKeys(password);
