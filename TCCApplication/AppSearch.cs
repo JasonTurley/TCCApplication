@@ -54,10 +54,8 @@ namespace TCCApplication
             if (id == string.Empty) { id = _rec.GetID(); }
 
             Navigate.NavigateToSearchPage(_driver);
-
-            // Select "Recommender from drop-down menu
-            _driver.FindElement(By.Id("selectSearchObject")).Click();
-            _driver.FindElement(By.XPath("//option[@value='Rec']")).Click();
+            DriverUtilities.Wait(_driver, 10);
+            Navigate.SelectSearch(_driver, "Rec");
 
             EnterSearchInfo(email, firstName, lastName, id);
             DriverUtilities.ClickFirstLink(_driver);
@@ -78,8 +76,7 @@ namespace TCCApplication
 
             Navigate.NavigateToSearchPage(_driver);
             DriverUtilities.Wait(_driver, 10);
-            _driver.FindElement(By.Id("selectSearchObject")).Click();
-            _driver.FindElement(By.XPath("//option[@value='College']")).Click();
+            Navigate.SelectSearch(_driver, "college");
 
             EnterSchoolInfo(schoolName, city, state, ceebCode);
             DriverUtilities.ClickFirstLink(_driver);

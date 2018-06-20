@@ -30,5 +30,28 @@ namespace TCCApplication
             driver.FindElement(By.Id("loadingContainer")).Click();
             driver.FindElement(By.XPath("//*[@id='left-panel']/nav/ul/li[3]/a")).Click();
         }
+
+        /// <summary>
+        /// Selects `name` from App Rec School Search dropdown box
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="name"></param>
+        public static void SelectSearch(IWebDriver driver, string name)
+        {
+            string searchFor = name.ToLower();
+            string value;
+
+            if (searchFor == "app" || searchFor == "applicants")
+                value = "App";
+            else if (searchFor == "rec" || searchFor == "recommenders")
+                value = "Rec";
+            else if (searchFor == "college")
+                value = "College";
+            else
+                value = "HighSchool";
+
+            driver.FindElement(By.Id("selectSearchObject")).Click();
+            driver.FindElement(By.XPath("//option[@value='" + value + "']")).Click();
+        }
     }
 }
