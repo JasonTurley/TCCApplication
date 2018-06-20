@@ -82,6 +82,13 @@ namespace SmokeTest
         }
 
         [Test]
+        public void TestSearchForHighSchool()
+        {
+            AppSearch appSearch = new AppSearch(_driver);
+            appSearch.SearchForHighSchool();
+        }
+
+        [Test]
         public void TestSearchForMembers()
         {
             AppSearch appSearch = new AppSearch(_driver);

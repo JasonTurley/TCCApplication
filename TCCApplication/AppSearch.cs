@@ -62,7 +62,7 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Search TCC for a college. If no parameters are given, searches for schools in Chicago, IL
+        /// Search TCC for a college. If no parameters are given, searches for schools in Chicago, IL.
         /// </summary>
         /// <param name="schoolName"></param>
         /// <param name="city"></param>
@@ -77,6 +77,27 @@ namespace TCCApplication
             Navigate.NavigateToSearchPage(_driver);
             DriverUtilities.Wait(_driver, 10);
             Navigate.SelectSearch(_driver, "college");
+
+            EnterSchoolInfo(schoolName, city, state, ceebCode);
+            DriverUtilities.ClickFirstLink(_driver);
+        }
+
+        /// <summary>
+        /// Search TCC for a high school. If no parameters are given, searches for schools in Chicago, IL.
+        /// </summary>
+        /// <param name="schoolName"></param>
+        /// <param name="city"></param>
+        /// <param name="state"></param>
+        /// <param name="ceebCode"></param>
+        public void SearchForHighSchool(string schoolName = "", string city = "", string state = "", string ceebCode = "")
+        {
+            if (schoolName == string.Empty) { schoolName = _school.SchoolName; }
+            if (city == string.Empty) { city = _school.City; }
+            if (state == string.Empty) { state = _school.State; }
+
+            Navigate.NavigateToSearchPage(_driver);
+            DriverUtilities.Wait(_driver, 10);
+            Navigate.SelectSearch(_driver, "High School");
 
             EnterSchoolInfo(schoolName, city, state, ceebCode);
             DriverUtilities.ClickFirstLink(_driver);
