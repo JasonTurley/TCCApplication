@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace TCCApplication.Data
-{ 
-    public class UserData
+{
+    public class AppData
     {
         //TODO: change hard coded values
         public static string Email = "jturley@commonapp.org";
@@ -10,13 +10,13 @@ namespace TCCApplication.Data
         public static string FirstName = "Jason";
         public static string LastName = "Turley";
 
-        public UserData()
+        public AppData()
         {
             Email = string.Empty;
             Password = string.Empty;
         }
 
-        public UserData(string userEmail, string userPassword)
+        public AppData(string userEmail, string userPassword)
         {
             Email = userEmail;
             Password = userPassword;

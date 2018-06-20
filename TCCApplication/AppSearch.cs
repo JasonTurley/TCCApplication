@@ -9,11 +9,13 @@ namespace TCCApplication
     {
         private IWebDriver _driver;
         private AppLoginLogout app;
+        private SchoolData school;
 
         public AppSearch(IWebDriver driver)
         {
             this._driver = driver;
             this.app = new AppLoginLogout(_driver);
+            this.school = new SchoolData();
         }
 
         /// <summary>
@@ -24,9 +26,9 @@ namespace TCCApplication
         /// <param name="lastName"></param>
         public void SearchForApplicant(string email = "", string firstName = "", string lastName = "")
         {
-            if (email == string.Empty)      { email = UserData.Email; }
-            if (firstName == string.Empty)  { firstName = UserData.FirstName; }
-            if (lastName == string.Empty)   { lastName = UserData.LastName; }
+            if (email == string.Empty) { email = AppData.Email; }
+            if (firstName == string.Empty) { firstName = AppData.FirstName; }
+            if (lastName == string.Empty) { lastName = AppData.LastName; }
 
             Navigate.NavigateToSearchPage(_driver);
             EnterSearchInfo(email, firstName, lastName);
@@ -42,10 +44,10 @@ namespace TCCApplication
         /// <param name="id"></param>
         public void SearchForRecommender(string email = "", string firstName = "", string lastName = "", string id = "")
         {
-            if (email == string.Empty)      { email = RecData.Email; }
-            if (firstName == string.Empty)  { firstName = RecData.FirstName; }
-            if (lastName == string.Empty)   { lastName = RecData.LastName; }
-            if (id == string.Empty)     { id = RecData.ID; }
+            if (email == string.Empty) { email = RecData.Email; }
+            if (firstName == string.Empty) { firstName = RecData.FirstName; }
+            if (lastName == string.Empty) { lastName = RecData.LastName; }
+            if (id == string.Empty) { id = RecData.ID; }
 
             Navigate.NavigateToSearchPage(_driver);
 
@@ -66,11 +68,12 @@ namespace TCCApplication
         /// <param name="ceebCode"></param>
         public void SearchForCollege(string schoolName = "", string city = "", string state = "", string ceebCode = "")
         {
-            if (schoolName == string.Empty) { schoolName = SchoolData.SchoolName; }
-            if (city == string.Empty)       { city = SchoolData.City; }
-            if (state == string.Empty)      { state = SchoolData.State; }
+            if (schoolName == string.Empty) { schoolName = school.SchoolName; }
+            if (city == string.Empty) { city = school.City; }
+            if (state == string.Empty) { state = school.State; }
 
             Navigate.NavigateToSearchPage(_driver);
+            DriverUtilities.Wait(_driver, 10);
             _driver.FindElement(By.Id("selectSearchObject")).Click();
             _driver.FindElement(By.XPath("//option[@value='College']")).Click();
 

@@ -53,9 +53,9 @@ namespace TCCApplication
         /// <param name="password"></param>
         public void ApplicantCredentials(string email, string password)
         {
-            if (email == string.Empty) { email = UserData.Email; }
-            if (password == string.Empty) { password = UserData.Password; }
-                
+            if (email == string.Empty) { email = AppData.Email; }
+            if (password == string.Empty) { password = AppData.Password; }
+
             _driver.FindElement(By.Id("Username")).SendKeys(email);
             _driver.FindElement(By.Id("Password")).SendKeys(password);
             _driver.FindElement(By.ClassName("btn-primary")).Click();
