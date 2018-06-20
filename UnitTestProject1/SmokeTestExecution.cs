@@ -24,7 +24,7 @@ namespace SmokeTest
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LogInUser();
-            DriverUtilities.Wait(_driver, 5);
+            DriverUtilities.Wait(_driver, 10);
             Assert.AreEqual(Pages.MemberListPage, _driver.Url);
         }
 
@@ -33,7 +33,7 @@ namespace SmokeTest
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LoginUserWithCredentials("email", "password");
-            DriverUtilities.Wait(_driver, 5);
+            DriverUtilities.Wait(_driver, 10);
             Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to stay on main page since login fails
         }
 
