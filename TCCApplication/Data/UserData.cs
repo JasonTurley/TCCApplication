@@ -10,7 +10,6 @@ namespace TCCApplication.Data
         public static string FirstName = "Jason";
         public static string LastName = "Turley";
 
-
         public UserData()
         {
             Email = string.Empty;
