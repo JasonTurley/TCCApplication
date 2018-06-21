@@ -12,7 +12,7 @@ namespace TCCApplication
         private UserData _user;
         private RecData _rec;
         private SchoolData _school;
-        private DriverUtilities _utilities;
+        private DriverUtilities _utils;
         private Navigate _nav;
 
         public AppSearch(IWebDriver driver)
@@ -22,7 +22,7 @@ namespace TCCApplication
             this._user = new UserData();
             this._rec = new RecData();
             this._school = new SchoolData();
-            this._utilities = new DriverUtilities(_driver);
+            this._utils = new DriverUtilities(_driver);
             this._nav = new Navigate(_driver);
         }
 
@@ -87,7 +87,7 @@ namespace TCCApplication
                 schoolName = _school.SchoolName;
                 city = _school.City;
                 state = _school.State;
-                ceebCode = _school.CEEBCode;
+                ceebCode = _school.CeebCode;
             }
 
             _nav.NavigateToSearchPage(_driver);
@@ -112,7 +112,7 @@ namespace TCCApplication
                 schoolName = _school.SchoolName;
                 city = _school.City;
                 state = _school.State;
-                ceebCode = _school.CEEBCode;
+                ceebCode = _school.CeebCode;
             }
 
             _nav.NavigateToSearchPage(_driver);
@@ -129,7 +129,7 @@ namespace TCCApplication
         public void SearchForMember(string memberName)
         {
             _app.LogInUser();
-            _driver.FindElement(By.Id("member-list-filter")).SendKeys(memberName + Keys.Enter);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", memberName + Keys.Enter);
             DriverUtilities.ClickFirstResult(_driver);
         }
 
@@ -142,22 +142,22 @@ namespace TCCApplication
         /// <param name="idIncludes"></param>
         public void EnterPersonSearchInfo(string email = "", string firstName = "", string lastName = "", string idIncludes = "")
         {
-            _utilities.Wait(_driver, 10);
-            _driver.FindElement(By.Id("txtEmail_fil")).SendKeys(email);
-            _driver.FindElement(By.Id("txtFirstName_fil")).SendKeys(firstName);
-            _driver.FindElement(By.Id("txtLastName_fil")).SendKeys(lastName);
+            _utils.Wait(_driver, 10);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", email);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtFirstName_fil", firstName);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtLastName_fil", lastName);
 
             // Applicants and recommenders have different "ID includes" fields 
             try
             {
-                _driver.FindElement(By.Id("txtCAID_fil")).SendKeys(idIncludes);
+                _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCAID_fil", idIncludes);
             }
             catch
             {
-                _driver.FindElement(By.Id("txtRecommederId_fil")).SendKeys(idIncludes);
+                _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtRecommederId_fil", idIncludes);
             }
 
-            _driver.FindElement(By.Id("aApplicantSearch")).Click();
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
         }
 
         /// <summary>
@@ -166,16 +166,17 @@ namespace TCCApplication
         /// <param name="schoolName"></param>
         /// <param name="city"></param>
         /// <param name="state"></param>
-        /// <param name="CEEBCode"></param>
-        public void EnterSchoolSearchInfo(string schoolName = "", string city = "", string state = "", string CEEBCode = "")
+        /// <param name="ceebCode"></param>
+        public void EnterSchoolSearchInfo(string schoolName = "", string city = "", string state = "", string ceebCode = "")
         {
-            _utilities.Wait(_driver, 10);
-            _driver.FindElement(By.Id("txtSchoolName_fil")).SendKeys(schoolName);
-            _driver.FindElement(By.Id("txtCity_fil")).SendKeys(city);
-            _driver.FindElement(By.Id("txtState_fil")).SendKeys(state);
-            _driver.FindElement(By.Id("txtCEEBCode_fil")).SendKeys(CEEBCode);
+            _utils.Wait(_driver, 10);
 
-            _driver.FindElement(By.Id("aApplicantSearch")).Click();
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtSchoolName_fil", schoolName);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCity_fil", city);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtState_fil", state);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCEEBCode_fil", ceebCode);
+
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
         }
     }
 }

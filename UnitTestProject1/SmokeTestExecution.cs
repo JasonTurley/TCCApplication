@@ -11,13 +11,13 @@ namespace SmokeTest
     public class SmokeTestExecution
     {
         private IWebDriver _driver;
-        private DriverUtilities _utilities;
+        private DriverUtilities _utils;
 
         [OneTimeSetUp]
         public void SetUp()
         {
             _driver = new FirefoxDriver();
-            _utilities = new DriverUtilities(_driver);
+            _utils = new DriverUtilities(_driver);
             System.IO.Directory.SetCurrentDirectory(TestContext.CurrentContext.WorkDirectory);
         }
 

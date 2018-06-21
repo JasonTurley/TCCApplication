@@ -14,8 +14,8 @@ namespace TCCApplication
         public enum ElementAccessorType
         {
             ID,
-            NAME,
-            XPATH
+            ClassName,
+            XPath
         }
 
         public DriverUtilities(IWebDriver driver)
@@ -37,10 +37,10 @@ namespace TCCApplication
                 case ElementAccessorType.ID:
                     findBy = By.Id(elementName);
                     break;
-                case ElementAccessorType.NAME:
-                    findBy = By.Name(elementName);
+                case ElementAccessorType.ClassName:
+                    findBy = By.ClassName(elementName);
                     break;
-                case ElementAccessorType.XPATH:
+                case ElementAccessorType.XPath:
                     findBy = By.XPath(elementName);
                     break;
                 default:

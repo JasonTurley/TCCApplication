@@ -9,7 +9,7 @@ namespace TCCApplication.Data
     // Data field for colleges and high schools
     public class SchoolData
     {
-        public string CEEBCode;
+        public string CeebCode;
         public string SchoolName;
         public string City;
         public string State;
@@ -17,7 +17,7 @@ namespace TCCApplication.Data
         // Default properties are set to schools in Chicago, IL
         public SchoolData()
         {
-            CEEBCode = "0";
+            CeebCode = "0";
             SchoolName = string.Empty;
             City = "Chicago";
             State = "IL";
@@ -25,7 +25,7 @@ namespace TCCApplication.Data
 
         public SchoolData(string name, string city, string state)
         {
-            this.CEEBCode = GetCEEBCode();
+            this.CeebCode = GetCEEBCode();
             this.SchoolName = name;
             this.City = city;
             this.State = state;

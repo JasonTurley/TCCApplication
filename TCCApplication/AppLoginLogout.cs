@@ -10,14 +10,14 @@ namespace TCCApplication
         private IWebDriver _driver;
         private UserData _user;
         private Navigate _nav;
-        private DriverUtilities _utilities;
+        private DriverUtilities _utils;
 
         public AppLoginLogout(IWebDriver driver)
         {
             this._driver = driver;
             this._user = new UserData();
             this._nav = new Navigate(_driver);
-            this._utilities = new DriverUtilities(_driver);
+            this._utils = new DriverUtilities(_driver);
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace TCCApplication
         /// </summary>
         public void LogOutUser()
         {
-            _driver.FindElement(By.Id("loadingContainer")).Click();
-            _utilities.Wait(_driver, 10);
-            _driver.FindElement(By.Id("logoutLink")).Click();       // Click the sign out button
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utils.Wait(_driver, 10);
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "logoutLink");
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace TCCApplication
             if (email == string.Empty) { email = _user.GetEmail(); }
             if (password == string.Empty) { password = _user.GetPassword(); }
 
-            _driver.FindElement(By.Id("Username")).SendKeys(email);
-            _driver.FindElement(By.Id("Password")).SendKeys(password);
-            _driver.FindElement(By.ClassName("btn-primary")).Click();
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "Username", email);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", password);
+            _utils.Click(DriverUtilities.ElementAccessorType.ClassName, "btn-primary");
         }
     }
 }

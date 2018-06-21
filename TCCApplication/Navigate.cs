@@ -6,12 +6,12 @@ namespace TCCApplication
     public class Navigate
     {
         private IWebDriver _driver;
-        private DriverUtilities _utilities;
+        private DriverUtilities _utils;
 
         public Navigate(IWebDriver driver)
         {
             this._driver = driver;
-            this._utilities = new DriverUtilities(_driver);
+            this._utils = new DriverUtilities(_driver);
         }
 
         /// <summary>
@@ -32,10 +32,10 @@ namespace TCCApplication
             // otherwise, we'd need to call it like so: LogInUser(driver) to get the correct IWebDriver instance
             AppLoginLogout app = new AppLoginLogout(driver);
             app.LogInUser();
-            _utilities.Wait(driver, 10);
-            driver.FindElement(By.Id("loadingContainer")).Click();
-            _utilities.Wait(driver, 10);
-            driver.FindElement(By.XPath("//*[@data-bind='click:MenuBar.redirectToAppRecSearch']")).Click();
+            _utils.Wait(driver, 10);
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utils.Wait(driver, 10);
+            _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
         }
 
         /// <summary>
@@ -57,9 +57,9 @@ namespace TCCApplication
             else
                 value = "HighSchool";
 
-            _utilities.Wait(driver, 5);
-            driver.FindElement(By.Id("selectSearchObject")).Click();
-            driver.FindElement(By.XPath("//option[@value='" + value + "']")).Click();
+            _utils.Wait(driver, 5);
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "selectSearchObject");
+            _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//option[@value='" + value + "']");
         }
     }
 }
