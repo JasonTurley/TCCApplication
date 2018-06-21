@@ -33,7 +33,7 @@ namespace TCCApplication
             app.LogInUser();
             _utilities.Wait(_driver, 10);
             driver.FindElement(By.Id("loadingContainer")).Click();
-            driver.FindElement(By.XPath("//*[@title='App Rec School Search']")).Click();
+            _utilities.Wait(_driver, 10);
             driver.FindElement(By.XPath("//*[@id='left-panel']/nav/ul/li[3]/a")).Click();
         }
 
