@@ -26,7 +26,7 @@ namespace TCCApplication
             {
                 app.LogInUser();
             }
-            DriverUtilities.Wait(driver, 5);
+            DriverUtilities.Wait(driver, 10);
             driver.FindElement(By.Id("loadingContainer")).Click();
             driver.FindElement(By.XPath("//*[@id='left-panel']/nav/ul/li[3]/a")).Click();
         }

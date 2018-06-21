@@ -41,13 +41,9 @@ namespace SmokeTest
         public void TestLogOutUser()
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
-
-            // First, sign in the applicant
-            appLoginLogout.LogInUser();
-
-            // Next, sign them out
+            appLoginLogout.LogInUser();                     // First, sign in the applicant
+            DriverUtilities.Wait(_driver, 10);               // Next, sign them out
             appLoginLogout.LogOutUser();
-            DriverUtilities.Wait(_driver, 5);
             Assert.AreEqual(Pages.MainPage, _driver.Url);
         }
 

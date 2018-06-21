@@ -35,6 +35,7 @@ namespace TCCApplication
             if (lastName == string.Empty) { lastName = _user.GetLastName(); }
 
             Navigate.NavigateToSearchPage(_driver);
+            DriverUtilities.Wait(_driver, 10);
             EnterSearchInfo(email, firstName, lastName);
             DriverUtilities.ClickFirstLink(_driver);
         }
