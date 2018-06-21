@@ -1,5 +1,6 @@
 ﻿namespace TCCApplication.Data
 {
+    // Base class for Applicants and Recommenders
     public class PersonData
     {
         protected string FirstName;

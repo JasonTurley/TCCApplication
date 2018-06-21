@@ -12,6 +12,8 @@ namespace TCCApplication
         private UserData _user;
         private RecData _rec;
         private SchoolData _school;
+        private DriverUtilities _utilities;
+        private Navigate _nav;
 
         public AppSearch(IWebDriver driver)
         {
@@ -20,28 +22,33 @@ namespace TCCApplication
             this._user = new UserData();
             this._rec = new RecData();
             this._school = new SchoolData();
+            this._utilities = new DriverUtilities(_driver);
+            this._nav = new Navigate(_driver);
         }
 
         /// <summary>
-        /// Search TCC for an applicant. If no parameters are given, searches for user Jason Turley
+        /// Search TCC for an applicant. If no parameters are given, searches for me, Jason Turley.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
         public void SearchForApplicant(string email = "", string firstName = "", string lastName = "")
         {
-            if (email == string.Empty) { email = _user.GetEmail(); }
-            if (firstName == string.Empty) { firstName = _user.GetFirstName(); }
-            if (lastName == string.Empty) { lastName = _user.GetLastName(); }
-
-            Navigate.NavigateToSearchPage(_driver);
-            DriverUtilities.Wait(_driver, 10);
-            EnterSearchInfo(email, firstName, lastName);
-            DriverUtilities.ClickFirstLink(_driver);
+            // Use my credentials
+            if (email == string.Empty && firstName == string.Empty && lastName == string.Empty)
+            {
+                email = _user.GetEmail();
+                firstName = _user.GetFirstName();
+                lastName = _user.GetLastName();
+            }
+            
+            _nav.NavigateToSearchPage(_driver);
+            EnterPersonSearchInfo(email, firstName, lastName);
+            DriverUtilities.ClickFirstResult(_driver);
         }
 
         /// <summary>
-        /// Search TCC for a recommender. If no parameters are given, searches for test recommender, Helen Brown
+        /// Search TCC for a recommender. If no parameters are given, searches for test recommender, Helen Brown.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="firstName"></param>
@@ -49,17 +56,20 @@ namespace TCCApplication
         /// <param name="id"></param>
         public void SearchForRecommender(string email = "", string firstName = "", string lastName = "", string id = "")
         {
-            if (email == string.Empty) { email = _rec.GetEmail(); }
-            if (firstName == string.Empty) { firstName = _rec.GetFirstName(); }
-            if (lastName == string.Empty) { lastName = _rec.GetLastName(); }
-            if (id == string.Empty) { id = _rec.GetID(); }
+            // Use Helen's credentials
+            if (email == string.Empty && firstName == string.Empty && lastName == string.Empty && id == string.Empty)
+            {
+                email = _rec.GetEmail();
+                firstName = _rec.GetFirstName();
+                lastName = _rec.GetLastName();
+                id = _rec.GetID();
+            }
+            
+            _nav.NavigateToSearchPage(_driver);
+            _nav.SelectSearch(_driver, "Rec");
 
-            Navigate.NavigateToSearchPage(_driver);
-            DriverUtilities.Wait(_driver, 10);
-            Navigate.SelectSearch(_driver, "Rec");
-
-            EnterSearchInfo(email, firstName, lastName, id);
-            DriverUtilities.ClickFirstLink(_driver);
+            EnterPersonSearchInfo(email, firstName, lastName, id);
+            DriverUtilities.ClickFirstResult(_driver);
         }
 
         /// <summary>
@@ -71,16 +81,20 @@ namespace TCCApplication
         /// <param name="ceebCode"></param>
         public void SearchForCollege(string schoolName = "", string city = "", string state = "", string ceebCode = "")
         {
-            if (schoolName == string.Empty) { schoolName = _school.SchoolName; }
-            if (city == string.Empty) { city = _school.City; }
-            if (state == string.Empty) { state = _school.State; }
+            // Find Chicago school
+            if (schoolName == string.Empty && city == string.Empty && state == string.Empty && ceebCode == string.Empty)
+            {
+                schoolName = _school.SchoolName;
+                city = _school.City;
+                state = _school.State;
+                ceebCode = _school.CEEBCode;
+            }
 
-            Navigate.NavigateToSearchPage(_driver);
-            DriverUtilities.Wait(_driver, 10);
-            Navigate.SelectSearch(_driver, "college");
+            _nav.NavigateToSearchPage(_driver);
+            _nav.SelectSearch(_driver, "college");
 
-            EnterSchoolInfo(schoolName, city, state, ceebCode);
-            DriverUtilities.ClickFirstLink(_driver);
+            EnterSchoolSearchInfo(schoolName, city, state, ceebCode);
+            DriverUtilities.ClickFirstResult(_driver);
         }
 
         /// <summary>
@@ -92,56 +106,70 @@ namespace TCCApplication
         /// <param name="ceebCode"></param>
         public void SearchForHighSchool(string schoolName = "", string city = "", string state = "", string ceebCode = "")
         {
-            if (schoolName == string.Empty) { schoolName = _school.SchoolName; }
-            if (city == string.Empty) { city = _school.City; }
-            if (state == string.Empty) { state = _school.State; }
+            // Find Chicago school
+            if (schoolName == string.Empty && city == string.Empty && state == string.Empty && ceebCode == string.Empty)
+            {
+                schoolName = _school.SchoolName;
+                city = _school.City;
+                state = _school.State;
+                ceebCode = _school.CEEBCode;
+            }
 
-            Navigate.NavigateToSearchPage(_driver);
-            DriverUtilities.Wait(_driver, 10);
-            Navigate.SelectSearch(_driver, "High School");
+            _nav.NavigateToSearchPage(_driver);
+            _nav.SelectSearch(_driver, "High School");
 
-            EnterSchoolInfo(schoolName, city, state, ceebCode);
-            DriverUtilities.ClickFirstLink(_driver);
+            EnterSchoolSearchInfo(schoolName, city, state, ceebCode);
+            DriverUtilities.ClickFirstResult(_driver);
         }
 
         /// <summary>
-        /// Search TCC for a member
+        /// Search TCC for a member.
         /// </summary>
         /// <param name="memberName"></param>
         public void SearchForMember(string memberName)
         {
             _app.LogInUser();
             _driver.FindElement(By.Id("member-list-filter")).SendKeys(memberName + Keys.Enter);
-            DriverUtilities.ClickFirstLink(_driver);
+            DriverUtilities.ClickFirstResult(_driver);
         }
 
         /// <summary>
-        /// Fills out search form with provided info
+        /// Fills out search form with provided info. Intended for both applicants and recommenders.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
-        /// <param name="id"></param>
-        public void EnterSearchInfo(string email = "", string firstName = "", string lastName = "", string id = "")
+        /// <param name="idIncludes"></param>
+        public void EnterPersonSearchInfo(string email = "", string firstName = "", string lastName = "", string idIncludes = "")
         {
+            _utilities.Wait(_driver, 10);
             _driver.FindElement(By.Id("txtEmail_fil")).SendKeys(email);
             _driver.FindElement(By.Id("txtFirstName_fil")).SendKeys(firstName);
             _driver.FindElement(By.Id("txtLastName_fil")).SendKeys(lastName);
 
-            // Try to fill ApplicantId
+            // Applicants and recommenders have different "ID includes" fields 
             try
             {
-                _driver.FindElement(By.Id("txtCAID_fil")).SendKeys(id);
+                _driver.FindElement(By.Id("txtCAID_fil")).SendKeys(idIncludes);
             }
             catch
             {
-                _driver.FindElement(By.Id("txtRecommederId_fil")).SendKeys(id);
+                _driver.FindElement(By.Id("txtRecommederId_fil")).SendKeys(idIncludes);
             }
+
             _driver.FindElement(By.Id("aApplicantSearch")).Click();
         }
 
-        public void EnterSchoolInfo(string schoolName = "", string city = "", string state = "", string CEEBCode = "")
+        /// <summary>
+        /// Fills out search form with provided info. Intended for both colleges and high schools.
+        /// </summary>
+        /// <param name="schoolName"></param>
+        /// <param name="city"></param>
+        /// <param name="state"></param>
+        /// <param name="CEEBCode"></param>
+        public void EnterSchoolSearchInfo(string schoolName = "", string city = "", string state = "", string CEEBCode = "")
         {
+            _utilities.Wait(_driver, 10);
             _driver.FindElement(By.Id("txtSchoolName_fil")).SendKeys(schoolName);
             _driver.FindElement(By.Id("txtCity_fil")).SendKeys(city);
             _driver.FindElement(By.Id("txtState_fil")).SendKeys(state);

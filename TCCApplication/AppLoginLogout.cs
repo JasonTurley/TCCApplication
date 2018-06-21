@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using TCCApplication;
 using TCCApplication.Data;
 
 namespace TCCApplication
@@ -8,14 +9,13 @@ namespace TCCApplication
     {
         private IWebDriver _driver;
         private UserData _user;
-
-        private bool LoggedIn { get; set; }
-
+        private Navigate _nav;
 
         public AppLoginLogout(IWebDriver driver)
         {
             this._driver = driver;
             this._user = new UserData();
+            this._nav = new Navigate(_driver);
         }
 
         /// <summary>
@@ -23,9 +23,8 @@ namespace TCCApplication
         /// </summary>
         public void LogInUser()
         {
-            Navigate.NavigateToLoginPage(_driver);
+            _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
-            this.LoggedIn = true;
         }
 
         /// <summary>
@@ -35,22 +34,21 @@ namespace TCCApplication
         /// <param name="userPassword"></param>
         public void LoginUserWithCredentials(string userEmail, string userPassword)
         {
-            Navigate.NavigateToLoginPage(_driver);
+            _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(userEmail, userPassword);
         }
 
         /// <summary>
-        /// Logs a user out of TCC
+        /// Logs user out of TCC
         /// </summary>
         public void LogOutUser()
         {
-            // Click on the sign out button
-            _driver.FindElement(By.Id("logoutLink")).Click();
+            _driver.FindElement(By.Id("logoutLink")).Click();       // Click the sign out button
         }
 
         /// <summary>
         /// Enters the provided email and password into the login field.
-        /// If no email and password is provided, user default (my) info
+        /// If no email and password is provided, user default (my) info.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="password"></param>
@@ -62,15 +60,6 @@ namespace TCCApplication
             _driver.FindElement(By.Id("Username")).SendKeys(email);
             _driver.FindElement(By.Id("Password")).SendKeys(password);
             _driver.FindElement(By.ClassName("btn-primary")).Click();
-        }
-
-        /// <summary>
-        /// Check if user is already logged in
-        /// </summary>
-        /// <returns></returns>
-        public bool IsLoggedIn()
-        {
-            return this.LoggedIn;
         }
     }
 }

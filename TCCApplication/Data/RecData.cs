@@ -4,7 +4,6 @@ namespace TCCApplication.Data
 {
     public class RecData : PersonData
     {
-
         // Properties are set to test user "Helen Brown's" data by default
         public RecData()
         {

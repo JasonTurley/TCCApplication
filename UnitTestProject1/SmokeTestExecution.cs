@@ -11,11 +11,13 @@ namespace SmokeTest
     public class SmokeTestExecution
     {
         private IWebDriver _driver;
+        private DriverUtilities _utilities;
 
         [OneTimeSetUp]
         public void SetUp()
         {
             _driver = new FirefoxDriver();
+            _utilities = new DriverUtilities(_driver);
             System.IO.Directory.SetCurrentDirectory(TestContext.CurrentContext.WorkDirectory);
         }
 
@@ -24,7 +26,6 @@ namespace SmokeTest
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LogInUser();
-            DriverUtilities.Wait(_driver, 10);
             Assert.AreEqual(Pages.MemberListPage, _driver.Url);
         }
 
@@ -33,7 +34,6 @@ namespace SmokeTest
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LoginUserWithCredentials("email", "password");
-            DriverUtilities.Wait(_driver, 10);
             Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to stay on main page since login fails
         }
 
@@ -42,7 +42,6 @@ namespace SmokeTest
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LogInUser();                     // First, sign in the applicant
-            DriverUtilities.Wait(_driver, 10);               // Next, sign them out
             appLoginLogout.LogOutUser();
             Assert.AreEqual(Pages.MainPage, _driver.Url);
         }

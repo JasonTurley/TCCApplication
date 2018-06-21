@@ -2,6 +2,7 @@
 
 namespace TCCApplication
 {
+    // Verify that driver is on correct page
     public static class Pages
     {
         public static string MainPage = "https://tcc.alpha.devca.net/";
