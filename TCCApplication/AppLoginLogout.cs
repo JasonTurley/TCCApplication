@@ -10,12 +10,14 @@ namespace TCCApplication
         private IWebDriver _driver;
         private UserData _user;
         private Navigate _nav;
+        private DriverUtilities _utilities;
 
         public AppLoginLogout(IWebDriver driver)
         {
             this._driver = driver;
             this._user = new UserData();
             this._nav = new Navigate(_driver);
+            this._utilities = new DriverUtilities(_driver);
         }
 
         /// <summary>
@@ -43,6 +45,8 @@ namespace TCCApplication
         /// </summary>
         public void LogOutUser()
         {
+            _driver.FindElement(By.Id("loadingContainer")).Click();
+            _utilities.Wait(_driver, 10);
             _driver.FindElement(By.Id("logoutLink")).Click();       // Click the sign out button
         }
 

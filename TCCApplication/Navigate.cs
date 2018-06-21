@@ -28,13 +28,14 @@ namespace TCCApplication
         /// </summary>
         public void NavigateToSearchPage(IWebDriver driver)
         {
-            // Log in the user if they are not already
-            AppLoginLogout app = new AppLoginLogout(_driver);
+            // Creating a new instance keeps LogInUser() argument free;
+            // otherwise, we'd need to call it like so: LogInUser(driver) to get the correct IWebDriver instance
+            AppLoginLogout app = new AppLoginLogout(driver);
             app.LogInUser();
-            _utilities.Wait(_driver, 10);
+            _utilities.Wait(driver, 10);
             driver.FindElement(By.Id("loadingContainer")).Click();
-            _utilities.Wait(_driver, 10);
-            driver.FindElement(By.XPath("//*[@id='left-panel']/nav/ul/li[3]/a")).Click();
+            _utilities.Wait(driver, 10);
+            driver.FindElement(By.XPath("//*[@data-bind='click:MenuBar.redirectToAppRecSearch']")).Click();
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace TCCApplication
             else
                 value = "HighSchool";
 
-            _utilities.Wait(_driver, 10);
+            _utilities.Wait(driver, 5);
             driver.FindElement(By.Id("selectSearchObject")).Click();
             driver.FindElement(By.XPath("//option[@value='" + value + "']")).Click();
         }
