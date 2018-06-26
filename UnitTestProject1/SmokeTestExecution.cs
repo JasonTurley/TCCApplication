@@ -26,15 +26,15 @@ namespace SmokeTest
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LogInUser();
-            Assert.AreEqual(Pages.MemberListPage, _driver.Url);
+            Assert.AreEqual(Pages.MemberListPage, _driver.Url); // Expected to be directed to member page
         }
 
         [Test]
         public void TestLoginUserWithCredentials()
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
-            appLoginLogout.LoginUserWithCredentials("email", "password");
-            Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to stay on main page since login fails
+            appLoginLogout.LoginUserWithCredentials("User-Email", "User-Password");
+            Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to stay on main page since login will fail
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace SmokeTest
         {
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LogInUser();                     // First, sign in the applicant
-            appLoginLogout.LogOutUser();
-            Assert.AreEqual(Pages.MainPage, _driver.Url);
+            appLoginLogout.LogOutUser();                    // Then sign them out
+            Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to be directed to main page
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace SmokeTest
         public void TestSearchForNonExistentApplicant()
         {
             AppSearch appSearch = new AppSearch(_driver);
-            appSearch.SearchForApplicant("goak@mailinator.com", "Gary", "Oak");
+            appSearch.SearchForApplicant("applicant-email@gmail.com", "App", "Lee-cant");
         }
 
         [Test]
@@ -66,7 +66,6 @@ namespace SmokeTest
         {
             AppSearch appSearch = new AppSearch(_driver);
             appSearch.SearchForRecommender();
-            //Console.ReadKey();
         }
 
         [Test]
@@ -87,7 +86,7 @@ namespace SmokeTest
         public void TestSearchForMembers()
         {
             AppSearch appSearch = new AppSearch(_driver);
-            appSearch.SearchForMember("Test");
+            appSearch.SearchForMember("Test Member");
         }
 
         [OneTimeTearDown]

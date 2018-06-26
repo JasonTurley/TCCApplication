@@ -28,7 +28,6 @@ namespace TCCApplication
         {
             _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
-            Thread.Sleep(3000);
         }
 
         /// <summary>
@@ -55,15 +54,18 @@ namespace TCCApplication
         /// Enters the provided email and password into the login field.
         /// If no email and password is provided, user default (my) info.
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        public void ApplicantCredentials(string email, string password)
+        /// <param name="userEmail"></param>
+        /// <param name="userPassword"></param>
+        public void ApplicantCredentials(string userEmail, string userPassword)
         {
-            if (email == string.Empty) { email = _user.GetEmail(); }
-            if (password == string.Empty) { password = _user.GetPassword(); }
+            if (userEmail == string.Empty && userPassword == string.Empty)
+            {
+                userEmail = _user.GetEmail();
+                userPassword = _user.GetPassword();
+            }
 
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "Username", email);
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", password);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "Username", userEmail);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", userPassword);
             _utils.Click(DriverUtilities.ElementAccessorType.ClassName, "btn-primary");
         }
     }

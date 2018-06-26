@@ -17,7 +17,7 @@ namespace TCCApplication.Data
         // Default properties are set to schools in Chicago, IL
         public SchoolData()
         {
-            CeebCode = "0";
+            CeebCode = string.Empty;
             SchoolName = string.Empty;
             City = "Chicago";
             State = "IL";

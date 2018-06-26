@@ -44,7 +44,7 @@ namespace TCCApplication
             
             _nav.NavigateToSearchPage(_driver);
             EnterPersonSearchInfo(email, firstName, lastName);
-            DriverUtilities.ClickFirstResult(_driver);
+            _utils.ClickFirstResult(_driver);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace TCCApplication
             _nav.SelectSearch(_driver, "Rec");
 
             EnterPersonSearchInfo(email, firstName, lastName, id);
-            DriverUtilities.ClickFirstResult(_driver);
+            _utils.ClickFirstResult(_driver);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace TCCApplication
             _nav.SelectSearch(_driver, "college");
 
             EnterSchoolSearchInfo(schoolName, city, state, ceebCode);
-            DriverUtilities.ClickFirstResult(_driver);
+            _utils.ClickFirstResult(_driver);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace TCCApplication
             _nav.SelectSearch(_driver, "High School");
 
             EnterSchoolSearchInfo(schoolName, city, state, ceebCode);
-            DriverUtilities.ClickFirstResult(_driver);
+            _utils.ClickFirstResult(_driver);
         }
 
         /// <summary>
@@ -130,8 +130,9 @@ namespace TCCApplication
         {
             _app.LogInUser();
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", memberName + Keys.Enter);
-            DriverUtilities.ClickFirstResult(_driver);
+            _utils.ClickFirstResult(_driver);
         }
+
 
         /// <summary>
         /// Fills out search form with provided info. Intended for both applicants and recommenders.

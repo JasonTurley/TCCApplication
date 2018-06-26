@@ -91,9 +91,9 @@ namespace TCCApplication
         /// Clicks on the first result link, if available. Otherwise, outputs error message
         /// </summary>
         /// <param name="driver"></param>
-        public static void ClickFirstResult(IWebDriver driver)
+        public void ClickFirstResult(IWebDriver driver)
         {
-            string firstResultXPath = "//td[@data-bind='text:Email']";
+            string firstResultXPath = "//td[@data-bind='text:Name']";
 
             try
             {

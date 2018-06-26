@@ -33,6 +33,8 @@ namespace TCCApplication
             AppLoginLogout app = new AppLoginLogout(driver);
             app.LogInUser();
             _utils.Wait(driver, 10);
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utils.Wait(driver, 10);
             _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
         }
 
