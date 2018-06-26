@@ -60,6 +60,7 @@ namespace TCCApplication
         public void EnterText(ElementAccessorType how, string elementName, string text)
         {
             By findBy = FindElementBy(how, elementName);
+            Wait(_driver, 10);
             this._driver.FindElement(findBy).Clear();
             this._driver.FindElement(findBy).SendKeys(text);
         }
@@ -72,6 +73,7 @@ namespace TCCApplication
         public void Click(ElementAccessorType how, string elementName)
         {
             By findBy = FindElementBy(how, elementName);
+            Wait(_driver, 10);
             this._driver.FindElement(findBy).Click();
         }
 

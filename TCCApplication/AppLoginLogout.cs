@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using OpenQA.Selenium;
 using TCCApplication;
 using TCCApplication.Data;
@@ -27,6 +28,7 @@ namespace TCCApplication
         {
             _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
+            Thread.Sleep(3000);
         }
 
         /// <summary>
@@ -45,7 +47,6 @@ namespace TCCApplication
         /// </summary>
         public void LogOutUser()
         {
-            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
             _utils.Wait(_driver, 10);
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "logoutLink");
         }
