@@ -34,8 +34,6 @@ namespace TCCApplication
         {
             _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
-            _utils.ImplicitWait(30);
-            _pageValidation.VerifyLoginPassed();
         }
 
         /// <summary>
@@ -47,8 +45,6 @@ namespace TCCApplication
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
             _utils.ImplicitWait(30);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "logoutLink");
-            _utils.ImplicitWait(30);
-            _pageValidation.VerifyLogoutPassed();
         }
 
         /// <summary>

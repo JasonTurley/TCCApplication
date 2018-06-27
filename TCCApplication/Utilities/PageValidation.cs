@@ -41,5 +41,14 @@ namespace TCCApplication
         {
             Assert.AreEqual(MainPage, _driver.Url);
         }
+
+
+        /// <summary>
+        /// Verify that user logout attempt has failed.
+        /// </summary>
+        public void VerifyLogoutFailed()
+        {
+            Console.WriteLine("TODO: Finish me!");
+        }
     }
 }

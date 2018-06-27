@@ -7,6 +7,7 @@ using OpenQA.Selenium.Firefox;
 using TCCApplication;
 using TCCApplication.Data;
 using TCCApplication.Utilities;
+using TCCApplication.TestScripts;
 
 namespace SmokeTest
 {
@@ -24,18 +25,10 @@ namespace SmokeTest
         }
 
         [Test]
-        public void TestLoginUser()
+        public void LoginLogoutTest()
         {
-            UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
-            appLoginLogout.LoginUser();
-        }
-
-        [Test]
-        public void TestLogoutUser()
-        {
-            UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
-            appLoginLogout.LoginUser();   // First, sign in the applicant
-            appLoginLogout.LogoutUser();
+            UserLoginTestScript test = new UserLoginTestScript(_driver);
+            test.UserLoginTestInput();
         }
 
         [Test]
