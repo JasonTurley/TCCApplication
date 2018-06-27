@@ -39,20 +39,6 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Logs into TCC with the provided email and password
-        /// </summary>
-        /// <param name="userEmail"></param>
-        /// <param name="userPassword"></param>
-        public void LoginUserWithCredentials(string userEmail, string userPassword)
-        {
-            this.SignedIn = true;
-            _nav.NavigateToLoginPage(_driver);
-            ApplicantCredentials(userEmail, userPassword);
-            _utils.ImplicitWait(30);
-            _pageValidation.VerifyLoginPassed();
-        }
-
-        /// <summary>
         /// Logs user out of TCC
         /// </summary>
         public void LogoutUser()

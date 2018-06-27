@@ -31,13 +31,6 @@ namespace SmokeTest
         }
 
         [Test]
-        public void TestLoginUserWithCredentials()
-        {
-            UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
-            appLoginLogout.LoginUserWithCredentials("email", "password");
-        }
-
-        [Test]
         public void TestLogoutUser()
         {
             UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
