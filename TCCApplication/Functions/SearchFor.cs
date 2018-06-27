@@ -99,7 +99,7 @@ namespace TCCApplication
 
                 case "member":
                 case "members":
-                    if (_driver.Url != PageLinks.MemberPage)
+                    if (_driver.Url != PageValidation.MemberPage)
                     {
                         _nav.NavigateToMemberPage(_driver, _userLog);
                     }

@@ -29,7 +29,7 @@ namespace SmokeTest
             UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LogInUser();
             _utils.ImplicitWait(30);   // Give page time to load
-            Assert.AreEqual(PageLinks.MemberPage, _driver.Url); // remove once validation class is implemented
+            Assert.AreEqual(PageValidation.MemberPage, _driver.Url); // remove once validation class is implemented
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace SmokeTest
         {
             UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LoginUserWithCredentials("email", "password");
-            Assert.AreEqual(PageLinks.MainPage, _driver.Url);   // Expected to stay on main page since login fails
+            Assert.AreEqual(PageValidation.MainPage, _driver.Url);   // Expected to stay on main page since login fails
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace SmokeTest
             UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LogInUser();                     // First, sign in the applicant
             appLoginLogout.LogOutUser();
-            Assert.AreEqual(PageLinks.MainPage, _driver.Url);
+            Assert.AreEqual(PageValidation.MainPage, _driver.Url);
         }
 
         [Test]

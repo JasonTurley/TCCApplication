@@ -22,7 +22,7 @@ namespace TCCApplication
         /// </summary>
         public void NavigateToLoginPage(IWebDriver driver)
         {
-            driver.Navigate().GoToUrl(PageLinks.MainPage);
+            driver.Navigate().GoToUrl(PageValidation.MainPage);
             driver.Manage().Window.Maximize();
         }
 
@@ -36,7 +36,7 @@ namespace TCCApplication
             {
                 userLog.LogInUser();
             }
-            driver.Navigate().GoToUrl(PageLinks.MemberPage);
+            driver.Navigate().GoToUrl(PageValidation.MemberPage);
         }
 
         /// <summary>
