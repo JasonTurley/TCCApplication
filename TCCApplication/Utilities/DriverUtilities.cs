@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace TCCApplication
+namespace TCCApplication.Utilities
 {
     public class DriverUtilities
     {
@@ -54,7 +54,7 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Enter text into text box.
+        /// Enters `text` into a text box.
         /// </summary>
         /// <param name="how"></param>
         /// <param name="elementName"></param>
@@ -67,7 +67,7 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Clicks on an element.
+        /// Click on an element.
         /// </summary>
         /// <param name="how"></param>
         /// <param name="elementName"></param>
@@ -82,9 +82,9 @@ namespace TCCApplication
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="seconds">Amount of seconds to wait</param>
-        public void ImplicitWait(IWebDriver driver, double seconds)
+        public void ImplicitWait(double seconds)
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
+            this._driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace TCCApplication
         /// <param name="driver"></param>
         /// <param name="seconds"></param>
         /// <param name="elementName"></param>
-        public void ExplicitWait(IWebDriver driver, double seconds, ElementAccessorType how, string elementName)
+        public void ExplicitWait(double seconds, ElementAccessorType how, string elementName)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            WebDriverWait wait = new WebDriverWait(this._driver, TimeSpan.FromSeconds(seconds));
             By findBy = FindElementBy(how, elementName);
             wait.Until(drv => drv.FindElement(findBy));    
         }
@@ -124,7 +124,7 @@ namespace TCCApplication
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="name"></param>
-        public void SelectSearch(IWebDriver driver, string itemToFind)
+        public void SelectDropdownItem(string itemToFind)
         {
             string value;
 
@@ -157,7 +157,6 @@ namespace TCCApplication
                     throw new Exception("No `itemToFind` specified.");
             }
 
-            ImplicitWait(driver, 10);
             Click(DriverUtilities.ElementAccessorType.ID, "selectSearchObject");
             Click(DriverUtilities.ElementAccessorType.XPath, "//option[@value='" + value + "']");
         }

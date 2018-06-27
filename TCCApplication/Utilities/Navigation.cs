@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using TCCApplication.Utilities;
 
 namespace TCCApplication
 {
@@ -7,11 +8,13 @@ namespace TCCApplication
     {
         private IWebDriver _driver;
         private DriverUtilities _utils;
+        private DriverUtilitiesValidation _utilsValidation;
 
         public Navigation(IWebDriver driver)
         {
             this._driver = driver;
             this._utils = new DriverUtilities(_driver);
+            this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 
         /// <summary>
@@ -29,7 +32,7 @@ namespace TCCApplication
         /// <param name="driver"></param>
         public void NavigateToMemberPage(IWebDriver driver, UserLoginLogout userLog)
         {
-            if (!userLog.IsLoggedIn)
+            if (!userLog.IsSignedIn())
             {
                 userLog.LogInUser();
             }
@@ -45,10 +48,10 @@ namespace TCCApplication
             UserLoginLogout temp = new UserLoginLogout(driver);
             temp.LogInUser();
 
-            _utils.ExplicitWait(driver, 10, DriverUtilities.ElementAccessorType.ID, "loadingContainer");
-            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
-            _utils.ImplicitWait(driver, 10);
-            _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
+            _utils.ExplicitWait(10, DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utils.ImplicitWait(10);
+            _utilsValidation.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
         }
     }
 }

@@ -50,10 +50,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestScripts\UserLoginLogout.cs" />
-    <Compile Include="TestScripts\Search.cs" />
+    <Compile Include="Functions\UserLoginLogout.cs" />
+    <Compile Include="Functions\SearchFor.cs" />
     <Compile Include="Data\PersonData.cs" />
     <Compile Include="Data\SchoolData.cs" />
+    <Compile Include="Utilities\DriverUtilitiesValidation.cs" />
     <Compile Include="Utilities\Navigation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Utilities\DriverUtilities.cs" />

@@ -3,30 +3,26 @@
 /// </summary>
 using System;
 using OpenQA.Selenium;
-using TCCApplication;
 using TCCApplication.Data;
+using TCCApplication.Utilities;
 
 namespace TCCApplication
 {
     public class Search
     {
         private IWebDriver _driver;
-        private UserLoginLogout _userLog;
-        private UserData _user;
-        private RecommenderData _rec;
-        private SchoolData _school;
-        private DriverUtilities _utils;
         private Navigation _nav;
+        private UserLoginLogout _userLog;
+        private DriverUtilities _utils;
+        private DriverUtilitiesValidation _utilsValidation;
 
         public Search(IWebDriver driver)
         {
             this._driver = driver;
             this._userLog = new UserLoginLogout(_driver);
-            this._user = new UserData();
-            this._rec = new RecommenderData();
-            this._school = new SchoolData();
-            this._utils = new DriverUtilities(_driver);
             this._nav = new Navigation(_driver);
+            this._utils = new DriverUtilities(_driver);
+            this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 
         /// <summary>
@@ -43,12 +39,12 @@ namespace TCCApplication
         public void SearchForPerson(string personType, string emailLike, string firstNameLike, string lastNameLike, string idIncludes, string postalCodeLike, string ceebCode)
         {
             _nav.NavigateToSearchPage(_driver);
-            _utils.ImplicitWait(_driver, 10);
+            _utils.ImplicitWait(10);
 
             // Applicants and recommenders share email, first name, last name accessor ID names
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", emailLike);
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtFirstName_fil", firstNameLike);
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtLastName_fil", lastNameLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", emailLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtFirstName_fil", firstNameLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtLastName_fil", lastNameLike);
 
             // They have unique idIncludes accessor ID names
             switch (personType.ToLower())
@@ -56,16 +52,16 @@ namespace TCCApplication
                 case "applicant":
                 case "applicants":
                 case "app":
-                    _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCAID_fil", idIncludes);
-                    _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtZipCode_fil", postalCodeLike);
-                    _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCEEBCode_fil", ceebCode);
+                    _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCAID_fil", idIncludes);
+                    _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtZipCode_fil", postalCodeLike);
+                    _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCEEBCode_fil", ceebCode);
                     break;
 
                 case "recommender":
                 case "recommenders":
                 case "rec":
                     // Recommenders do not have postal or CEEB codes
-                    _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtRecommederId_fil", idIncludes);
+                    _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtRecommederId_fil", idIncludes);
                     break;
 
                 default:
@@ -73,7 +69,7 @@ namespace TCCApplication
             }
 
             // Click search button
-            _utils.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
+            _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
         }
 
         /// <summary>
@@ -92,13 +88,13 @@ namespace TCCApplication
                 case "highschool":
                 case "high school":
                     _nav.NavigateToSearchPage(_driver);
-                    _utils.SelectSearch(_driver, "High School");
+                    _utilsValidation.SelectDropdownItem("High School");
                     break;
 
                 case "college":
                 case "colleges":
                     _nav.NavigateToSearchPage(_driver);
-                    _utils.SelectSearch(_driver, "college");
+                    _utilsValidation.SelectDropdownItem("college");
                     break;
 
                 case "member":
@@ -107,7 +103,7 @@ namespace TCCApplication
                     {
                         _nav.NavigateToMemberPage(_driver, _userLog);
                     }
-                    _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", schoolNameLike + Keys.Enter);
+                    _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", schoolNameLike + Keys.Enter);
 
                     // trying to enter the below info on the member's page will result in an error. It's safer to exit.
                     return; 
@@ -117,12 +113,12 @@ namespace TCCApplication
             }
 
             // Fill in the text boxes
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCEEBCode_fil", ceebCode);
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtSchoolName_fil", schoolNameLike);
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCity_fil", cityLike);
-            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtState_fil", stateLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCEEBCode_fil", ceebCode);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtSchoolName_fil", schoolNameLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCity_fil", cityLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtState_fil", stateLike);
 
-            _utils.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
+            _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
         }
     }
 }

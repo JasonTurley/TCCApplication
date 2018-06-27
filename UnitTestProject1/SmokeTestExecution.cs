@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using TCCApplication;
 using TCCApplication.Data;
+using TCCApplication.Utilities;
 
 namespace SmokeTest
 {
@@ -27,7 +28,7 @@ namespace SmokeTest
         {
             UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LogInUser();
-            _utils.ImplicitWait(_driver, 30);   // Give page time to load
+            _utils.ImplicitWait(30);   // Give page time to load
             Assert.AreEqual(PageLinks.MemberPage, _driver.Url); // remove once validation class is implemented
         }
 
