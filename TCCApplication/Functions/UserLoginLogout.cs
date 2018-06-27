@@ -13,6 +13,7 @@ namespace TCCApplication
         private Navigation _nav;
         private DriverUtilities _utils;
         private DriverUtilitiesValidation _utilsValidation;
+        private PageValidation _pageValidation;
 
         private bool SignedIn;
 
@@ -23,15 +24,18 @@ namespace TCCApplication
             this._nav = new Navigation(_driver);
             this._utils = new DriverUtilities(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
+            this._pageValidation = new PageValidation(_driver);
         }
 
         /// <summary>
         /// Logs into my TCC account
         /// </summary>
-        public void LogInUser()
+        public void LoginUser()
         {
             _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
+            _utils.ImplicitWait(30);
+            _pageValidation.VerifyLoginPassed();
         }
 
         /// <summary>
@@ -44,17 +48,21 @@ namespace TCCApplication
             this.SignedIn = true;
             _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(userEmail, userPassword);
+            _utils.ImplicitWait(30);
+            _pageValidation.VerifyLoginPassed();
         }
 
         /// <summary>
         /// Logs user out of TCC
         /// </summary>
-        public void LogOutUser()
+        public void LogoutUser()
         {
             this.SignedIn = false;
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
-            _utils.ImplicitWait(10);
+            _utils.ImplicitWait(30);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "logoutLink");
+            _utils.ImplicitWait(30);
+            _pageValidation.VerifyLogoutPassed();
         }
 
         /// <summary>

@@ -19,15 +19,25 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Verify that user has successfully logged into TCC. A successful
-        /// login will redirect user to the Member Page
+        /// Verify that user login attempt has succeeded. User should be redirected to Member Page.
         /// </summary>
         public void VerifyLoginPassed()
         {
             Assert.AreEqual(MemberPage, _driver.Url);
         }
 
+        /// <summary>
+        /// Verify that user login attempt has failed. User should remain on the Main Page.
+        /// </summary>
         public void VerifyLoginFailed()
+        {
+            Assert.AreEqual(MainPage, _driver.Url);
+        }
+
+        /// <summary>
+        /// Verify that the user logout attempt has succeeded. User should be redirected back to Main Page.
+        /// </summary>
+        public void VerifyLogoutPassed()
         {
             Assert.AreEqual(MainPage, _driver.Url);
         }
