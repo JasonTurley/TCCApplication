@@ -2,13 +2,15 @@
 using OpenQA.Selenium;
 using TCCApplication;
 using TCCApplication.Data;
+using static TCCApplication.DriverUtilities;
+using System.Threading;
 
 namespace TCCApplication
 {
     public class AppSearch
     {
         private IWebDriver _driver;
-        private AppLoginLogout _app;
+        private AppLoginLogout _appLog;
         private UserData _user;
         private RecData _rec;
         private SchoolData _school;
@@ -18,7 +20,7 @@ namespace TCCApplication
         public AppSearch(IWebDriver driver)
         {
             this._driver = driver;
-            this._app = new AppLoginLogout(_driver);
+            this._appLog = new AppLoginLogout(_driver);
             this._user = new UserData();
             this._rec = new RecData();
             this._school = new SchoolData();
@@ -44,7 +46,6 @@ namespace TCCApplication
             
             _nav.NavigateToSearchPage(_driver);
             EnterPersonSearchInfo(email, firstName, lastName);
-            _utils.ClickFirstResult(_driver);
         }
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace TCCApplication
         /// <param name="memberName"></param>
         public void SearchForMember(string memberName)
         {
-            _app.LogInUser();
+            _appLog.LogInUser();
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", memberName + Keys.Enter);
             _utils.ClickFirstResult(_driver);
         }
@@ -143,7 +144,7 @@ namespace TCCApplication
         /// <param name="idIncludes"></param>
         public void EnterPersonSearchInfo(string email = "", string firstName = "", string lastName = "", string idIncludes = "")
         {
-            _utils.Wait(_driver, 10);
+            _utils.ImplicitWait(_driver, 30);
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", email);
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtFirstName_fil", firstName);
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtLastName_fil", lastName);
@@ -170,7 +171,7 @@ namespace TCCApplication
         /// <param name="ceebCode"></param>
         public void EnterSchoolSearchInfo(string schoolName = "", string city = "", string state = "", string ceebCode = "")
         {
-            _utils.Wait(_driver, 10);
+            _utils.ImplicitWait(_driver, 30);
 
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtSchoolName_fil", schoolName);
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCity_fil", city);
@@ -178,6 +179,25 @@ namespace TCCApplication
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCEEBCode_fil", ceebCode);
 
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
+        }
+
+        /// <summary>
+        /// App Rec School Filter
+        /// </summary>
+        /// <param name="text"></param>
+        public void Filter(string text)
+        {
+            string elementName = "applicant-list-filter";
+            _utils.ExplicitWait(_driver, elementName);
+            _utils.EnterText(DriverUtilities.ElementAccessorType.ID, elementName, text);
+        }
+
+        /// <summary>
+        /// Clicks the Clear Search button
+        /// </summary>
+        public void ClearSearch()
+        {
+            _utils.Click(ElementAccessorType.ID, "aApplicantClearFilter");
         }
     }
 }

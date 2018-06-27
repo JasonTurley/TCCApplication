@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Timers;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -21,6 +21,9 @@ namespace SmokeTest
             System.IO.Directory.SetCurrentDirectory(TestContext.CurrentContext.WorkDirectory);
         }
 
+        /// <summary>
+        /// Test that user can log in to TCC.
+        /// </summary>
         [Test]
         public void TestLogInUser()
         {
@@ -29,6 +32,9 @@ namespace SmokeTest
             Assert.AreEqual(Pages.MemberListPage, _driver.Url); // Expected to be directed to member page
         }
 
+        /// <summary>
+        /// Test that provided user can log in to TCC.
+        /// </summary>
         [Test]
         public void TestLoginUserWithCredentials()
         {
@@ -37,6 +43,9 @@ namespace SmokeTest
             Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to stay on main page since login will fail
         }
 
+        /// <summary>
+        /// Test that user can log out of TCC.
+        /// </summary>
         [Test]
         public void TestLogOutUser()
         {
@@ -46,6 +55,9 @@ namespace SmokeTest
             Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to be directed to main page
         }
 
+        /// <summary>
+        /// Test that an applicant can be searched for.
+        /// </summary>
         [Test]
         public void TestSearchForApplicant()
         {
@@ -54,6 +66,9 @@ namespace SmokeTest
             //Assert.AreEqual(Pages.JasonTurleyAppProfile, _driver.Url);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Test]
         public void TestSearchForNonExistentApplicant()
         {
@@ -61,6 +76,10 @@ namespace SmokeTest
             appSearch.SearchForApplicant("applicant-email@gmail.com", "App", "Lee-cant");
         }
 
+
+        /// <summary>
+        /// Test that a recommender can be searched for.
+        /// </summary>
         [Test]
         public void TestSearchForRecommender()
         {
@@ -68,6 +87,9 @@ namespace SmokeTest
             appSearch.SearchForRecommender();
         }
 
+        /// <summary>
+        /// Test that a college can be searched for.
+        /// </summary>
         [Test]
         public void TestSearchForCollege()
         {
@@ -75,6 +97,9 @@ namespace SmokeTest
             appSearch.SearchForCollege();
         }
 
+        /// <summary>
+        /// Test that a high school can be searched for.
+        /// </summary>
         [Test]
         public void TestSearchForHighSchool()
         {
@@ -82,18 +107,44 @@ namespace SmokeTest
             appSearch.SearchForHighSchool();
         }
 
+        /// <summary>
+        /// Test that a member can be searched for.
+        /// </summary>
         [Test]
-        public void TestSearchForMembers()
+        public void TestSearchForMember()
         {
             AppSearch appSearch = new AppSearch(_driver);
             appSearch.SearchForMember("Test Member");
+        }
+
+        /// <summary>
+        /// Test that the filter option works.
+        /// </summary>
+        [Test]
+        public void TestFilter()
+        {
+            AppSearch appSearch = new AppSearch(_driver);
+            appSearch.SearchForApplicant("", "Bob");
+            Thread.Sleep(10000);
+            appSearch.Filter("56785");
+        }
+
+        /// <summary>
+        /// Test that the clear search fields button works.
+        /// </summary>
+        [Test]
+        public void TestClearSearch()
+        {
+            AppSearch appSearch = new AppSearch(_driver);
+            appSearch.SearchForCollege("Martin Luther King", "Atlanta", "GA");
+            appSearch.ClearSearch();
         }
 
         [OneTimeTearDown]
         public void TearDown()
         {
             _driver.Close();
-            _driver.Dispose();
+            _driver.Dispose(); 
         }
     }
 }

@@ -10,7 +10,9 @@ C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\TCCApplication.
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\TCCApplication.exe
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\TCCApplication.pdb
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.dll
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.Support.dll
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.xml
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.Support.xml
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.csprojResolveAssemblyReference.cache
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.exe
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.pdb
-C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.csprojResolveAssemblyReference.cache

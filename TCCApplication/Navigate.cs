@@ -1,5 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using System.Threading;
 
 namespace TCCApplication
 {
@@ -7,11 +9,13 @@ namespace TCCApplication
     {
         private IWebDriver _driver;
         private DriverUtilities _utils;
+        private Actions actions;
 
         public Navigate(IWebDriver driver)
         {
             this._driver = driver;
             this._utils = new DriverUtilities(_driver);
+            this.actions = new Actions(_driver);
         }
 
         /// <summary>
@@ -32,9 +36,9 @@ namespace TCCApplication
             // otherwise, we'd need to call it like so: LogInUser(driver) to get the correct IWebDriver instance
             AppLoginLogout app = new AppLoginLogout(driver);
             app.LogInUser();
-            _utils.Wait(driver, 10);
+
+            //_utils.ExplicitWait(driver, "loadingContainer");
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
-            _utils.Wait(driver, 10);
             _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
         }
 
@@ -57,7 +61,7 @@ namespace TCCApplication
             else
                 value = "HighSchool";
 
-            _utils.Wait(driver, 5);
+            _utils.ImplicitWait(driver, 5);
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "selectSearchObject");
             _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//option[@value='" + value + "']");
         }

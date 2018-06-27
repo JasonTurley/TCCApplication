@@ -27,10 +27,12 @@ C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\Microsoft.Vis
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.framework.dll
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\TCCApplication.exe
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\WebDriver.dll
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\WebDriver.Support.dll
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\TCCApplication.pdb
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.framework.pdb
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\nunit.framework.xml
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\WebDriver.xml
+C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\bin\Debug\WebDriver.Support.xml
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\obj\Debug\SmokeTest.csprojResolveAssemblyReference.cache
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\obj\Debug\UnitTestProject1.dll
 C:\Users\jturley\Desktop\TCCApplication\UnitTestProject1\obj\Debug\UnitTestProject1.pdb

@@ -4,6 +4,7 @@
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 namespace TCCApplication
 {
@@ -60,7 +61,7 @@ namespace TCCApplication
         public void EnterText(ElementAccessorType how, string elementName, string text)
         {
             By findBy = FindElementBy(how, elementName);
-            Wait(_driver, 10);
+            ImplicitWait(_driver, 10);
             this._driver.FindElement(findBy).Clear();
             this._driver.FindElement(findBy).SendKeys(text);
         }
@@ -73,7 +74,7 @@ namespace TCCApplication
         public void Click(ElementAccessorType how, string elementName)
         {
             By findBy = FindElementBy(how, elementName);
-            Wait(_driver, 10);
+           // ExplicitWait(_driver, elementName);
             this._driver.FindElement(findBy).Click();
         }
 
@@ -82,18 +83,24 @@ namespace TCCApplication
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="seconds">Amount of seconds to wait</param>
-        public void Wait(IWebDriver driver, double seconds)
+        public void ImplicitWait(IWebDriver driver, double seconds)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
         }
         
+        public void ExplicitWait(IWebDriver driver, string idToFind)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            wait.Until(drv => drv.FindElement(By.Id(idToFind)));
+        }
+
         /// <summary>
         /// Clicks on the first result link, if available. Otherwise, outputs error message
         /// </summary>
         /// <param name="driver"></param>
         public void ClickFirstResult(IWebDriver driver)
         {
-            string firstResultXPath = "//td[@data-bind='text:Name']";
+            string firstResultXPath = "//td[@data-bind='text:FirstName']";
 
             try
             {

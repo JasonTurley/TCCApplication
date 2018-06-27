@@ -46,7 +46,7 @@ namespace TCCApplication
         /// </summary>
         public void LogOutUser()
         {
-            _utils.Wait(_driver, 10);
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "logoutLink");
         }
 
