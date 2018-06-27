@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -26,7 +27,8 @@ namespace SmokeTest
         {
             UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LogInUser();
-            Assert.AreEqual(PageLinks.MemberListPage, _driver.Url);
+            _utils.ImplicitWait(_driver, 30);   // Give page time to load
+            Assert.AreEqual(PageLinks.MemberPage, _driver.Url); // remove once validation class is implemented
         }
 
         [Test]
@@ -49,45 +51,16 @@ namespace SmokeTest
         [Test]
         public void TestSearchForApplicant()
         {
-            SearchFor appSearch = new SearchFor(_driver);
-            appSearch.SearchForApplicant();
-            //Assert.AreEqual(Pages.JasonTurleyAppProfile, _driver.Url);
+            Search search = new Search(_driver);
+            search.SearchForPerson("applicant", "", "Peter", "Parker", "", "", "");
         }
 
-        [Test]
-        public void TestSearchForNonExistentApplicant()
-        {
-            SearchFor appSearch = new SearchFor(_driver);
-            appSearch.SearchForApplicant("goak@mailinator.com", "Gary", "Oak");
-        }
-
-        [Test]
-        public void TestSearchForRecommender()
-        {
-            SearchFor appSearch = new SearchFor(_driver);
-            appSearch.SearchForRecommender();
-            //Console.ReadKey();
-        }
-
-        [Test]
-        public void TestSearchForCollege()
-        {
-            SearchFor appSearch = new SearchFor(_driver);
-            appSearch.SearchForCollege();
-        }
-
-        [Test]
-        public void TestSearchForHighSchool()
-        {
-            SearchFor appSearch = new SearchFor(_driver);
-            appSearch.SearchForHighSchool();
-        }
-
+ 
         [Test]
         public void TestSearchForMembers()
         {
-            SearchFor appSearch = new SearchFor(_driver);
-            appSearch.SearchForMember("Test");
+            Search appSearch = new Search(_driver);
+            appSearch.SearchForSchool("member", "", "Boston College", "", "");
         }
 
         [OneTimeTearDown]

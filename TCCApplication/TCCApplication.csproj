@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestScripts\UserLoginLogout.cs" />
-    <Compile Include="TestScripts\SearchFor.cs" />
+    <Compile Include="TestScripts\Search.cs" />
     <Compile Include="Data\PersonData.cs" />
     <Compile Include="Data\SchoolData.cs" />
     <Compile Include="Utilities\Navigation.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="Utilities\DriverUtilities.cs" />
     <Compile Include="Utilities\PageLinks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\RecData.cs" />
+    <Compile Include="Data\RecommenderData.cs" />
     <Compile Include="Data\UserData.cs" />
   </ItemGroup>
   <ItemGroup>

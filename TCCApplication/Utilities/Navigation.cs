@@ -24,42 +24,31 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Navigate App Search Rec page. Assumes the user is already logged in
+        /// Navigate to TCC Member Page
         /// </summary>
-        public void NavigateToSearchPage(IWebDriver driver)
+        /// <param name="driver"></param>
+        public void NavigateToMemberPage(IWebDriver driver, UserLoginLogout userLog)
         {
-            // Creating a new instance keeps LogInUser() argument free;
-            // otherwise, we'd need to call it like so: LogInUser(driver) to get the correct IWebDriver instance
-            UserLoginLogout app = new UserLoginLogout(driver);
-            app.LogInUser();
-            _utils.Wait(driver, 10);
-            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
-            _utils.Wait(driver, 10);
-            _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
+            if (!userLog.IsLoggedIn)
+            {
+                userLog.LogInUser();
+            }
+            driver.Navigate().GoToUrl(PageLinks.MemberPage);
         }
 
         /// <summary>
-        /// Selects `name` from App Rec School Search dropdown box
+        /// Navigate App Search Rec page. Assumes the user is already logged in
         /// </summary>
         /// <param name="driver"></param>
-        /// <param name="name"></param>
-        public void SelectSearch(IWebDriver driver, string name)
+        public void NavigateToSearchPage(IWebDriver driver)
         {
-            string searchFor = name.ToLower();
-            string value;
+            UserLoginLogout temp = new UserLoginLogout(driver);
+            temp.LogInUser();
 
-            if (searchFor == "app" || searchFor == "applicants")
-                value = "App";
-            else if (searchFor == "rec" || searchFor == "recommenders")
-                value = "Rec";
-            else if (searchFor == "college")
-                value = "College";
-            else
-                value = "HighSchool";
-
-            _utils.Wait(driver, 5);
-            _utils.Click(DriverUtilities.ElementAccessorType.ID, "selectSearchObject");
-            _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//option[@value='" + value + "']");
+            _utils.ExplicitWait(driver, 10, DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utils.ImplicitWait(driver, 10);
+            _utils.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
         }
     }
 }

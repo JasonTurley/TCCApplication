@@ -1,9 +1,11 @@
-﻿// Citiations:
-//  - QA Project Code Review https://cawiki.atlassian.net/wiki/spaces/CA2/pages/983252/QA+project+Code+Review
-//  - https://github.com/CommonApp/QA/blob/master/CAOCloudRegressionTest/CommonUtilities/Validation/CommonUtil.cs         
+﻿///<summary>
+/// Wrapper functions for commonly used Selenium WebDriver functions.
+/// Citation: https://github.com/CommonApp/QA/blob/master/CAOCloudRegressionTest/CommonUtilities/Validation/CommonUtil.cs
+/// </summary>
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 namespace TCCApplication
 {
@@ -24,7 +26,7 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Get Web Element based on Selenoium accessor type
+        /// Get Web Element based on Selenium accessor type.
         /// </summary>
         /// <param name="how"></param>
         /// <param name="elementName"></param>
@@ -80,11 +82,24 @@ namespace TCCApplication
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="seconds">Amount of seconds to wait</param>
-        public void Wait(IWebDriver driver, double seconds)
+        public void ImplicitWait(IWebDriver driver, double seconds)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
         }
-        
+
+        /// <summary>
+        /// Sets an explicit wait time in seconds.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="seconds"></param>
+        /// <param name="elementName"></param>
+        public void ExplicitWait(IWebDriver driver, double seconds, ElementAccessorType how, string elementName)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            By findBy = FindElementBy(how, elementName);
+            wait.Until(drv => drv.FindElement(findBy));    
+        }
+
         /// <summary>
         /// Clicks on the first result link, if available. Otherwise, outputs error message
         /// </summary>
@@ -102,6 +117,49 @@ namespace TCCApplication
                 if (e.Message != null)
                     Console.WriteLine("NoSuchElementException: {0}", e.Message);
             }
+        }
+
+        /// <summary>
+        /// Selects `itemToFind` from App Rec School Search dropdown menu
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="name"></param>
+        public void SelectSearch(IWebDriver driver, string itemToFind)
+        {
+            string value;
+
+            // Find item to select from the dropdown menu
+            switch (itemToFind.ToLower())
+            {
+                case "applicant":
+                case "applicants":
+                case "app":
+                    value = "App";
+                    break;
+
+                case "recommender":
+                case "recommenders":
+                case "rec":
+                    value = "Rec";
+                    break;
+
+                case "college":
+                case "colleges":
+                    value = "College";
+                    break;
+
+                case "high school":
+                case "high schools":
+                    value = "HighSchool";
+                    break;
+
+                default:
+                    throw new Exception("No `itemToFind` specified.");
+            }
+
+            ImplicitWait(driver, 10);
+            Click(DriverUtilities.ElementAccessorType.ID, "selectSearchObject");
+            Click(DriverUtilities.ElementAccessorType.XPath, "//option[@value='" + value + "']");
         }
     }
 }

@@ -12,6 +12,8 @@ namespace TCCApplication
         private Navigation _nav;
         private DriverUtilities _utils;
 
+        public bool IsLoggedIn;
+
         public UserLoginLogout(IWebDriver driver)
         {
             this._driver = driver;
@@ -25,6 +27,7 @@ namespace TCCApplication
         /// </summary>
         public void LogInUser()
         {
+            this.IsLoggedIn = true;
             _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
         }
@@ -36,6 +39,7 @@ namespace TCCApplication
         /// <param name="userPassword"></param>
         public void LoginUserWithCredentials(string userEmail, string userPassword)
         {
+            this.IsLoggedIn = true;
             _nav.NavigateToLoginPage(_driver);
             ApplicantCredentials(userEmail, userPassword);
         }
@@ -45,8 +49,9 @@ namespace TCCApplication
         /// </summary>
         public void LogOutUser()
         {
+            this.IsLoggedIn = false;
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
-            _utils.Wait(_driver, 10);
+            _utils.ImplicitWait(_driver, 10);
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "logoutLink");
         }
 
@@ -65,5 +70,6 @@ namespace TCCApplication
             _utils.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", password);
             _utils.Click(DriverUtilities.ElementAccessorType.ClassName, "btn-primary");
         }
+
     }
 }
