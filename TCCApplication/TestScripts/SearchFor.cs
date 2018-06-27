@@ -5,25 +5,25 @@ using TCCApplication.Data;
 
 namespace TCCApplication
 {
-    public class AppSearch
+    public class SearchFor
     {
         private IWebDriver _driver;
-        private AppLoginLogout _app;
+        private UserLoginLogout _app;
         private UserData _user;
         private RecData _rec;
         private SchoolData _school;
         private DriverUtilities _utils;
-        private Navigate _nav;
+        private Navigation _nav;
 
-        public AppSearch(IWebDriver driver)
+        public SearchFor(IWebDriver driver)
         {
             this._driver = driver;
-            this._app = new AppLoginLogout(_driver);
+            this._app = new UserLoginLogout(_driver);
             this._user = new UserData();
             this._rec = new RecData();
             this._school = new SchoolData();
             this._utils = new DriverUtilities(_driver);
-            this._nav = new Navigate(_driver);
+            this._nav = new Navigation(_driver);
         }
 
         /// <summary>

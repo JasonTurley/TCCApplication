@@ -24,32 +24,32 @@ namespace SmokeTest
         [Test]
         public void TestLogInUser()
         {
-            AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
+            UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LogInUser();
-            Assert.AreEqual(Pages.MemberListPage, _driver.Url);
+            Assert.AreEqual(PageLinks.MemberListPage, _driver.Url);
         }
 
         [Test]
         public void TestLoginUserWithCredentials()
         {
-            AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
+            UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LoginUserWithCredentials("email", "password");
-            Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to stay on main page since login fails
+            Assert.AreEqual(PageLinks.MainPage, _driver.Url);   // Expected to stay on main page since login fails
         }
 
         [Test]
         public void TestLogOutUser()
         {
-            AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
+            UserLoginLogout appLoginLogout = new UserLoginLogout(_driver);
             appLoginLogout.LogInUser();                     // First, sign in the applicant
             appLoginLogout.LogOutUser();
-            Assert.AreEqual(Pages.MainPage, _driver.Url);
+            Assert.AreEqual(PageLinks.MainPage, _driver.Url);
         }
 
         [Test]
         public void TestSearchForApplicant()
         {
-            AppSearch appSearch = new AppSearch(_driver);
+            SearchFor appSearch = new SearchFor(_driver);
             appSearch.SearchForApplicant();
             //Assert.AreEqual(Pages.JasonTurleyAppProfile, _driver.Url);
         }
@@ -57,14 +57,14 @@ namespace SmokeTest
         [Test]
         public void TestSearchForNonExistentApplicant()
         {
-            AppSearch appSearch = new AppSearch(_driver);
+            SearchFor appSearch = new SearchFor(_driver);
             appSearch.SearchForApplicant("goak@mailinator.com", "Gary", "Oak");
         }
 
         [Test]
         public void TestSearchForRecommender()
         {
-            AppSearch appSearch = new AppSearch(_driver);
+            SearchFor appSearch = new SearchFor(_driver);
             appSearch.SearchForRecommender();
             //Console.ReadKey();
         }
@@ -72,21 +72,21 @@ namespace SmokeTest
         [Test]
         public void TestSearchForCollege()
         {
-            AppSearch appSearch = new AppSearch(_driver);
+            SearchFor appSearch = new SearchFor(_driver);
             appSearch.SearchForCollege();
         }
 
         [Test]
         public void TestSearchForHighSchool()
         {
-            AppSearch appSearch = new AppSearch(_driver);
+            SearchFor appSearch = new SearchFor(_driver);
             appSearch.SearchForHighSchool();
         }
 
         [Test]
         public void TestSearchForMembers()
         {
-            AppSearch appSearch = new AppSearch(_driver);
+            SearchFor appSearch = new SearchFor(_driver);
             appSearch.SearchForMember("Test");
         }
 

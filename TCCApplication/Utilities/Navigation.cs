@@ -3,12 +3,12 @@ using OpenQA.Selenium;
 
 namespace TCCApplication
 {
-    public class Navigate
+    public class Navigation
     {
         private IWebDriver _driver;
         private DriverUtilities _utils;
 
-        public Navigate(IWebDriver driver)
+        public Navigation(IWebDriver driver)
         {
             this._driver = driver;
             this._utils = new DriverUtilities(_driver);
@@ -19,7 +19,7 @@ namespace TCCApplication
         /// </summary>
         public void NavigateToLoginPage(IWebDriver driver)
         {
-            driver.Navigate().GoToUrl(Pages.MainPage);
+            driver.Navigate().GoToUrl(PageLinks.MainPage);
             driver.Manage().Window.Maximize();
         }
 
@@ -30,7 +30,7 @@ namespace TCCApplication
         {
             // Creating a new instance keeps LogInUser() argument free;
             // otherwise, we'd need to call it like so: LogInUser(driver) to get the correct IWebDriver instance
-            AppLoginLogout app = new AppLoginLogout(driver);
+            UserLoginLogout app = new UserLoginLogout(driver);
             app.LogInUser();
             _utils.Wait(driver, 10);
             _utils.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");

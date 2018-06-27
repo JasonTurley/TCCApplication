@@ -3,7 +3,7 @@
 namespace TCCApplication
 {
     // Verify that driver is on correct page
-    public static class Pages
+    public static class PageLinks
     {
         public static string MainPage = "https://tcc.alpha.devca.net/";
         public static string MemberListPage = "https://tcc.alpha.devca.net/Member/List";

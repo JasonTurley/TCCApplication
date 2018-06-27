@@ -5,18 +5,18 @@ using TCCApplication.Data;
 
 namespace TCCApplication
 {
-    public class AppLoginLogout
+    public class UserLoginLogout
     {
         private IWebDriver _driver;
         private UserData _user;
-        private Navigate _nav;
+        private Navigation _nav;
         private DriverUtilities _utils;
 
-        public AppLoginLogout(IWebDriver driver)
+        public UserLoginLogout(IWebDriver driver)
         {
             this._driver = driver;
             this._user = new UserData();
-            this._nav = new Navigate(_driver);
+            this._nav = new Navigation(_driver);
             this._utils = new DriverUtilities(_driver);
         }
 
