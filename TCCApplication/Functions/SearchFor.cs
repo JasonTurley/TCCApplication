@@ -8,20 +8,20 @@ using TCCApplication.Utilities;
 
 namespace TCCApplication
 {
-    public class Search
+    public class SearchFor
     {
         private IWebDriver _driver;
-        private Navigation _nav;
-        private UserLoginLogout _userLog;
-        private DriverUtilities _utils;
+        private Navigation _navigation;
+        private UserLoginLogout _userLoginLogout;
+        private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
 
-        public Search(IWebDriver driver)
+        public SearchFor(IWebDriver driver)
         {
             this._driver = driver;
-            this._userLog = new UserLoginLogout(_driver);
-            this._nav = new Navigation(_driver);
-            this._utils = new DriverUtilities(_driver);
+            this._userLoginLogout = new UserLoginLogout(_driver);
+            this._navigation = new Navigation(_driver);
+            this._driverUtils = new DriverUtilities(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 
@@ -38,8 +38,7 @@ namespace TCCApplication
         /// <param name="ceebCode">Full CEEB Code. Note: only for applicant</param>
         public void SearchForPerson(string personType, string emailLike, string firstNameLike, string lastNameLike, string idIncludes, string postalCodeLike, string ceebCode)
         {
-            _nav.NavigateToSearchPage(_driver);
-            _utils.ImplicitWait(10);
+            _navigation.NavigateToSearchPage(_driver);
 
             // Applicants and recommenders share email, first name, last name accessor ID names
             _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", emailLike);
@@ -87,13 +86,13 @@ namespace TCCApplication
             {
                 case "highschool":
                 case "high school":
-                    _nav.NavigateToSearchPage(_driver);
+                    _navigation.NavigateToSearchPage(_driver);
                     _utilsValidation.SelectDropdownItem("High School");
                     break;
 
                 case "college":
                 case "colleges":
-                    _nav.NavigateToSearchPage(_driver);
+                    _navigation.NavigateToSearchPage(_driver);
                     _utilsValidation.SelectDropdownItem("college");
                     break;
 
@@ -101,7 +100,7 @@ namespace TCCApplication
                 case "members":
                     if (_driver.Url != PageValidation.MemberPage)
                     {
-                        _nav.NavigateToMemberPage(_driver, _userLog);
+                        _navigation.NavigateToMemberPage(_driver, _userLoginLogout);
                     }
                     _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", schoolNameLike + Keys.Enter);
 

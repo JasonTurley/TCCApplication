@@ -101,6 +101,34 @@ namespace TCCApplication.Utilities
         }
 
         /// <summary>
+        /// Check if element is present on page or not
+        /// </summary>
+        /// <param name="how"></param>
+        /// <param name="elementName"></param>
+        /// <returns></returns>
+        public bool IsElementPresent(ElementAccessorType how, string elementName)
+        {
+            By findBy = FindElementBy(how, elementName);
+
+            // Note: FindElement throws an exception if it cannot find element. This is handled in DriverUtilitiesValidation
+            return _driver.FindElement(findBy).Displayed;   
+        }
+
+        /// <summary>
+        /// Get the displayed text 
+        /// </summary>
+        /// <param name="how"></param>
+        /// <param name="element"></param>
+        /// <returns>String</returns>
+        public string GetText(ElementAccessorType how, string element)
+        {
+            string actualValue = null;
+            By findBy = FindElementBy(how, element);
+            actualValue = this._driver.FindElement(findBy).Text;
+            return actualValue;
+        }
+
+        /// <summary>
         /// Clicks on the first result link, if available. Otherwise, outputs error message
         /// </summary>
         /// <param name="driver"></param>

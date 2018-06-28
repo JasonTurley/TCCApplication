@@ -14,13 +14,14 @@ namespace SmokeTest
     public class SmokeTestExecution
     {
         private IWebDriver _driver;
-        private DriverUtilities _utils;
+        private DriverUtilities _driverUtils;
 
         [OneTimeSetUp]
         public void SetUp()
         {
             _driver = new FirefoxDriver();
-            _utils = new DriverUtilities(_driver);
+            _driverUtils = new DriverUtilities(_driver);
+            _driverUtils.ImplicitWait(10);
             System.IO.Directory.SetCurrentDirectory(TestContext.CurrentContext.WorkDirectory);
         }
 
@@ -32,19 +33,11 @@ namespace SmokeTest
         }
 
         [Test]
-        public void TestSearchForApplicant()
+        public void SearchForTest()
         {
-            Search search = new Search(_driver);
-            search.SearchForPerson("applicant", "", "Peter", "Parker", "", "", "");
-        }
-
- 
-        [Test]
-        public void TestSearchForMembers()
-        {
-            Search appSearch = new Search(_driver);
-            appSearch.SearchForSchool("member", "", "Boston College", "", "");
-        }
+            SearchForTestScript test = new SearchForTestScript(_driver);
+            test.SearchForTestInput();
+        }    
 
         [OneTimeTearDown]
         public void TearDown()

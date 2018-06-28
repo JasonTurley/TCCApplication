@@ -4,20 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using NUnit.Framework;
 
 namespace TCCApplication.Utilities
 {
-    class DriverUtilitiesValidation
+    public class DriverUtilitiesValidation
     {
         private StringBuilder _resultString = new StringBuilder();
 
         private IWebDriver _driver;
-        private DriverUtilities _utils;
+        private DriverUtilities _driverUtils;
 
         public DriverUtilitiesValidation(IWebDriver driver)
         {
             this._driver = driver;
-            this._utils = new DriverUtilities(_driver);
+            this._driverUtils = new DriverUtilities(_driver);
         }
 
         //===============================================================================================================================
@@ -37,7 +38,7 @@ namespace TCCApplication.Utilities
 
             try
             {
-                _utils.EnterText(how, elementName, text);
+                _driverUtils.EnterText(how, elementName, text);
             }
             catch (Exception e)
             {
@@ -58,7 +59,7 @@ namespace TCCApplication.Utilities
 
             try
             {
-                _utils.Click(how, elementName);
+                _driverUtils.Click(how, elementName);
             }
             catch (Exception e)
             {
@@ -68,14 +69,67 @@ namespace TCCApplication.Utilities
             return _resultString.ToString();
         }
 
+        /// <summary>
+        /// Check if element is present on page or not
+        /// </summary>
+        /// <param name="how"></param>
+        /// <param name="elementName"></param>
+        /// <returns></returns>
+        public bool IsElementPresent(DriverUtilities.ElementAccessorType how, string elementName)
+        {
+            try
+            {
+                _driverUtils.IsElementPresent(how, elementName);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                Console.WriteLine("Element: {0} does not exist.", elementName);
+                return false;
+            }
+        }
 
+        /// <summary>
+        /// Verify displayed Text is as expected
+        /// </summary>
+        /// <param name="how"></param>
+        /// <param name="msg"></param>
+        /// <param name="elementID"></param>
+        /// <param name="expectedText"></param>
+        /// <param name="print"></param>
+        /// <returns>String</returns>
+        public string VerifyDisplayedText(DriverUtilities.ElementAccessorType how, string elementName, string expectedText)
+        {
+            _resultString.Clear();
+            string actualText = null;
+
+            try
+            {
+                if (elementName != string.Empty)
+                {
+                    actualText = _driverUtils.GetText(how, elementName);
+                }
+                Assert.AreEqual(expectedText, actualText);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failed with message: {0}", e.Message);
+            }
+
+            return _resultString.ToString();
+        }
+        /// <summary>
+        /// Selects `itemToFind` from App Rec School Search dropdown menu
+        /// </summary>
+        /// <param name="itemToFind"></param>
+        /// <returns></returns>
         public string SelectDropdownItem(string itemToFind)
         {
             _resultString.Clear();
 
             try
             {
-                _utils.SelectDropdownItem(itemToFind);
+                _driverUtils.SelectDropdownItem(itemToFind);
             }
             catch (Exception e)
             {

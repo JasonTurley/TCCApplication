@@ -10,8 +10,8 @@ namespace TCCApplication
     {
         private IWebDriver _driver;
         private UserData _userData;
-        private Navigation _nav;
-        private DriverUtilities _utils;
+        private Navigation _navigation;
+        private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
         private PageValidation _pageValidation;
 
@@ -21,8 +21,8 @@ namespace TCCApplication
         {
             this._driver = driver;
             this._userData = new UserData();
-            this._nav = new Navigation(_driver);
-            this._utils = new DriverUtilities(_driver);
+            this._navigation = new Navigation(_driver);
+            this._driverUtils = new DriverUtilities(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
             this._pageValidation = new PageValidation(_driver);
         }
@@ -32,7 +32,7 @@ namespace TCCApplication
         /// </summary>
         public void LoginUser()
         {
-            _nav.NavigateToLoginPage(_driver);
+            _navigation.NavigateToLoginPage(_driver);
             ApplicantCredentials(string.Empty, string.Empty);
         }
 
@@ -44,7 +44,7 @@ namespace TCCApplication
         /// <param name="userPassword"></param>
         public void LoginUser(string userEmail, string userPassword)
         {
-            _nav.NavigateToLoginPage(_driver);
+            _navigation.NavigateToLoginPage(_driver);
             ApplicantCredentials(userEmail, userPassword);
         }
 
@@ -55,7 +55,6 @@ namespace TCCApplication
         {
             this.SignedIn = false;
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
-            _utils.ImplicitWait(30);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "logoutLink");
         }
 

@@ -9,7 +9,7 @@ namespace TCCApplication
     public class PageValidation
     {
         private IWebDriver _driver;
-        private DriverUtilities _driverUtils;
+        private DriverUtilitiesValidation _utilsValidation;
 
         public static string MainPage = "https://tcc.alpha.devca.net/";
         public static string MemberPage = "https://tcc.alpha.devca.net/Member/List";
@@ -18,7 +18,7 @@ namespace TCCApplication
         public PageValidation(IWebDriver driver)
         {
             this._driver = driver;
-            this._driverUtils = new DriverUtilities(_driver);
+            this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 
         /// <summary>
@@ -26,7 +26,6 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginPassed()
         {
-            _driverUtils.ImplicitWait(30);
             Assert.AreEqual(MemberPage, _driver.Url);
         }
 
@@ -35,7 +34,6 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginFailed()
         {
-            _driverUtils.ImplicitWait(30);
             Assert.AreEqual(MainPage, _driver.Url);
         }
 
@@ -44,18 +42,43 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLogoutPassed()
         {
-            _driverUtils.ImplicitWait(30);
             Assert.AreEqual(MainPage, _driver.Url);
         }
-
 
         /// <summary>
         /// Verify that user logout attempt has failed.
         /// </summary>
         public void VerifyLogoutFailed()
         {
-            _driverUtils.ImplicitWait(30);
             Console.WriteLine("TODO: Finish me!");
+        }
+
+        /// <summary>
+        /// Verify that searched for member is present on page
+        /// </summary>
+        /// <param name="how"></param>
+        /// <param name="elementName"></param>
+        public void VerifyMemberSearchPassed(DriverUtilities.ElementAccessorType how, string elementName)
+        {
+            // FIXME: works, but not practical
+            int pass = 0;
+
+            if (_utilsValidation.IsElementPresent(how, elementName))
+            {
+                pass = 1;
+            } 
+
+            Assert.AreEqual(1, pass);
+        }
+
+        /// <summary>
+        /// Verify that searched for member is not present on page
+        /// </summary>
+        /// <param name="how"></param>
+        /// <param name="elementName"></param>
+        public void VerifyMemberSearchFailed(DriverUtilities.ElementAccessorType how, string elementName)
+        {
+            _utilsValidation.VerifyDisplayedText(how, elementName, "No matching records found.");
         }
     }
 }
