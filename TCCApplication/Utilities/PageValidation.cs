@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using TCCApplication.Utilities;
 
 namespace TCCApplication
 {
@@ -8,6 +9,7 @@ namespace TCCApplication
     public class PageValidation
     {
         private IWebDriver _driver;
+        private DriverUtilities _driverUtils;
 
         public static string MainPage = "https://tcc.alpha.devca.net/";
         public static string MemberPage = "https://tcc.alpha.devca.net/Member/List";
@@ -16,6 +18,7 @@ namespace TCCApplication
         public PageValidation(IWebDriver driver)
         {
             this._driver = driver;
+            this._driverUtils = new DriverUtilities(_driver);
         }
 
         /// <summary>
@@ -23,6 +26,7 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginPassed()
         {
+            _driverUtils.ImplicitWait(30);
             Assert.AreEqual(MemberPage, _driver.Url);
         }
 
@@ -31,6 +35,7 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginFailed()
         {
+            _driverUtils.ImplicitWait(30);
             Assert.AreEqual(MainPage, _driver.Url);
         }
 
@@ -39,6 +44,7 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLogoutPassed()
         {
+            _driverUtils.ImplicitWait(30);
             Assert.AreEqual(MainPage, _driver.Url);
         }
 
@@ -48,6 +54,7 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLogoutFailed()
         {
+            _driverUtils.ImplicitWait(30);
             Console.WriteLine("TODO: Finish me!");
         }
     }

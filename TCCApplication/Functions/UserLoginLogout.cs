@@ -36,6 +36,18 @@ namespace TCCApplication
             ApplicantCredentials(string.Empty, string.Empty);
         }
 
+
+        /// <summary>
+        /// Logs into my TCC account
+        /// </summary>
+        /// <param name="userEmail"></param>
+        /// <param name="userPassword"></param>
+        public void LoginUser(string userEmail, string userPassword)
+        {
+            _nav.NavigateToLoginPage(_driver);
+            ApplicantCredentials(userEmail, userPassword);
+        }
+
         /// <summary>
         /// Logs user out of TCC
         /// </summary>
@@ -51,16 +63,19 @@ namespace TCCApplication
         /// Enters the provided email and password into the login field.
         /// If no email and password is provided, user default (my) info.
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        public void ApplicantCredentials(string email, string password)
+        /// <param name="userEmail"></param>
+        /// <param name="userPassword"></param>
+        public void ApplicantCredentials(string userEmail, string userPassword)
         {
-            if (email == string.Empty) { email = _userData.GetEmail(); }
-            if (password == string.Empty) { password = _userData.GetPassword(); }
+            if (userEmail == string.Empty)
+                userEmail = _userData.GetEmail(); 
+            if (userPassword == string.Empty)
+                userPassword = _userData.GetPassword(); 
 
-            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Username", email);
-            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", password);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Username", userEmail);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", userPassword);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ClassName, "btn-primary");
+            this.SignedIn = true;
         }
 
         /// <summary>

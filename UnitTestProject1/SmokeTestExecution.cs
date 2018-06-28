@@ -27,8 +27,8 @@ namespace SmokeTest
         [Test]
         public void LoginLogoutTest()
         {
-            UserLoginTestScript test = new UserLoginTestScript(_driver);
-            test.UserLoginTestInput();
+            LoginLogoutTestScript test = new LoginLogoutTestScript(_driver);
+            test.UserLoginLogoutTestInput();
         }
 
         [Test]

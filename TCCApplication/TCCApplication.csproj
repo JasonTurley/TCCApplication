@@ -59,7 +59,7 @@
     <Compile Include="Functions\SearchFor.cs" />
     <Compile Include="Data\PersonData.cs" />
     <Compile Include="Data\SchoolData.cs" />
-    <Compile Include="TestScripts\UserLoginTestScript.cs" />
+    <Compile Include="TestScripts\LoginLogoutTestScript.cs" />
     <Compile Include="Utilities\DriverUtilitiesValidation.cs" />
     <Compile Include="Utilities\Navigation.cs" />
     <Compile Include="Program.cs" />
