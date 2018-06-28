@@ -63,10 +63,16 @@ namespace TCCApplication.TestScripts
             _pageValidation.VerifyTableIsPresent();
 
             // Test high school search failed
+            _searchFor.SearchForSchool("High school", "12345", _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
+            _pageValidation.VerifyTableIsNotPresent();
 
             // Test college search passed
+            _searchFor.SearchForSchool("college", _schoolData.GetCEEBCode(), _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
+            _pageValidation.VerifyTableIsPresent();
 
             // Test college search failed
+            _searchFor.SearchForSchool("colleges", "54321", _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
+            _pageValidation.VerifyTableIsNotPresent();
         }
     }
 }
