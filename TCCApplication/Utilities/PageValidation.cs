@@ -10,12 +10,13 @@ namespace TCCApplication
     public class PageValidation
     {
         private IWebDriver _driver;
+        private Result _results = new Result();
+
         private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
 
         public static string MainPage = "https://tcc.alpha.devca.net/";
         public static string MemberPage = "https://tcc.alpha.devca.net/Member/List";
-        public static string JasonTurleyAppProfile = "https://tcc.alpha.devca.net/AppRec/SearchDetail?FirstName=Jason&LastName=&Email=&PostalCode=&CommonAppId=&CEEBCode=&SchoolName=&City=&State=&Type=&RecID=&IsPreviousSeason=false";
 
         public PageValidation(IWebDriver driver)
         {
@@ -30,7 +31,14 @@ namespace TCCApplication
         public void VerifyLoginPassed()
         {
             Thread.Sleep(2000);
-            Assert.AreEqual(MemberPage, _driver.Url);
+            try
+            {
+                Assert.AreEqual(MemberPage, _driver.Url);
+            }
+            catch  (Exception e)
+            {
+                _results.AddFailure(e);
+            }
         }
 
         /// <summary>
@@ -38,7 +46,14 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginFailed()
         {
-            Assert.AreEqual(MainPage, _driver.Url);
+            try
+            {
+                Assert.AreEqual(MainPage, _driver.Url);
+            }
+            catch (Exception e)
+            {
+                _results.AddFailure(e);
+            }
         }
 
         /// <summary>
@@ -46,7 +61,14 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLogoutPassed()
         {
-            Assert.AreEqual(MainPage, _driver.Url);
+            try
+            {
+                Assert.AreEqual(MainPage, _driver.Url);
+            }
+            catch (Exception e)
+            {
+                _results.AddFailure(e);
+            }
         }
 
         /// <summary>
@@ -85,7 +107,14 @@ namespace TCCApplication
         /// </summary>
         public void VerifyTableIsPresent()
         {
-            Assert.AreEqual(0, TableIsEmpty());
+            try
+            {
+                Assert.AreEqual(0, TableIsEmpty());
+            }
+            catch (Exception e)
+            {
+                _results.AddFailure(e);
+            }
         }
 
         /// <summary>
@@ -93,7 +122,14 @@ namespace TCCApplication
         /// </summary>
         public void VerifyTableIsNotPresent()
         {
-            Assert.AreEqual(1, TableIsEmpty());
+            try
+            {
+                Assert.AreEqual(1, TableIsEmpty());
+            }
+            catch (Exception e)
+            {
+                _results.AddFailure(e);
+            }
         }
     }
 }
