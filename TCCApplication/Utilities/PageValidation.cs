@@ -58,32 +58,13 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Verify that searched for member is present on page
+        /// Returns 1 if the database table is empty; otherwise returns 0
         /// </summary>
-        /// <param name="how"></param>
-        /// <param name="elementName"></param>
-        public void VerifyMemberSearchPassed(DriverUtilities.ElementAccessorType how, string elementName)
-        {
-            // FIXME: works, but not practical
-            int pass = 0;
-
-            if (_utilsValidation.IsElementPresent(how, elementName))
-            {
-                pass = 1;
-            } 
-
-            Assert.AreEqual(1, pass);
-        }
-
-        /// <summary>
-        /// Check if a table is present
-        /// </summary>
-        /// <returns></returns>
-        public int TableIsPresent()
+        private int TableIsEmpty()
         {
             DriverUtilities.ElementAccessorType how = DriverUtilities.ElementAccessorType.ClassName;
 
-            int present = 0;
+            int empty = 0;
             string emptyTableSelector = "dataTables_empty";
             string displayText = "No matching records found.";
 
@@ -91,22 +72,28 @@ namespace TCCApplication
             Thread.Sleep(2000);
 
             // Returns true if table is empty
-            if (_utilsValidation.VerifyDisplayedText(how, emptyTableSelector, displayText) == false)
+            if (_utilsValidation.VerifyDisplayedText(how, emptyTableSelector, displayText))
             {
-                present = 1;
+                empty = 1;
             }
 
-            return present;
+            return empty;
         }
 
+        /// <summary>
+        /// Verify that a database table is present on page
+        /// </summary>
         public void VerifyTableIsPresent()
         {
-            Assert.AreEqual(1, TableIsPresent());
+            Assert.AreEqual(0, TableIsEmpty());
         }
 
+        /// <summary>
+        /// Verify that a database table is NOT present on page
+        /// </summary>
         public void VerifyTableIsNotPresent()
         {
-            Assert.AreEqual(0, TableIsPresent());
+            Assert.AreEqual(1, TableIsEmpty());
         }
     }
 }

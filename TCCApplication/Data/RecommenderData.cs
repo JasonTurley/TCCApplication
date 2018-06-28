@@ -13,7 +13,7 @@ namespace TCCApplication.Data
             ID = "2420";
         }
 
-        public RecommenderData(string email, string firstName = "", string lastName = "", string id = "")
+        public RecommenderData(string email, string firstName, string lastName, string id)
         {
             Email = email;
             FirstName = firstName;

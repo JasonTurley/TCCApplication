@@ -25,6 +25,19 @@ namespace TCCApplication
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 
+       /// <summary>
+       /// Enter the arguments into an applicant's or recommender's email and name input fields.
+       /// </summary>
+       /// <param name="emailLike"></param>
+       /// <param name="firstNameLike"></param>
+       /// <param name="lastNameLike"></param>
+        public void EnterSharedInfo(string emailLike, string firstNameLike, string lastNameLike)
+        {
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", emailLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtFirstName_fil", firstNameLike);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtLastName_fil", lastNameLike);
+        }
+
         /// <summary>
         /// Searches TCC for an either an applicant or recommender depending on what is passed in for `personType`.
         /// If no type is specified, throws exception.
@@ -40,17 +53,14 @@ namespace TCCApplication
         {
             _navigation.NavigateToSearchPage(_driver);
 
-            // Applicants and recommenders share email, first name, last name accessor ID names
-            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", emailLike);
-            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtFirstName_fil", firstNameLike);
-            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtLastName_fil", lastNameLike);
-
-            // They have unique idIncludes accessor ID names
+            // Are we searching for an applicant or recommender?
             switch (personType.ToLower())
             {
                 case "applicant":
                 case "applicants":
                 case "app":
+                    // Enter provided applicant info
+                    EnterSharedInfo(emailLike, firstNameLike, lastNameLike);
                     _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCAID_fil", idIncludes);
                     _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtZipCode_fil", postalCodeLike);
                     _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtCEEBCode_fil", ceebCode);
@@ -59,7 +69,11 @@ namespace TCCApplication
                 case "recommender":
                 case "recommenders":
                 case "rec":
-                    // Recommenders do not have postal or CEEB codes
+                    // Change tab to "Recommenders" page
+                    _utilsValidation.SelectDropdownItem(personType);
+
+                    // Enter provided recommender info
+                    EnterSharedInfo(emailLike, firstNameLike, lastNameLike);
                     _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtRecommederId_fil", idIncludes);
                     break;
 
@@ -85,7 +99,9 @@ namespace TCCApplication
             switch (schoolType.ToLower())
             {
                 case "highschool":
+                case "highschools":
                 case "high school":
+                case "high schools":
                     _navigation.NavigateToSearchPage(_driver);
                     _utilsValidation.SelectDropdownItem("High School");
                     break;
