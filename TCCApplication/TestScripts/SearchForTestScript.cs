@@ -35,44 +35,44 @@ namespace TCCApplication.TestScripts
         {
             // Test member search passed
             _searchFor.SearchForSchool("member", "", "Boston", "", "");
-            _pageValidation.VerifyTableIsPresent();
+            _pageValidation.VerifyTargetIsPresent();
 
             // Test member search failed
             _searchFor.SearchForSchool("member", "", "UIUC", "", "");
-            _pageValidation.VerifyTableIsNotPresent();  // Check that table does NOT load
+            _pageValidation.VerifyTargetIsNotPresent();  // Check that table does NOT load
 
             // Test applicant search passed
             _searchFor.SearchForPerson("applicant", _userData.GetEmail(), _userData.GetFirstName(), _userData.GetLastName(), _userData.GetID(),
                                         _userData.GetPostalCode(), _userData.GetCEEBCode());
-            _pageValidation.VerifyTableIsPresent();
+            _pageValidation.VerifyTargetIsPresent();
 
             // Test applicant search failed
             _searchFor.SearchForPerson("applicant", "invalid-email", "fname", "lname", "12345", "60111", "54321");
-            _pageValidation.VerifyTableIsNotPresent();
+            _pageValidation.VerifyTargetIsNotPresent();
 
             // Test recommender search passed
             _searchFor.SearchForPerson("rec", _recData.GetEmail(), _recData.GetFirstName(), _recData.GetLastName(), _recData.GetID(), "", "");
-            _pageValidation.VerifyTableIsPresent();
+            _pageValidation.VerifyTargetIsPresent();
 
             // Test recommender search failed
             _searchFor.SearchForPerson("recommender", "invalid-email", "fname", "lname", "12345", "60111", "54321");
-            _pageValidation.VerifyTableIsNotPresent();
+            _pageValidation.VerifyTargetIsNotPresent();
 
             // Test high school search passed
             _searchFor.SearchForSchool("High school", _schoolData.GetCEEBCode(), _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
-            _pageValidation.VerifyTableIsPresent();
+            _pageValidation.VerifyTargetIsPresent();
 
             // Test high school search failed
             _searchFor.SearchForSchool("High school", "12345", _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
-            _pageValidation.VerifyTableIsNotPresent();
+            _pageValidation.VerifyTargetIsNotPresent();
 
             // Test college search passed
             _searchFor.SearchForSchool("college", _schoolData.GetCEEBCode(), _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
-            _pageValidation.VerifyTableIsPresent();
+            _pageValidation.VerifyTargetIsPresent();
 
             // Test college search failed
             _searchFor.SearchForSchool("colleges", "54321", _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
-            _pageValidation.VerifyTableIsNotPresent();
+            _pageValidation.VerifyTargetIsNotPresent();
         }
     }
 }

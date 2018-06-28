@@ -6,7 +6,8 @@ using TCCApplication.Utilities;
 
 namespace TCCApplication
 {
-    // Verify that driver is on correct page
+    // Verify that tests direct user to the correct page.
+    // Note that the methods here are a bit hackey...
     public class PageValidation
     {
         private IWebDriver _driver;
@@ -31,13 +32,11 @@ namespace TCCApplication
         public void VerifyLoginPassed()
         {
             Thread.Sleep(2000);
-            try
+
+            // Test failed
+            if (String.Compare(MemberPage, _driver.Url) != 0)
             {
-                Assert.AreEqual(MemberPage, _driver.Url);
-            }
-            catch  (Exception e)
-            {
-                _results.AddFailure(e);
+                _results.IncrementFailureCount();
             }
         }
 
@@ -46,13 +45,10 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginFailed()
         {
-            try
+            // Test failed
+            if (String.Compare(MainPage, _driver.Url) != 0)
             {
-                Assert.AreEqual(MainPage, _driver.Url);
-            }
-            catch (Exception e)
-            {
-                _results.AddFailure(e);
+                _results.IncrementFailureCount();
             }
         }
 
@@ -61,13 +57,10 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLogoutPassed()
         {
-            try
+            /// Test failed
+            if (String.Compare(MemberPage, _driver.Url) != 0)
             {
-                Assert.AreEqual(MainPage, _driver.Url);
-            }
-            catch (Exception e)
-            {
-                _results.AddFailure(e);
+                _results.IncrementFailureCount();
             }
         }
 
@@ -80,55 +73,43 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Returns 1 if the database table is empty; otherwise returns 0
+        /// Returns 1 if search target is present on page
         /// </summary>
-        private int TableIsEmpty()
+        private int TargetIsPresent()
         {
-            DriverUtilities.ElementAccessorType how = DriverUtilities.ElementAccessorType.ClassName;
-
-            int empty = 0;
+            int isPresent = 1;
             string emptyTableSelector = "dataTables_empty";
-            string displayText = "No matching records found.";
+            string displayedText = "No matching records found.";
+            //Thread.Sleep(2000);
 
-            //_driverUtils.ExplicitWait(how, emptyTableSelector, 30);
-            Thread.Sleep(2000);
-
-            // Returns true if table is empty
-            if (_utilsValidation.VerifyDisplayedText(how, emptyTableSelector, displayText))
+            // Returns true if target is not found
+            if (_utilsValidation.VerifyDisplayedText(DriverUtilities.ElementAccessorType.ClassName, emptyTableSelector, displayedText))
             {
-                empty = 1;
+                isPresent = 0;
             }
 
-            return empty;
+            return isPresent;
         }
 
         /// <summary>
-        /// Verify that a database table is present on page
+        /// Verify that the searched for target is present on page. 
         /// </summary>
-        public void VerifyTableIsPresent()
+        public void VerifyTargetIsPresent()
         {
-            try
+            if (TargetIsPresent() != 1)
             {
-                Assert.AreEqual(0, TableIsEmpty());
-            }
-            catch (Exception e)
-            {
-                _results.AddFailure(e);
+                _results.IncrementFailureCount();
             }
         }
 
         /// <summary>
         /// Verify that a database table is NOT present on page
         /// </summary>
-        public void VerifyTableIsNotPresent()
+        public void VerifyTargetIsNotPresent()
         {
-            try
+            if (TargetIsPresent() != 0)
             {
-                Assert.AreEqual(1, TableIsEmpty());
-            }
-            catch (Exception e)
-            {
-                _results.AddFailure(e);
+                _results.IncrementFailureCount();
             }
         }
     }

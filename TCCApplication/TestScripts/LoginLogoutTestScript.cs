@@ -61,7 +61,8 @@ namespace TCCApplication.TestScripts
             TimeSpan duration = stopTime - startTime;
             _results.TotalExecutionTime(duration);
 
-            // Results
+            // Output results
+            _results.WriteResults(3 /*current number of tests*/);
         }
     }
 }
