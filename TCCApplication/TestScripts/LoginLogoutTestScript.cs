@@ -11,6 +11,8 @@ namespace TCCApplication.TestScripts
     public class LoginLogoutTestScript
     {
         private IWebDriver _driver;
+        private Result _results = new Result();
+
         private UserLoginLogout _userLoginLogout;
         private DriverUtilities _driverUtils;
         private PageValidation _pageValidation;
@@ -28,6 +30,9 @@ namespace TCCApplication.TestScripts
         /// </summary>
         public void UserLoginLogoutTestInput()
         {
+            Result.CreateResultFile("LoginLogoutTest");
+            _results.WriteToFile("test message");
+
             // Test login pass
             _userLoginLogout.LoginUser();
             _pageValidation.VerifyLoginPassed();
