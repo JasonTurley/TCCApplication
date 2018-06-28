@@ -93,7 +93,7 @@ namespace TCCApplication.Utilities
         /// <param name="driver"></param>
         /// <param name="seconds"></param>
         /// <param name="elementName"></param>
-        public void ExplicitWait(double seconds, ElementAccessorType how, string elementName)
+        public void ExplicitWait(ElementAccessorType how, string elementName, double seconds)
         {
             WebDriverWait wait = new WebDriverWait(this._driver, TimeSpan.FromSeconds(seconds));
             By findBy = FindElementBy(how, elementName);

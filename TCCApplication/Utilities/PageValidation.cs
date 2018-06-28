@@ -10,6 +10,7 @@ namespace TCCApplication
     public class PageValidation
     {
         private IWebDriver _driver;
+        private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
 
         public static string MainPage = "https://tcc.alpha.devca.net/";
@@ -19,6 +20,7 @@ namespace TCCApplication
         public PageValidation(IWebDriver driver)
         {
             this._driver = driver;
+            this._driverUtils = new DriverUtilities(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 
@@ -74,21 +76,37 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Verify that searched for member is not present on page
+        /// Check if a table is present
         /// </summary>
-        /// <param name="how"></param>
-        /// <param name="elementName"></param>
-        public void VerifyMemberSearchFailed(DriverUtilities.ElementAccessorType how, string elementName)
+        /// <returns></returns>
+        public int TableIsPresent()
         {
-            int fail = 0;
+            DriverUtilities.ElementAccessorType how = DriverUtilities.ElementAccessorType.ClassName;
 
-            // Returns true if elementName is not a valid member
-            if (_utilsValidation.VerifyDisplayedText(how, elementName, "No matching records found."))
+            int present = 0;
+            string emptyTableSelector = "dataTables_empty";
+            string displayText = "No matching records found.";
+
+            //_driverUtils.ExplicitWait(how, emptyTableSelector, 30);
+            Thread.Sleep(2000);
+
+            // Returns true if table is empty
+            if (_utilsValidation.VerifyDisplayedText(how, emptyTableSelector, displayText) == false)
             {
-                fail = 1;
+                present = 1;
             }
 
-            Assert.AreEqual(1, fail);
+            return present;
+        }
+
+        public void VerifyTableIsPresent()
+        {
+            Assert.AreEqual(1, TableIsPresent());
+        }
+
+        public void VerifyTableIsNotPresent()
+        {
+            Assert.AreEqual(0, TableIsPresent());
         }
     }
 }

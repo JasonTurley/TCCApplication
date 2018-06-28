@@ -48,7 +48,7 @@ namespace TCCApplication
             UserLoginLogout temp = new UserLoginLogout(driver);
             temp.LoginUser();
 
-            _utils.ExplicitWait(10, DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+            _utils.ExplicitWait(DriverUtilities.ElementAccessorType.ID, "loadingContainer", 30);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
         }
