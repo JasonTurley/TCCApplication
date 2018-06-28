@@ -16,6 +16,9 @@ namespace SmokeTest
         private IWebDriver _driver;
         private DriverUtilities _driverUtils;
 
+        /// <summary>
+        /// Set up Firefox browser, implicit wait time, and set the current directory
+        /// </summary>
         [OneTimeSetUp]
         public void SetUp()
         {
@@ -25,6 +28,9 @@ namespace SmokeTest
             System.IO.Directory.SetCurrentDirectory(TestContext.CurrentContext.WorkDirectory);
         }
 
+        /// <summary>
+        /// Test all the scripts in TestScripts/LoginLogoutTestScript.cs
+        /// </summary>
         [Test]
         public void TestLoginLogoutFunctions()
         {
@@ -32,6 +38,9 @@ namespace SmokeTest
             test.UserLoginLogoutTestInput();
         }
 
+        /// <summary>
+        /// Test all the scripts in TestScripts/SearchForTestScript.cs
+        /// </summary>
         [Test]
         public void TestSearchForFunctions()
         {
@@ -39,6 +48,9 @@ namespace SmokeTest
             test.SearchForTestInput();
         }    
 
+        /// <summary>
+        /// Cleanup resources
+        /// </summary>
         [OneTimeTearDown]
         public void TearDown()
         {
