@@ -28,16 +28,16 @@ namespace TCCApplication.TestScripts
         {
             // Test member search passed
             _searchFor.SearchForSchool("member", "", "Boston", "", "");
-            _pageValidation.VerifyMemberSearchPassed(DriverUtilities.ElementAccessorType.ID, "dt_basic");  // Check that table loads
+            _pageValidation.VerifyMemberSearchPassed(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='foreach: MembersViewModel.Members']");  // Check that table loads
 
-            ResetTCC();
+            //ResetTCC();
 
             // Test member search failed
             _searchFor.SearchForSchool("member", "", "UIUC", "", "");
             _pageValidation.VerifyMemberSearchFailed(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");  // Check that table does NOT load
 
             // Test applicant search
-           
+            //_searchFor.SearchForPerson("recommender", "", "bob", "", "", "", "");
             // Test recommender search
 
             // Test high school search

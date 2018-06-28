@@ -98,9 +98,8 @@ namespace TCCApplication.Utilities
         /// <param name="expectedText"></param>
         /// <param name="print"></param>
         /// <returns>String</returns>
-        public string VerifyDisplayedText(DriverUtilities.ElementAccessorType how, string elementName, string expectedText)
+        public bool VerifyDisplayedText(DriverUtilities.ElementAccessorType how, string elementName, string expectedText)
         {
-            _resultString.Clear();
             string actualText = null;
 
             try
@@ -109,14 +108,13 @@ namespace TCCApplication.Utilities
                 {
                     actualText = _driverUtils.GetText(how, elementName);
                 }
-                Assert.AreEqual(expectedText, actualText);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Failed with message: {0}", e.Message);
             }
 
-            return _resultString.ToString();
+            return actualText != null;
         }
         /// <summary>
         /// Selects `itemToFind` from App Rec School Search dropdown menu

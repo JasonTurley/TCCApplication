@@ -26,14 +26,14 @@ namespace SmokeTest
         }
 
         [Test]
-        public void LoginLogoutTest()
+        public void TestLoginLogoutFunctions()
         {
             LoginLogoutTestScript test = new LoginLogoutTestScript(_driver);
             test.UserLoginLogoutTestInput();
         }
 
         [Test]
-        public void SearchForTest()
+        public void TestSearchForFunctions()
         {
             SearchForTestScript test = new SearchForTestScript(_driver);
             test.SearchForTestInput();

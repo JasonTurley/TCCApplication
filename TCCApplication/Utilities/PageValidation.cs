@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TCCApplication.Utilities;
@@ -26,6 +27,7 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginPassed()
         {
+            Thread.Sleep(2000);
             Assert.AreEqual(MemberPage, _driver.Url);
         }
 
@@ -78,7 +80,15 @@ namespace TCCApplication
         /// <param name="elementName"></param>
         public void VerifyMemberSearchFailed(DriverUtilities.ElementAccessorType how, string elementName)
         {
-            _utilsValidation.VerifyDisplayedText(how, elementName, "No matching records found.");
+            int fail = 0;
+
+            // Returns true if elementName is not a valid member
+            if (_utilsValidation.VerifyDisplayedText(how, elementName, "No matching records found."))
+            {
+                fail = 1;
+            }
+
+            Assert.AreEqual(1, fail);
         }
     }
 }
