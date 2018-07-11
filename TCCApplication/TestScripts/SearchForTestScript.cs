@@ -99,6 +99,7 @@ namespace TCCApplication.TestScripts
 
             // Output results
             _results.WriteTestResults("Search_For", _results.GetAmountPassed(), TotalTests);
+            _results.ResetAmountPassed();
         }
     }
 }

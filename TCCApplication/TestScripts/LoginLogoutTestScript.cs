@@ -65,6 +65,7 @@ namespace TCCApplication.TestScripts
 
             // Output results
             _results.WriteTestResults("Login_Logout_Test", _results.GetAmountPassed(), TotalTests);
+            _results.ResetAmountPassed();
         }
     }
 }

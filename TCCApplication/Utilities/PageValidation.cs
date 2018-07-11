@@ -32,7 +32,7 @@ namespace TCCApplication
         {
             Thread.Sleep(2000);
             Assert.AreEqual(MemberPage, _driver.Url);
-            _results.IncrementPassCount();
+            _results.IncrementAmountPassed();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace TCCApplication
         public void VerifyLoginFailed()
         {
             Assert.AreEqual(MainPage, _driver.Url);
-            _results.IncrementPassCount();
+            _results.IncrementAmountPassed();
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace TCCApplication
         public void VerifyLogoutPassed()
         {
             Assert.AreEqual(MainPage, _driver.Url);
-            _results.IncrementPassCount();
+            _results.IncrementAmountPassed();
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace TCCApplication
         public void VerifyTargetIsPresent()
         {
             Assert.NotZero(TargetIsPresent());
-            _results.IncrementPassCount();
+            _results.IncrementAmountPassed();
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace TCCApplication
         public void VerifyTargetIsNotPresent()
         {
             Assert.Zero(TargetIsPresent());
-            _results.IncrementPassCount();            
+            _results.IncrementAmountPassed();            
         }
     }
 }
