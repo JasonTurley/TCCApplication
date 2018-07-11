@@ -10,7 +10,7 @@ namespace TCCApplication
         private static string _reportTime = System.DateTime.Now.ToString("MM-dd-yyyy.hh.mm.ss");
         private static string _resultFilename;
 
-        private static uint FailureCount { get; set; }
+        private int AmountPassed;     // Number of tests passed
 
         /// <summary>
         /// Creates a new test result file in the Results directory
@@ -25,14 +25,26 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Sets `testcaseName` as the page's main heading
+        /// Writes `heading` as the page's main heading
         /// </summary>
-        /// <param name="testcaseName">Text to be added to file</param>
-        public void WriteHeading(string testcaseName)
+        /// <param name="heading">Text to be added to file</param>
+        public void WriteMainHeading(string heading)
         {
             using (StreamWriter writer = new StreamWriter(_resultFilename))
             {
-                writer.WriteLine("<h1>" + testcaseName + "</h1>");
+                writer.WriteLine("<h1>" + heading + "</h1>");
+            }
+        }
+
+        /// <summary>
+        /// Writes `heading` as a sub heading
+        /// </summary>
+        /// <param name="heading"></param>
+        public void WriteSubHeading(string heading)
+        {
+            using (StreamWriter writer = new StreamWriter(_resultFilename))
+            {
+                writer.WriteLine("<h3>" + heading + "</h3>");
             }
         }
 
@@ -52,44 +64,34 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Writes the total number of tests, amount passed, and amount failed to html file
+        /// Writes test results to html file
         /// </summary>
-        /// <param name="totalTests"></param>
-        public void WriteResults(uint totalTests)
+        /// <param name="scriptName">Name of test script</param>
+        /// <param name="passed">Number of passed test cases</param>
+        /// <param name="total">Total number of test cases</param>
+        public void WriteTestResults(string scriptName, int passed, int total)
         {
-            uint amountPassed = totalTests - GetFailureCount();
-            uint amountFailed = GetFailureCount();
-
             using (StreamWriter writer = new StreamWriter(_resultFilename, true))
             {
-                writer.WriteLine(" ");
-                writer.WriteLine("<h3> ");
-                writer.WriteLine("<strong>Total Tests: " + totalTests.ToString() + 
-                                    "</br><span style=\"color: green;\"> Passed: " + amountPassed.ToString()
-                                    + "</br><span style=\"color: red;\"> Failed: " + amountFailed.ToString() + "</strong>");
+                writer.WriteLine("<p>" + scriptName + " - "+ passed.ToString() + " of " + total.ToString() + " steps <span style=\"color: green;\">PASSED</p>");
             }
         }
 
         /// <summary>
-        /// Increments the number of test cases failed for current script
+        /// Increments the number of test cases that have passed
         /// </summary>
-        public void IncrementFailureCount()
+        public void IncrementPassCount()
         {
-            FailureCount++;
+            AmountPassed++;
         }
 
         /// <summary>
-        /// Returns the amount of tests that have failed
+        /// Returns the amount of tests that have passed
         /// </summary>
         /// <returns></returns>
-        public uint GetFailureCount()
+        public int GetAmountPassed()
         {
-            return FailureCount;
-        }
-
-        public void ResetFailureCount()
-        {
-            FailureCount = 0;
+            return AmountPassed;
         }
     }
 }

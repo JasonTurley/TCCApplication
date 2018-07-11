@@ -7,7 +7,6 @@ using TCCApplication.Utilities;
 namespace TCCApplication
 {
     // Verify that tests direct user to the correct page.
-    // Note that the methods here are a bit hackey...
     public class PageValidation
     {
         private IWebDriver _driver;
@@ -32,12 +31,8 @@ namespace TCCApplication
         public void VerifyLoginPassed()
         {
             Thread.Sleep(2000);
-
-            // Test failed
-            if (String.Compare(MemberPage, _driver.Url) != 0)
-            {
-                _results.IncrementFailureCount();
-            }
+            Assert.AreEqual(MemberPage, _driver.Url);
+            _results.IncrementPassCount();
         }
 
         /// <summary>
@@ -45,11 +40,8 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginFailed()
         {
-            // Test failed
-            if (String.Compare(MainPage, _driver.Url) != 0)
-            {
-                _results.IncrementFailureCount();
-            }
+            Assert.AreEqual(MainPage, _driver.Url);
+            _results.IncrementPassCount();
         }
 
         /// <summary>
@@ -57,11 +49,8 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLogoutPassed()
         {
-            /// Test failed
-            if (String.Compare(MemberPage, _driver.Url) != 0)
-            {
-                _results.IncrementFailureCount();
-            }
+            Assert.AreEqual(MainPage, _driver.Url);
+            _results.IncrementPassCount();
         }
 
         /// <summary>
@@ -96,10 +85,8 @@ namespace TCCApplication
         /// </summary>
         public void VerifyTargetIsPresent()
         {
-            if (TargetIsPresent() != 1)
-            {
-                _results.IncrementFailureCount();
-            }
+            Assert.NotZero(TargetIsPresent());
+            _results.IncrementPassCount();
         }
 
         /// <summary>
@@ -107,10 +94,8 @@ namespace TCCApplication
         /// </summary>
         public void VerifyTargetIsNotPresent()
         {
-            if (TargetIsPresent() != 0)
-            {
-                _results.IncrementFailureCount();
-            }
+            Assert.Zero(TargetIsPresent());
+            _results.IncrementPassCount();            
         }
     }
 }

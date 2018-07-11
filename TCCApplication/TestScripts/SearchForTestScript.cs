@@ -13,12 +13,16 @@ namespace TCCApplication.TestScripts
     public class SearchForTestScript
     {
         private IWebDriver _driver;
+        private Result _results = new Result();
+
         private SearchFor _searchFor;
         private PageValidation _pageValidation;
         private UserData _userData;
         private RecommenderData _recData;
         private SchoolData _schoolData;
         private UserLoginLogout _userLoginLogout;
+
+        private int TotalTests;
 
         public SearchForTestScript(IWebDriver driver)
         {
@@ -31,8 +35,19 @@ namespace TCCApplication.TestScripts
             this._userLoginLogout = new UserLoginLogout(_driver);
         }
 
+        /// <summary>
+        /// Test that users can:
+        /// - Search for applicants, recommenders, members, highschools and colleges 
+        /// </summary>
         public void SearchForTestInput()
         {
+            // Create test result file
+            Result.CreateResultFile("SearchForTestInput");
+            _results.WriteMainHeading("Searching For...");
+
+            // Start timer
+            DateTime startTime = DateTime.Now;
+
             // Test member search passed
             _searchFor.SearchForSchool("member", "", "Boston", "", "");
             _pageValidation.VerifyTargetIsPresent();
@@ -73,6 +88,17 @@ namespace TCCApplication.TestScripts
             // Test college search failed
             _searchFor.SearchForSchool("colleges", "54321", _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
             _pageValidation.VerifyTargetIsNotPresent();
+
+            // Update me as more test cases are added
+            TotalTests = 10;
+
+            // Stop timer
+            DateTime stopTime = DateTime.Now;
+            TimeSpan duration = stopTime - startTime;
+            _results.TotalExecutionTime(duration);
+
+            // Output results
+            _results.WriteTestResults("Search_For", _results.GetAmountPassed(), TotalTests);
         }
     }
 }

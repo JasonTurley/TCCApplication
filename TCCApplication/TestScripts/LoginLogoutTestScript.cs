@@ -17,7 +17,7 @@ namespace TCCApplication.TestScripts
         private DriverUtilities _driverUtils;
         private PageValidation _pageValidation;
 
-        DateTime startTime;
+        private int TotalTests;
 
         public LoginLogoutTestScript(IWebDriver driver)
         {
@@ -32,12 +32,12 @@ namespace TCCApplication.TestScripts
         /// </summary>
         public void UserLoginLogoutTestInput()
         {
-            // Create file
+            // Create test result file
             Result.CreateResultFile("LoginLogoutTest");
-            _results.WriteHeading("User Login & Logout Test");
+            _results.WriteMainHeading("User Login & Logout Test");
 
             // Start timer
-            startTime = DateTime.Now;
+            DateTime startTime = DateTime.Now;
 
             // Test login pass
             _userLoginLogout.LoginUser();
@@ -54,7 +54,9 @@ namespace TCCApplication.TestScripts
             _pageValidation.VerifyLogoutPassed();
 
             // Test logout fail
-            // TODO:
+
+            // Update me as more test cases are added
+            TotalTests = 3;
 
             // Stop timer
             DateTime stopTime = DateTime.Now;
@@ -62,7 +64,7 @@ namespace TCCApplication.TestScripts
             _results.TotalExecutionTime(duration);
 
             // Output results
-            _results.WriteResults(3 /*current number of tests*/);
+            _results.WriteTestResults("Login_Logout_Test", _results.GetAmountPassed(), TotalTests);
         }
     }
 }
