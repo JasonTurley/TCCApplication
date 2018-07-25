@@ -1,4 +1,7 @@
-﻿namespace TCCApplication.Data
+﻿/// <summary>
+/// PersonData - Base class for a Person object. 
+/// </summary>
+namespace TCCApplication.Data
 {
     // Base class for Applicants and Recommenders
     public class PersonData
@@ -13,8 +16,8 @@
         // Default constructor. Sets properties to junk default values
         public PersonData()
         {
-            FirstName = "Blah";
-            LastName = "Lol";
+            FirstName = "Blah blah";
+            LastName = "Lol lolz";
             Email = "default-email@mailinator.com";
             Password = "$default-password1234";
             ID = "123456";
@@ -44,7 +47,7 @@
 
 
         //=========================================================================================================
-        // GETTERS
+        // Getters for derived classes
         //=========================================================================================================
 
         public string GetEmail()

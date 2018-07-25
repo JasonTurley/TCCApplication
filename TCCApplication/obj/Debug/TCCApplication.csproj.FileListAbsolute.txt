@@ -9,10 +9,19 @@ C:\Users\jturley\Documents\Visual Studio 2015\Projects\TCCApplication\TCCApplica
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\TCCApplication.exe.config
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\TCCApplication.exe
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\TCCApplication.pdb
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\nunit.framework.dll
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.dll
+<<<<<<< HEAD
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.Support.dll
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.xml
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.Support.xml
+=======
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\nunit.framework.pdb
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\nunit.framework.xml
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\bin\Debug\WebDriver.xml
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.exe
+C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.pdb
+>>>>>>> refactor
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.csprojResolveAssemblyReference.cache
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.exe
 C:\Users\jturley\Desktop\TCCApplication\TCCApplication\obj\Debug\TCCApplication.pdb

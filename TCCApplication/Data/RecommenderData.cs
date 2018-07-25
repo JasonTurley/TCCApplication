@@ -2,10 +2,10 @@ using System;
 
 namespace TCCApplication.Data
 {
-    public class RecData : PersonData
+    public class RecommenderData : PersonData
     {
         // Properties are set to test user "Helen Brown's" data by default
-        public RecData()
+        public RecommenderData()
         {
             Email = "Helen_Brown_alpha@mailinator.com";
             FirstName = "Helen_";
@@ -13,7 +13,7 @@ namespace TCCApplication.Data
             ID = "2420";
         }
 
-        public RecData(string email, string firstName = "", string lastName = "", string id = "")
+        public RecommenderData(string email, string firstName, string lastName, string id)
         {
             Email = email;
             FirstName = firstName;

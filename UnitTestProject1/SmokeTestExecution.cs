@@ -1,32 +1,47 @@
 ﻿using System;
+<<<<<<< HEAD
+=======
+using System.Timers;
+>>>>>>> refactor
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using TCCApplication;
 using TCCApplication.Data;
+using TCCApplication.Utilities;
+using TCCApplication.TestScripts;
 
 namespace SmokeTest
 {
     public class SmokeTestExecution
     {
         private IWebDriver _driver;
-        private DriverUtilities _utils;
+        private DriverUtilities _driverUtils;
 
+        /// <summary>
+        /// Set up Firefox browser, implicit wait time, and set the current directory
+        /// </summary>
         [OneTimeSetUp]
         public void SetUp()
         {
             _driver = new FirefoxDriver();
-            _utils = new DriverUtilities(_driver);
+            _driverUtils = new DriverUtilities(_driver);
+            _driverUtils.ImplicitWait(10);
             System.IO.Directory.SetCurrentDirectory(TestContext.CurrentContext.WorkDirectory);
         }
 
         /// <summary>
+<<<<<<< HEAD
         /// Test that user can log in to TCC.
+=======
+        /// Test all the scripts in TestScripts/LoginLogoutTestScript.cs
+>>>>>>> refactor
         /// </summary>
         [Test]
-        public void TestLogInUser()
+        public void TestLoginLogoutFunctions()
         {
+<<<<<<< HEAD
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LogInUser();
             Assert.AreEqual(Pages.MemberListPage, _driver.Url); // Expected to be directed to member page
@@ -34,10 +49,19 @@ namespace SmokeTest
 
         /// <summary>
         /// Test that provided user can log in to TCC.
+=======
+            LoginLogoutTestScript test = new LoginLogoutTestScript(_driver);
+            test.UserLoginLogoutTestInput();
+        }
+
+        /// <summary>
+        /// Test all the scripts in TestScripts/SearchForTestScript.cs
+>>>>>>> refactor
         /// </summary>
         [Test]
-        public void TestLoginUserWithCredentials()
+        public void TestSearchForFunctions()
         {
+<<<<<<< HEAD
             AppLoginLogout appLoginLogout = new AppLoginLogout(_driver);
             appLoginLogout.LoginUserWithCredentials("User-Email", "User-Password");
             Assert.AreEqual(Pages.MainPage, _driver.Url);   // Expected to stay on main page since login will fail
@@ -139,7 +163,15 @@ namespace SmokeTest
             appSearch.SearchForCollege("Martin Luther King", "Atlanta", "GA");
             appSearch.ClearSearch();
         }
+=======
+            SearchForTestScript test = new SearchForTestScript(_driver);
+            test.SearchForTestInput();
+        }    
+>>>>>>> refactor
 
+        /// <summary>
+        /// Cleanup resources
+        /// </summary>
         [OneTimeTearDown]
         public void TearDown()
         {
