@@ -16,7 +16,7 @@ namespace TCCApplication.TestScripts
         private SchoolData _schoolData;
         private UserLoginLogout _userLoginLogout;
 
-        private int TotalTests;
+        private const int TotalTests;
 
         public SearchForTestScript(IWebDriver driver)
         {

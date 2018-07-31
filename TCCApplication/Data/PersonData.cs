@@ -12,7 +12,6 @@ namespace TCCApplication.Data
         protected string Password;
         protected string ID;
 
-
         // Default constructor. Sets properties to junk default values
         public PersonData()
         {
@@ -44,8 +43,7 @@ namespace TCCApplication.Data
             this.Email = newEmail;
             this.Password = newPassword;
         }
-
-
+        
         //=========================================================================================================
         // Getters for derived classes
         //=========================================================================================================
