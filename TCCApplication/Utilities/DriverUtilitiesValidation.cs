@@ -25,7 +25,6 @@ namespace TCCApplication.Utilities
         // Validate Selenium API Commands
         //===============================================================================================================================
 
-
         /// <summary>
         /// Enters `text` into a text box.
         /// </summary>
