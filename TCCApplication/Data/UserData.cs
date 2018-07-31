@@ -15,13 +15,8 @@ namespace TCCApplication.Data
 
         }
 
-<<<<<<< HEAD
-        // Email and password fields are required. The others can be updated later with the UpdateInfo method
-        public UserData(string userEmail, string userPassword, string firstName = "", string lastName = "", string id = "")
-=======
         // Email and password required. The other fields can be updated later with UpdateInfo
         public UserData(string userEmail, string userPassword, string firstName, string lastName, string id)
->>>>>>> refactor
         {
             this.FirstName = firstName;
             this.LastName = lastName;
