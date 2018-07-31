@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace TCCApplication
@@ -10,7 +9,7 @@ namespace TCCApplication
         private static string _reportTime = System.DateTime.Now.ToString("MM-dd-yyyy.hh.mm.ss");
         private static string _resultFilename;
 
-        private static int AmountPassed;     // Number of tests passed
+        private static uint AmountPassed;     // Number of tests passed
 
         /// <summary>
         /// Creates a new test result file in the Results directory
@@ -89,7 +88,7 @@ namespace TCCApplication
         /// Returns the amount of tests that have passed
         /// </summary>
         /// <returns></returns>
-        public int GetAmountPassed()
+        public uint GetAmountPassed()
         {
             return AmountPassed;
         }

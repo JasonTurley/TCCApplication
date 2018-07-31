@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Timers;
-using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using TCCApplication;
-using TCCApplication.Data;
 using TCCApplication.Utilities;
 using TCCApplication.TestScripts;
 
@@ -17,7 +13,7 @@ namespace SmokeTest
         private DriverUtilities _driverUtils;
 
         /// <summary>
-        /// Set up Firefox browser, implicit wait time, and set the current directory
+        /// Set up Firefox browser
         /// </summary>
         [OneTimeSetUp]
         public void SetUp()
@@ -29,7 +25,7 @@ namespace SmokeTest
         }
 
         /// <summary>
-        /// Test all the scripts in TestScripts/LoginLogoutTestScript.cs
+        /// Runs all scenarios in TestScripts/LoginLogoutTestScript.cs
         /// </summary>
         [Test]
         public void TestLoginLogoutFunctions()
@@ -39,7 +35,7 @@ namespace SmokeTest
         }
 
         /// <summary>
-        /// Test all the scripts in TestScripts/SearchForTestScript.cs
+        /// Runs all scenarios in TestScripts/SearchForTestScript.cs
         /// </summary>
         [Test]
         public void TestSearchForFunctions()
