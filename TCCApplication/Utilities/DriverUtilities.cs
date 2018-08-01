@@ -78,6 +78,16 @@ namespace TCCApplication.Utilities
         }
 
         /// <summary>
+        /// Clicks accordian folder.
+        /// </summary>
+        /// <param name="how"></param>
+        /// <param name="elementName"></param>
+        public void ClickAccordion(ElementAccessorType how, string elementName)
+        {
+            Click(how, elementName);
+        }
+
+        /// <summary>
         /// Sets an implicit wait time in seconds.
         /// </summary>
         /// <param name="driver"></param>
