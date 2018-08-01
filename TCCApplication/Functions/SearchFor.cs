@@ -1,6 +1,7 @@
-﻿///<summary>
-/// Search - Handles all searching done on TCC
-/// </summary>
+﻿/**
+ * SearchFor - enables user to search for applicants, recommenders, high-schools, and colleges.
+ */
+
 using System;
 using OpenQA.Selenium;
 using TCCApplication.Data;

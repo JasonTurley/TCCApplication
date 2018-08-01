@@ -13,7 +13,7 @@ namespace TCCApplication.TestScripts
         private DriverUtilities _driverUtils;
         private PageValidation _pageValidation;
 
-        private const int TotalTests = 3;
+        private const uint TotalTests = 3;
 
         public LoginLogoutTestScript(IWebDriver driver)
         {
@@ -24,9 +24,9 @@ namespace TCCApplication.TestScripts
         }
 
         /// <summary>
-        /// Test that user can log in and out of TCC
+        /// Run all tests associated with the UserLoginLogout class.
         /// </summary>
-        public void UserLoginLogoutTestInput()
+        public void Run()
         {
             // Create test result file
             Result.CreateResultFile("LoginLogoutTest");
@@ -49,7 +49,7 @@ namespace TCCApplication.TestScripts
             _userLoginLogout.LogoutUser();
             _pageValidation.VerifyLogoutPassed();
 
-            // Test logout fail
+            // TODO: Test logout fail
 
             // Stop timer
             DateTime stopTime = DateTime.Now;
