@@ -1,4 +1,7 @@
-﻿using System;
+﻿/// <summary>
+/// UserLoginLogout.cs - Functions to log in and out of TCC.
+/// </summary>
+using System;
 using OpenQA.Selenium;
 using TCCApplication;
 using TCCApplication.Data;

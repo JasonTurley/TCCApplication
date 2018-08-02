@@ -1,7 +1,6 @@
-﻿/**
- * SearchFor - enables user to search for applicants, recommenders, high-schools, and colleges.
- */
-
+﻿/// <summary>
+/// SearchFor.cs - Enables user to search for applicants, recommenders, high-schools, and colleges.
+/// <summary>
 using System;
 using OpenQA.Selenium;
 using TCCApplication.Data;

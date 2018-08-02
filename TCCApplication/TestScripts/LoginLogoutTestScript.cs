@@ -1,4 +1,7 @@
-﻿using System;
+﻿/// <summary>
+/// LoginLogoutTestScripts.cs - Runs the tests from UserLoginLogout.cs
+/// </summary>
+using System;
 using OpenQA.Selenium;
 
 namespace TCCApplication.TestScripts
@@ -6,7 +9,7 @@ namespace TCCApplication.TestScripts
     public class LoginLogoutTestScript
     {
         private IWebDriver _driver;
-        private Result _results = new Result();
+        private Result _results;
 
         private UserLoginLogout _userLoginLogout;
         private PageValidation _pageValidation;
@@ -16,6 +19,7 @@ namespace TCCApplication.TestScripts
         public LoginLogoutTestScript(IWebDriver driver)
         {
             this._driver = driver;
+            this._results = new Result();
             this._userLoginLogout = new UserLoginLogout(_driver);
             this._pageValidation = new PageValidation(_driver);
         }
@@ -26,7 +30,7 @@ namespace TCCApplication.TestScripts
         public void Run()
         {
             // Create test result file
-            Result.CreateResultFile("LoginLogoutTest");
+            _results.CreateResultFile("LoginLogoutTest");
             _results.WriteMainHeading("User Login & Logout Test");
 
             // Start timer

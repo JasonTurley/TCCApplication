@@ -1,7 +1,8 @@
-﻿/**
- * Catches any exceptions thrown by the DriverUtilites class. These methods 
- * should be used instead of its sibling class.
- */
+﻿/// <summary>
+/// DriverUtilitiesValidation.cs - Handles any exceptions thrown by the DriverUtilites class. 
+/// 
+/// For this reason, it is highly recommended to use this class instead of DriverUtilities.
+/// </summary>
 
 using System;
 using System.Text;
@@ -26,6 +27,11 @@ namespace TCCApplication.Utilities
         // Validate Selenium API Commands
         //===============================================================================================================================
 
+        /// <summary>
+        /// Sets an implicit wait time in seconds.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="seconds">Amount of seconds to wait</param>
         public string ImplicitWait(double seconds)
         {
             _resultString.Clear();
@@ -37,6 +43,28 @@ namespace TCCApplication.Utilities
             catch (Exception e)
             {
                 _resultString.Append(e.Message);
+            }
+
+            return _resultString.ToString();
+        }
+
+        /// <summary>
+        /// Sets an explicit wait time in seconds.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="seconds"></param>
+        /// <param name="elementName"></param>
+        public string ExplicitWait(DriverUtilities.ElementAccessorType how, string elementName, double seconds)
+        {
+            _resultString.Clear();
+
+            try
+            {
+                _driverUtils.ExplicitWait(how, elementName, seconds);
+            }
+            catch (Exception e)
+            {
+                _resultString.Append(e.Message);    
             }
 
             return _resultString.ToString();

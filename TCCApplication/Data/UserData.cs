@@ -1,5 +1,6 @@
-﻿using System;
-
+﻿///<summary>
+/// UserData.cs - Blueprint for a TCC user.  
+///</summary>
 namespace TCCApplication.Data
 {
     public class UserData : PersonData
@@ -12,10 +13,8 @@ namespace TCCApplication.Data
             LastName = "Turley";
             Password = "C0mm0n@1-2";
             ID = "58354";
-
         }
 
-        // Email and password required. The other fields can be updated later with UpdateInfo
         public UserData(string userEmail, string userPassword, string firstName, string lastName, string id)
         {
             this.FirstName = firstName;

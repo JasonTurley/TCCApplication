@@ -1,3 +1,6 @@
+/// <summary>
+/// RecommenderData.cs - Blueprint for a TCC recommender.
+/// </summary>
 using System;
 
 namespace TCCApplication.Data

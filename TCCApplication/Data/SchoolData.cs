@@ -1,4 +1,7 @@
-﻿using System;
+﻿/// <summary>
+/// SchoolData.cs - Represents either a high school or college.
+/// </summary>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,8 +40,7 @@ namespace TCCApplication.Data
 
         public string GetCEEBCode()
         {
-            // FIXME
-            return "";
+            return this.CeebCode; 
         }
 
         public string GetName()

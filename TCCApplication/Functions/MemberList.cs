@@ -1,6 +1,6 @@
-﻿/*
- * MemberList - class that enables user to search for Members.
- */
+﻿/// <summary>
+/// MemberList.cs - Enables users to search for colleges on TCC's Member List page:w
+/// </summary>
 
 using System;
 using OpenQA.Selenium;
@@ -51,11 +51,11 @@ namespace TCCApplication
 
             // Enter member name into search box
             _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", name + Keys.Enter);
+            _utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']", 10);
 
             // Click result link
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']");
 
-            // Collapse accordions
             return ClickAllAccordions();
         }
 

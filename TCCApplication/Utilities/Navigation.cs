@@ -1,4 +1,8 @@
-﻿using System;
+﻿/// <summary>
+/// Navigation.cs - Helper funtions to naviagte the TCC site.
+/// </summary>
+
+using System;
 using OpenQA.Selenium;
 using TCCApplication.Utilities;
 

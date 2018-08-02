@@ -1,4 +1,7 @@
-﻿using System;
+﻿///<summary>
+/// PageValidation.cs - Verify that after an action, the correct screen is loaded.
+/// </summary>
+using System;
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -6,7 +9,6 @@ using TCCApplication.Utilities;
 
 namespace TCCApplication
 {
-    // Verify that tests direct user to the correct page.
     public class PageValidation
     {
         private IWebDriver _driver;
@@ -62,11 +64,11 @@ namespace TCCApplication
         }
 
         /// <summary>
-        /// Returns 1 if search target is present on page
-        /// </summary>
-        private int TargetIsPresent()
+        /// Check if search returned any results
+       /// </summary>
+        private bool TargetIsPresent()
         {
-            int isPresent = 1;
+            bool isPresent = true;
             string emptyTableSelector = "dataTables_empty";
             string displayedText = "No matching records found.";
             //Thread.Sleep(2000);
@@ -74,7 +76,7 @@ namespace TCCApplication
             // Returns true if target is not found
             if (_utilsValidation.VerifyDisplayedText(DriverUtilities.ElementAccessorType.ClassName, emptyTableSelector, displayedText))
             {
-                isPresent = 0;
+                isPresent = false;
             }
 
             return isPresent;
@@ -85,7 +87,7 @@ namespace TCCApplication
         /// </summary>
         public void VerifyTargetIsPresent()
         {
-            Assert.NotZero(TargetIsPresent());
+            Assert.IsTrue(TargetIsPresent());
             _results.IncrementAmountPassed();
         }
 
@@ -94,7 +96,7 @@ namespace TCCApplication
         /// </summary>
         public void VerifyTargetIsNotPresent()
         {
-            Assert.Zero(TargetIsPresent());
+            Assert.IsFalse(TargetIsPresent());
             _results.IncrementAmountPassed();            
         }
     }

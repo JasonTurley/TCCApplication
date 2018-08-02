@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// PersonData - Base class for a Person object. 
+/// PersonData.cs - Abstract class. The protected member functions can only be used in derived classes. 
 /// </summary>
 namespace TCCApplication.Data
 {
@@ -12,17 +12,12 @@ namespace TCCApplication.Data
         protected string Password;
         protected string ID;
 
-        // Default constructor. Sets properties to junk default values
-        public PersonData()
+        protected PersonData()
         {
-            FirstName = "Blah blah";
-            LastName = "Lol lolz";
-            Email = "default-email@mailinator.com";
-            Password = "$default-password1234";
-            ID = "123456";
+
         }
 
-        public PersonData(string firstName, string lastName, string email, string password, string id)
+        protected PersonData(string firstName, string lastName, string email, string password, string id)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -31,14 +26,14 @@ namespace TCCApplication.Data
             this.ID = id;
         }
 
-        public void UpdateInfo(string newFirstName, string newLastName, string id = "")
+        protected void UpdateInfo(string newFirstName, string newLastName, string id = "")
         {
             this.FirstName = newFirstName;
             this.LastName = newLastName;
             this.ID = id;
         }
 
-        public void UpdateLoginInfo(string newEmail, string newPassword)
+        protected void UpdateLoginInfo(string newEmail, string newPassword)
         {
             this.Email = newEmail;
             this.Password = newPassword;
@@ -48,27 +43,27 @@ namespace TCCApplication.Data
         // Getters for derived classes
         //=========================================================================================================
 
-        public string GetEmail()
+        protected string GetEmail()
         {
             return this.Email;
         }
 
-        public string GetPassword()
+        protected string GetPassword()
         {
             return this.Password;
         }
 
-        public string GetFirstName()
+        protected string GetFirstName()
         {
             return this.FirstName;
         }
 
-        public string GetLastName()
+        protected string GetLastName()
         {
             return this.LastName;
         }
 
-        public string GetID()
+        protected string GetID()
         {
             return this.ID;
         }

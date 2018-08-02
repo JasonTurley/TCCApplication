@@ -1,4 +1,7 @@
-﻿using System;
+﻿/// <summary>
+/// Result.cs - Creates and writes test results to a file.
+/// </summary>
+using System;
 using System.IO;
 
 namespace TCCApplication
@@ -15,7 +18,7 @@ namespace TCCApplication
         /// Creates a new test result file in the Results directory
         /// </summary>
         /// <param name="filename"></param>
-        public static void CreateResultFile(string filename)
+        public void CreateResultFile(string filename)
         {
             string directory = @"C:\Users\jturley\Desktop\TCCApplication\TCCApplication\Results\";
 

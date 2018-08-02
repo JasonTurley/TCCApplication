@@ -1,4 +1,7 @@
-﻿using System;
+﻿/// <summary>
+/// SearchForTestScripts.cs - Runs the tests from SearchFor.cs
+/// </summary>
+using System;
 using TCCApplication.Data;
 using OpenQA.Selenium;
 
@@ -7,7 +10,7 @@ namespace TCCApplication.TestScripts
     public class SearchForTestScript
     {
         private IWebDriver _driver;
-        private Result _results = new Result();
+        private Result _results;
 
         private SearchFor _searchFor;
         private PageValidation _pageValidation;
@@ -15,11 +18,12 @@ namespace TCCApplication.TestScripts
         private RecommenderData _recData;
         private SchoolData _schoolData;
 
-        private const uint TotalTests = 10;
+        private const uint NumTests = 10;
 
         public SearchForTestScript(IWebDriver driver)
         {
             this._driver = driver;
+            this._results = new Result();
             this._searchFor = new SearchFor(_driver);
             this._pageValidation = new PageValidation(_driver);
             this._userData = new UserData();
@@ -33,7 +37,7 @@ namespace TCCApplication.TestScripts
         public void Run()
         {
             // Create test result file
-            Result.CreateResultFile("SearchForTestInput");
+            _results.CreateResultFile("SearchForTestInput");
             _results.WriteMainHeading("Searching For...");
 
             // Start timer
@@ -86,7 +90,7 @@ namespace TCCApplication.TestScripts
             _results.TotalExecutionTime(duration);
 
             // Output results
-            _results.WriteTestResults("Search_For", _results.GetAmountPassed(), TotalTests);
+            _results.WriteTestResults("Search_For", _results.GetAmountPassed(), NumTests);
             _results.ResetAmountPassed();
         }
     }

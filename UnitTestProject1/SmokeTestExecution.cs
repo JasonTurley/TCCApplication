@@ -1,4 +1,8 @@
-﻿using System;
+﻿/// <summary>
+/// SmokeTestExecution.cs - Driver program for all test execution
+/// </summary>
+
+using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -10,7 +14,7 @@ namespace SmokeTest
     public class SmokeTestExecution
     {
         private IWebDriver _driver;
-        private DriverUtilities _driverUtils;
+        private DriverUtilitiesValidation _utilsValidation;
 
         /// <summary>
         /// Set up Firefox browser
@@ -18,9 +22,9 @@ namespace SmokeTest
         [OneTimeSetUp]
         public void SetUp()
         {
-            _driver = new FirefoxDriver();
-            _driverUtils = new DriverUtilities(_driver);
-            _driverUtils.ImplicitWait(10);
+            this._driver = new FirefoxDriver();
+            this._utilsValidation = new DriverUtilitiesValidation(_driver);
+            _utilsValidation.ImplicitWait(10);
             System.IO.Directory.SetCurrentDirectory(TestContext.CurrentContext.WorkDirectory);
         }
 
@@ -28,21 +32,31 @@ namespace SmokeTest
         /// Runs all scenarios in TestScripts/LoginLogoutTestScript.cs
         /// </summary>
         [Test]
-        public void TestLoginLogoutFunctions()
+        public void RunLoginLogoutTestScript()
         {
             LoginLogoutTestScript test = new LoginLogoutTestScript(_driver);
-            test.UserLoginLogoutTestInput();
+            test.Run();
         }
 
         /// <summary>
         /// Runs all scenarios in TestScripts/SearchForTestScript.cs
         /// </summary>
         [Test]
-        public void TestSearchForFunctions()
+        public void RunSearchForTestScript()
         {
             SearchForTestScript test = new SearchForTestScript(_driver);
-            test.SearchForTestInput();
-        }    
+            test.Run();
+        }
+
+        /// <summary>
+        /// Runs all scenarios in TestScripts/MemberListc.cs
+        /// </summary>
+        [Test]
+        public void RunMemberListTestScript()
+        {
+            MemberListTestScript test = new MemberListTestScript(_driver);
+            test.Run();
+        }
 
         /// <summary>
         /// Cleanup resources
