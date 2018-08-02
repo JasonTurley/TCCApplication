@@ -11,7 +11,6 @@ namespace TCCApplication
         private IWebDriver _driver;
         private UserData _userData;
         private Navigation _navigation;
-        private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
         private PageValidation _pageValidation;
 
@@ -22,7 +21,6 @@ namespace TCCApplication
             this._driver = driver;
             this._userData = new UserData();
             this._navigation = new Navigation(_driver);
-            this._driverUtils = new DriverUtilities(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
             this._pageValidation = new PageValidation(_driver);
         }

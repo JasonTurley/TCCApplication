@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenQA.Selenium;
-using TCCApplication.Utilities;
 
 namespace TCCApplication.TestScripts
 {
@@ -10,7 +9,6 @@ namespace TCCApplication.TestScripts
         private Result _results = new Result();
 
         private UserLoginLogout _userLoginLogout;
-        private DriverUtilities _driverUtils;
         private PageValidation _pageValidation;
 
         private const uint TotalTests = 3;
@@ -19,7 +17,6 @@ namespace TCCApplication.TestScripts
         {
             this._driver = driver;
             this._userLoginLogout = new UserLoginLogout(_driver);
-            this._driverUtils = new DriverUtilities(_driver);
             this._pageValidation = new PageValidation(_driver);
         }
 

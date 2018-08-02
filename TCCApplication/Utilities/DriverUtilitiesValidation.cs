@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿/**
+ * Catches any exceptions thrown by the DriverUtilites class. These methods 
+ * should be used instead of its sibling class.
+ */
+
+using System;
 using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
-using NUnit.Framework;
 
 namespace TCCApplication.Utilities
 {
@@ -24,6 +25,22 @@ namespace TCCApplication.Utilities
         //===============================================================================================================================
         // Validate Selenium API Commands
         //===============================================================================================================================
+
+        public string ImplicitWait(double seconds)
+        {
+            _resultString.Clear();
+
+            try
+            {
+                _driverUtils.ImplicitWait(seconds);
+            }
+            catch (Exception e)
+            {
+                _resultString.Append(e.Message);
+            }
+
+            return _resultString.ToString();
+        }
 
         /// <summary>
         /// Enters `text` into a text box.

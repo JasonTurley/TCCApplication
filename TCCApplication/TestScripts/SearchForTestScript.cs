@@ -14,7 +14,6 @@ namespace TCCApplication.TestScripts
         private UserData _userData;
         private RecommenderData _recData;
         private SchoolData _schoolData;
-        private UserLoginLogout _userLoginLogout;
 
         private const uint TotalTests = 10;
 
@@ -26,7 +25,6 @@ namespace TCCApplication.TestScripts
             this._userData = new UserData();
             this._recData = new RecommenderData();
             this._schoolData = new SchoolData();
-            this._userLoginLogout = new UserLoginLogout(_driver);
         }
 
         /// <summary>

@@ -14,7 +14,6 @@ namespace TCCApplication
         private IWebDriver _driver;
         private Navigation _navigation;
         private UserLoginLogout _userLoginLogout;
-        private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
 
         public SearchFor(IWebDriver driver)
@@ -22,7 +21,6 @@ namespace TCCApplication
             this._driver = driver;
             this._userLoginLogout = new UserLoginLogout(_driver);
             this._navigation = new Navigation(_driver);
-            this._driverUtils = new DriverUtilities(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 

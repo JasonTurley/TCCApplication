@@ -14,31 +14,66 @@ namespace TCCApplication
         private IWebDriver _driver;
         private Navigation _navigation;
         private UserLoginLogout _userLoginLogout;
-        private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
+
+        private string[] AccoridionIDs;
 
         public MemberList(IWebDriver driver)
         {
             this._driver = driver;
             this._navigation = new Navigation(_driver);
             this._userLoginLogout = new UserLoginLogout(_driver);
-            this._driverUtils = new DriverUtilities(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
+
+            AccoridionIDs = new string[]
+            {
+                "abasicConfig",
+                "ainformationDetails",
+                "aQuesSupp",
+                "testReq",
+                "aPaymentReq",
+                "aSupReq",
+                "aRecReq",
+                "aCutOffConfig",
+                "aSDSConfiguration",
+                "aFinAidConfig",
+                "aDynamicText"
+            };
         }
 
-        /*
-         * TODO:
-         * - login to tcc (land on member list page)
-         * - enter member in search box
-         * - click result, if any
-         * - collapse and expand accordions
-         */
-
-        public void MemberSearch(string name)
+        /// <summary>
+        /// Search for a member from the Member List page.
+        /// </summary>
+        /// <param name="name">Target member to search for</param>
+        public uint MemberSearch(string name)
         {
             _userLoginLogout.LoginUser();
-            _driverUtils.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", name);
 
+            // Enter member name into search box
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", name + Keys.Enter);
+
+            // Click result link
+            _utilsValidation.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']");
+
+            // Collapse accordions
+            return ClickAllAccordions();
         }
+
+        /// <summary>
+        /// Clicks all accordion menus lists on a member's page 
+        /// </summary>
+        public uint ClickAllAccordions()
+        {
+            uint totalClicked = 0;
+
+            foreach (string id in AccoridionIDs)
+            {
+                _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, id);
+                totalClicked++;
+            }
+
+            return totalClicked;
+        }
+
     }
 }
