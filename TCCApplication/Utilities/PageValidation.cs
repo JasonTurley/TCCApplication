@@ -74,10 +74,10 @@ namespace TCCApplication
             //Thread.Sleep(2000);
 
             // Returns true if target is not found
-            if (_utilsValidation.VerifyDisplayedText(DriverUtilities.ElementAccessorType.ClassName, emptyTableSelector, displayedText))
-            {
-                isPresent = false;
-            }
+           // if (_utilsValidation.VerifyDisplayedText(DriverUtilities.ElementAccessorType.ClassName, emptyTableSelector, displayedText))
+            //{
+              //  isPresent = false;
+           // }
 
             return isPresent;
         }
@@ -98,6 +98,11 @@ namespace TCCApplication
         {
             Assert.IsFalse(TargetIsPresent());
             _results.IncrementAmountPassed();            
+        }
+
+        public void VerifyDisplayText(string expected, string actual)
+        {
+            Assert.AreEqual(expected, actual);
         }
     }
 }

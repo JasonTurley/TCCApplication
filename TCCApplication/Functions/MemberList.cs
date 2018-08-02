@@ -6,6 +6,7 @@ using System;
 using OpenQA.Selenium;
 using TCCApplication.Data;
 using TCCApplication.Utilities;
+using NUnit.Framework;
 
 namespace TCCApplication
 {
@@ -15,6 +16,7 @@ namespace TCCApplication
         private Navigation _navigation;
         private UserLoginLogout _userLoginLogout;
         private DriverUtilitiesValidation _utilsValidation;
+        private UserData _userData;
 
         private string[] AccoridionIDs;
 
@@ -24,6 +26,7 @@ namespace TCCApplication
             this._navigation = new Navigation(_driver);
             this._userLoginLogout = new UserLoginLogout(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
+            this._userData = new UserData();
 
             AccoridionIDs = new string[]
             {
@@ -45,9 +48,9 @@ namespace TCCApplication
         /// Search for a member from the Member List page.
         /// </summary>
         /// <param name="name">Target member to search for</param>
-        public uint MemberSearch(string name)
+        public void MemberSearch(string name)
         {
-            _userLoginLogout.LoginUser();
+            _userLoginLogout.LoginUser(_userData.GetEmail(), _userData.GetPassword());
 
             // Enter member name into search box
             _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", name + Keys.Enter);
@@ -55,14 +58,12 @@ namespace TCCApplication
 
             // Click result link
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']");
-
-            return ClickAllAccordions();
         }
 
         /// <summary>
         /// Clicks all accordion menus lists on a member's page 
         /// </summary>
-        public uint ClickAllAccordions()
+        public uint CountClickableAccordions()
         {
             uint totalClicked = 0;
 

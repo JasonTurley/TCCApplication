@@ -28,49 +28,6 @@ namespace TCCApplication.Utilities
         //===============================================================================================================================
 
         /// <summary>
-        /// Sets an implicit wait time in seconds.
-        /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="seconds">Amount of seconds to wait</param>
-        public string ImplicitWait(double seconds)
-        {
-            _resultString.Clear();
-
-            try
-            {
-                _driverUtils.ImplicitWait(seconds);
-            }
-            catch (Exception e)
-            {
-                _resultString.Append(e.Message);
-            }
-
-            return _resultString.ToString();
-        }
-
-        /// <summary>
-        /// Sets an explicit wait time in seconds.
-        /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="seconds"></param>
-        /// <param name="elementName"></param>
-        public string ExplicitWait(DriverUtilities.ElementAccessorType how, string elementName, double seconds)
-        {
-            _resultString.Clear();
-
-            try
-            {
-                _driverUtils.ExplicitWait(how, elementName, seconds);
-            }
-            catch (Exception e)
-            {
-                _resultString.Append(e.Message);    
-            }
-
-            return _resultString.ToString();
-        }
-
-        /// <summary>
         /// Enters `text` into a text box.
         /// </summary>
         /// <param name="how"></param>
@@ -114,6 +71,49 @@ namespace TCCApplication.Utilities
         }
 
         /// <summary>
+        /// Sets an implicit wait time in seconds.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="seconds">Amount of seconds to wait</param>
+        public string ImplicitWait(double seconds)
+        {
+            _resultString.Clear();
+
+            try
+            {
+                _driverUtils.ImplicitWait(seconds);
+            }
+            catch (Exception e)
+            {
+                _resultString.Append(e.Message);
+            }
+
+            return _resultString.ToString();
+        }
+
+        /// <summary>
+        /// Sets an explicit wait time in seconds.
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="seconds"></param>
+        /// <param name="elementName"></param>
+        public string ExplicitWait(DriverUtilities.ElementAccessorType how, string elementName, double seconds)
+        {
+            _resultString.Clear();
+
+            try
+            {
+                _driverUtils.ExplicitWait(how, elementName, seconds);
+            }
+            catch (Exception e)
+            {
+                _resultString.Append(e.Message);
+            }
+
+            return _resultString.ToString();
+        }
+
+        /// <summary>
         /// Check if element is present on page or not
         /// </summary>
         /// <param name="how"></param>
@@ -134,32 +134,25 @@ namespace TCCApplication.Utilities
         }
 
         /// <summary>
-        /// Verify displayed Text is as expected
+        /// Get the displayed text 
         /// </summary>
         /// <param name="how"></param>
-        /// <param name="msg"></param>
-        /// <param name="elementID"></param>
-        /// <param name="expectedText"></param>
-        /// <param name="print"></param>
+        /// <param name="elementName"></param>
         /// <returns>String</returns>
-        public bool VerifyDisplayedText(DriverUtilities.ElementAccessorType how, string elementName, string expectedText)
+        public string GetText(DriverUtilities.ElementAccessorType how, string elementName)
         {
-            string actualText = null;
-
             try
             {
-                if (elementName != string.Empty)
-                {
-                    actualText = _driverUtils.GetText(how, elementName);
-                }
+                string text = _driverUtils.GetText(how, elementName);
+                return text;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed with message: {0}", e.Message);
+                _resultString.Append(e.Message);
+                return _resultString.ToString();
             }
-
-            return actualText != null;
         }
+
         /// <summary>
         /// Selects `itemToFind` from App Rec School Search dropdown menu
         /// </summary>

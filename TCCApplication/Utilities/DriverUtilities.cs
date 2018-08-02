@@ -78,16 +78,6 @@ namespace TCCApplication.Utilities
         }
 
         /// <summary>
-        /// Clicks accordian folder.
-        /// </summary>
-        /// <param name="how"></param>
-        /// <param name="elementName"></param>
-        public void ClickAccordion(ElementAccessorType how, string elementName)
-        {
-            Click(how, elementName);
-        }
-
-        /// <summary>
         /// Sets an implicit wait time in seconds.
         /// </summary>
         /// <param name="driver"></param>
@@ -132,10 +122,9 @@ namespace TCCApplication.Utilities
         /// <returns>String</returns>
         public string GetText(ElementAccessorType how, string element)
         {
-            string actualValue = null;
             By findBy = FindElementBy(how, element);
-            actualValue = this._driver.FindElement(findBy).Text;
-            return actualValue;
+            string text = this._driver.FindElement(findBy).Text;
+            return text;
         }
 
         /// <summary>

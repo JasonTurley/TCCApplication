@@ -36,10 +36,6 @@ namespace TCCApplication
         /// <param name="driver"></param>
         public void NavigateToMemberPage(IWebDriver driver, UserLoginLogout userLog)
         {
-            if (!userLog.IsSignedIn())
-            {
-                userLog.LoginUser();
-            }
             driver.Navigate().GoToUrl(PageValidation.MemberPage);
         }
 
@@ -49,8 +45,8 @@ namespace TCCApplication
         /// <param name="driver"></param>
         public void NavigateToSearchPage(IWebDriver driver)
         {
-            UserLoginLogout temp = new UserLoginLogout(driver);
-            temp.LoginUser();
+//            UserLoginLogout temp = new UserLoginLogout(driver);
+//            temp.LoginUser();
 
             _utils.ExplicitWait(DriverUtilities.ElementAccessorType.ID, "loadingContainer", 30);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");

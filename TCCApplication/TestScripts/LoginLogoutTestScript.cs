@@ -2,6 +2,7 @@
 /// LoginLogoutTestScripts.cs - Runs the tests from UserLoginLogout.cs
 /// </summary>
 using System;
+using TCCApplication.Data;
 using OpenQA.Selenium;
 
 namespace TCCApplication.TestScripts
@@ -10,7 +11,7 @@ namespace TCCApplication.TestScripts
     {
         private IWebDriver _driver;
         private Result _results;
-
+        private UserData _userData;
         private UserLoginLogout _userLoginLogout;
         private PageValidation _pageValidation;
 
@@ -22,6 +23,7 @@ namespace TCCApplication.TestScripts
             this._results = new Result();
             this._userLoginLogout = new UserLoginLogout(_driver);
             this._pageValidation = new PageValidation(_driver);
+            this._userData = new UserData();
         }
 
         /// <summary>
@@ -29,6 +31,9 @@ namespace TCCApplication.TestScripts
         /// </summary>
         public void Run()
         {
+            string username = _userData.GetEmail();
+            string password = _userData.GetPassword();
+
             // Create test result file
             _results.CreateResultFile("LoginLogoutTest");
             _results.WriteMainHeading("User Login & Logout Test");
@@ -37,7 +42,7 @@ namespace TCCApplication.TestScripts
             DateTime startTime = DateTime.Now;
 
             // Test login pass
-            _userLoginLogout.LoginUser();
+            _userLoginLogout.LoginUser(username, password);
             _pageValidation.VerifyLoginPassed();
             _userLoginLogout.LogoutUser();
 
@@ -46,7 +51,7 @@ namespace TCCApplication.TestScripts
             _pageValidation.VerifyLoginFailed();
 
             // Test logout pass
-            _userLoginLogout.LoginUser();
+            _userLoginLogout.LoginUser(username, password);
             _userLoginLogout.LogoutUser();
             _pageValidation.VerifyLogoutPassed();
 
