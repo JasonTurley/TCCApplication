@@ -47,9 +47,10 @@ namespace SmokeTest
             SearchForTestScript test = new SearchForTestScript(_driver);
             test.Run();
         }
+       
 
         /// <summary>
-        /// Runs all scenarios in TestScripts/MemberListc.cs
+        /// Runs all scenarios in TestScripts/MemberListTestScript.cs
         /// </summary>
         [Test]
         public void RunMemberListTestScript()

@@ -40,13 +40,14 @@ namespace TCCApplication.TestScripts
             // Start timer
             DateTime startTime = DateTime.Now;
 
-            // Verify expected amount of accorion menus were clicked
-            TestMemberAccordionsWork();
-
-            Thread.Sleep(4000);
+            // Verify that member is found
+            TestMemberIsFound();
 
             // Verify that no results are found
-            TestNoMemberFound();
+            TestMemberIsNotFound();
+
+            // Verify expected amount of accorion menus were clicked
+            TestMemberAccordionsWork();
 
             // Stop timer
             DateTime stopTime = DateTime.Now;
@@ -57,22 +58,30 @@ namespace TCCApplication.TestScripts
             //_results.WriteTestResults("Member_List", 1, 1);
         }
 
-        public void TestMemberAccordionsWork()
+        private void TestMemberAccordionsWork()
         {
-            string name = "Siena";
             uint expectedTotal = 11;
             uint actualTotal;
 
-            _memberList.MemberSearch(name);
+            _memberList.MemberSearch("Siena");
             actualTotal = _memberList.CountClickableAccordions();
-            Assert.AreEqual(actualTotal, expectedTotal); 
+            Assert.AreEqual(expectedTotal, actualTotal); 
         }
 
-        public void TestNoMemberFound()
+        private void TestMemberIsFound()
+        {
+            _memberList.MemberSearch("Alma");
+
+             string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
+            _pageValidation.VerifyTextIsNotDisplayed("No matching records found.", actualText);
+        }
+
+        private void TestMemberIsNotFound()
         {
             _memberList.MemberSearch("QWERTY");
+
             string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
-            Assert.AreEqual(actualText, "No matching records found.");
+            _pageValidation.VerifyTextIsDisplayed("No matching records found.", actualText);
         }
     }
 }

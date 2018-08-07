@@ -69,7 +69,6 @@
     <Compile Include="TestScripts\MemberListTestScript.cs" />
     <Compile Include="TestScripts\SearchForTestScript.cs" />
     <Compile Include="Utilities\DriverUtilitiesValidation.cs" />
-    <Compile Include="Utilities\Navigation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Utilities\DriverUtilities.cs" />
     <Compile Include="Utilities\PageValidation.cs" />

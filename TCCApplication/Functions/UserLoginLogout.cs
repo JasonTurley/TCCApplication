@@ -13,14 +13,12 @@ namespace TCCApplication
     {
         private IWebDriver _driver;
         private UserData _userData;
-        private Navigation _navigation;
         private DriverUtilitiesValidation _utilsValidation;
         private PageValidation _pageValidation;
 
         public UserLoginLogout(IWebDriver driver)
         {
             this._driver = driver;
-            this._navigation = new Navigation(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
             this._pageValidation = new PageValidation(_driver);
             this._userData = new UserData();
@@ -31,10 +29,11 @@ namespace TCCApplication
         /// </summary>
         public void LoginUser(string email, string password)
         {
-            _navigation.NavigateToLoginPage(_driver);
+            _driver.Navigate().GoToUrl(PageValidation.MainPage);
+            _driver.Manage().Window.Maximize();
 
-            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Username", _userData.GetEmail());
-            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", _userData.GetPassword());
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Username", email);
+            _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "Password", password);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ClassName, "btn-primary");
         }
 

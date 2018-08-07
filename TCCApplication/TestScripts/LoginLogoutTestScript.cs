@@ -2,6 +2,7 @@
 /// LoginLogoutTestScripts.cs - Runs the tests from UserLoginLogout.cs
 /// </summary>
 using System;
+using System.Threading;
 using TCCApplication.Data;
 using OpenQA.Selenium;
 
@@ -31,9 +32,6 @@ namespace TCCApplication.TestScripts
         /// </summary>
         public void Run()
         {
-            string username = _userData.GetEmail();
-            string password = _userData.GetPassword();
-
             // Create test result file
             _results.CreateResultFile("LoginLogoutTest");
             _results.WriteMainHeading("User Login & Logout Test");
@@ -42,18 +40,13 @@ namespace TCCApplication.TestScripts
             DateTime startTime = DateTime.Now;
 
             // Test login pass
-            _userLoginLogout.LoginUser(username, password);
-            _pageValidation.VerifyLoginPassed();
-            _userLoginLogout.LogoutUser();
+            TestLogInPassed();
 
             // Test login fail
-            _userLoginLogout.LoginUser("invalid-email", "invalid password");
-            _pageValidation.VerifyLoginFailed();
+            TestLogInFailed();
 
             // Test logout pass
-            _userLoginLogout.LoginUser(username, password);
-            _userLoginLogout.LogoutUser();
-            _pageValidation.VerifyLogoutPassed();
+            TestLogOutPassed();
 
             // TODO: Test logout fail
 
@@ -65,6 +58,34 @@ namespace TCCApplication.TestScripts
             // Output results
             _results.WriteTestResults("Login_Logout_Test", _results.GetAmountPassed(), TotalTests);
             _results.ResetAmountPassed();
+        }
+
+        /// <summary>
+        /// Test that user can log into TCC
+        /// </summary>
+        private void TestLogInPassed()
+        {
+            _userLoginLogout.LoginUser(_userData.GetEmail(), _userData.GetPassword());
+            _pageValidation.VerifyLoginPassed();
+        }
+
+        /// <summary>
+        /// Test that an invalid user cannot log into TCC
+        /// </summary>
+        private void TestLogInFailed()
+        {
+            _userLoginLogout.LoginUser("invalid-email", "invalid password");
+            _pageValidation.VerifyAtLoginScreen();
+        }
+
+        /// <summary>
+        /// Test that a user can log out of TCC
+        /// </summary>
+        private void TestLogOutPassed()
+        {
+            _userLoginLogout.LoginUser(_userData.GetEmail(), _userData.GetPassword());
+            _userLoginLogout.LogoutUser();
+            _pageValidation.VerifyAtLoginScreen();
         }
     }
 }

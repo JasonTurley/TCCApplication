@@ -13,7 +13,6 @@ namespace TCCApplication
     public class MemberList
     {
         private IWebDriver _driver;
-        private Navigation _navigation;
         private UserLoginLogout _userLoginLogout;
         private DriverUtilitiesValidation _utilsValidation;
         private UserData _userData;
@@ -23,7 +22,6 @@ namespace TCCApplication
         public MemberList(IWebDriver driver)
         {
             this._driver = driver;
-            this._navigation = new Navigation(_driver);
             this._userLoginLogout = new UserLoginLogout(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
             this._userData = new UserData();

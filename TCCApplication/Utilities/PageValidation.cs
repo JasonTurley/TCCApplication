@@ -32,26 +32,18 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLoginPassed()
         {
-            Thread.Sleep(2000);
-            Assert.AreEqual(MemberPage, _driver.Url);
+            _utilsValidation.ImplicitWait(5);
+            string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.XPath, "//*[@id='wid-memberList']/header/h2");
+            VerifyTextIsDisplayed("Member List", actualText);
             _results.IncrementAmountPassed();
         }
 
         /// <summary>
-        /// Verify that user login attempt has failed. User should remain on the Main Page.
+        /// Verify that user is on the login screen
         /// </summary>
-        public void VerifyLoginFailed()
+        public void VerifyAtLoginScreen()
         {
-            Assert.AreEqual(MainPage, _driver.Url);
-            _results.IncrementAmountPassed();
-        }
-
-        /// <summary>
-        /// Verify that the user logout attempt has succeeded. User should be redirected back to Main Page.
-        /// </summary>
-        public void VerifyLogoutPassed()
-        {
-            Assert.AreEqual(MainPage, _driver.Url);
+            Assert.AreEqual("https://tcc.alpha.devca.net/", _driver.Url);
             _results.IncrementAmountPassed();
         }
 
@@ -60,49 +52,46 @@ namespace TCCApplication
         /// </summary>
         public void VerifyLogoutFailed()
         {
-            Console.WriteLine("TODO: Finish me!");
+            Console.WriteLine("TODO");
         }
 
         /// <summary>
-        /// Check if search returned any results
-       /// </summary>
-        private bool TargetIsPresent()
-        {
-            bool isPresent = true;
-            string emptyTableSelector = "dataTables_empty";
-            string displayedText = "No matching records found.";
-            //Thread.Sleep(2000);
-
-            // Returns true if target is not found
-           // if (_utilsValidation.VerifyDisplayedText(DriverUtilities.ElementAccessorType.ClassName, emptyTableSelector, displayedText))
-            //{
-              //  isPresent = false;
-           // }
-
-            return isPresent;
-        }
-
-        /// <summary>
-        /// Verify that the searched for target is present on page. 
+        /// Verify that actualText is present on the page
         /// </summary>
-        public void VerifyTargetIsPresent()
+        /// <param name="actualText"></param>
+        /// <param name="expectedText"></param>
+        public void VerifyTextIsDisplayed(string expectedText, string actualText)
         {
-            Assert.IsTrue(TargetIsPresent());
-            _results.IncrementAmountPassed();
+            Assert.AreEqual(expectedText, actualText);
         }
 
         /// <summary>
-        /// Verify that a database table is NOT present on page
+        /// Verify that actualText is NOT present on the page
         /// </summary>
-        public void VerifyTargetIsNotPresent()
+        /// <param name="expected"></param>
+        /// <param name="actual"></param>
+        public void VerifyTextIsNotDisplayed(string expected, string actual)
         {
-            Assert.IsFalse(TargetIsPresent());
-            _results.IncrementAmountPassed();            
+            Assert.AreNotEqual(expected, actual);
         }
 
-        public void VerifyDisplayText(string expected, string actual)
+        /// <summary>
+        /// Verify that message "No matching records found." is displayed
+        /// </summary>
+        public void VerifyNoResultsFound()
         {
-            Assert.AreEqual(expected, actual);
+            string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
+            VerifyTextIsDisplayed("No matching records found.", actualText);
+        }
+
+        /// <summary>
+        /// Verify that a results table is loaded and the message "No matching records found."
+        /// is not displayed
+        /// </summary>
+        public void VerifyResultsAreFound()
+        {
+             string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
+            VerifyTextIsNotDisplayed("No matching records found.", actualText);
         }
     }
 }

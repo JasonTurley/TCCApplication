@@ -11,24 +11,24 @@ namespace TCCApplication
     public class SearchFor
     {
         private IWebDriver _driver;
-        private Navigation _navigation;
         private UserLoginLogout _userLoginLogout;
         private DriverUtilitiesValidation _utilsValidation;
+        private UserData _userData;
 
         public SearchFor(IWebDriver driver)
         {
             this._driver = driver;
             this._userLoginLogout = new UserLoginLogout(_driver);
-            this._navigation = new Navigation(_driver);
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
+            this._userData = new UserData();
         }
 
-       /// <summary>
-       /// Enter the arguments into an applicant's or recommender's email and name input fields.
-       /// </summary>
-       /// <param name="emailLike"></param>
-       /// <param name="firstNameLike"></param>
-       /// <param name="lastNameLike"></param>
+        /// <summary>
+        /// Enter the arguments into an applicant's or recommender's email and name input fields.
+        /// </summary>
+        /// <param name="emailLike"></param>
+        /// <param name="firstNameLike"></param>
+        /// <param name="lastNameLike"></param>
         public void EnterSharedInfo(string emailLike, string firstNameLike, string lastNameLike)
         {
             _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtEmail_fil", emailLike);
@@ -49,8 +49,8 @@ namespace TCCApplication
         /// <param name="ceebCode">Full CEEB Code. Note: only for applicant</param>
         public void SearchForPerson(string personType, string emailLike, string firstNameLike, string lastNameLike, string idIncludes, string postalCodeLike, string ceebCode)
         {
-            _navigation.NavigateToSearchPage(_driver);
-
+            GoToSearchPage();
+                        
             // Are we searching for an applicant or recommender?
             switch (personType.ToLower())
             {
@@ -93,6 +93,8 @@ namespace TCCApplication
         /// <param name="stateLike"></param>
         public void SearchForSchool(string schoolType, string ceebCode, string schoolNameLike, string cityLike, string stateLike)
         {
+            GoToSearchPage();
+
             // Select "High School" or "College" from dropdown menu
             switch (schoolType.ToLower())
             {
@@ -100,26 +102,13 @@ namespace TCCApplication
                 case "highschools":
                 case "high school":
                 case "high schools":
-                    _navigation.NavigateToSearchPage(_driver);
                     _utilsValidation.SelectDropdownItem("High School");
                     break;
 
                 case "college":
                 case "colleges":
-                    _navigation.NavigateToSearchPage(_driver);
                     _utilsValidation.SelectDropdownItem("college");
                     break;
-
-                case "member":
-                case "members":
-                    if (_driver.Url != PageValidation.MemberPage)
-                    {
-                        _navigation.NavigateToMemberPage(_driver, _userLoginLogout);
-                    }
-                    _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", schoolNameLike + Keys.Enter);
-
-                    // trying to enter the below info on the member's page will result in an error. It's safer to exit.
-                    return; 
 
                 default:
                     throw new Exception("No `schoolType` selected.");
@@ -132,6 +121,15 @@ namespace TCCApplication
             _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "txtState_fil", stateLike);
 
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "aApplicantSearch");
+        }
+
+        private void GoToSearchPage()
+        {
+            _userLoginLogout.LoginUser(_userData.GetEmail(), _userData.GetPassword());
+
+           _utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.ID, "loadingContainer", 30);
+           _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "loadingContainer");
+           _utilsValidation.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='click:MenuBar.redirectToAppRecSearch']");
         }
     }
 }

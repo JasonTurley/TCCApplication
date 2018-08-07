@@ -144,7 +144,7 @@ namespace TCCApplication.Utilities
             try
             {
                 string text = _driverUtils.GetText(how, elementName);
-                return text;
+                return (text == null ? string.Empty : text) ;       // return empty string instead of null
             }
             catch (Exception e)
             {
