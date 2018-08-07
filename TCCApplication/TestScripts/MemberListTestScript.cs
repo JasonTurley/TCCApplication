@@ -34,16 +34,13 @@ namespace TCCApplication.TestScripts
         public void Run()
         {
             // Create test result file
-           // _results.CreateResultFile("MemberListTestInput");
+            //_results.CreateResultFile("MemberListTestInput");
             //_results.WriteMainHeading("Testing Accordion Buttons");
 
             // Start timer
             DateTime startTime = DateTime.Now;
 
-            // Verify that member is found
             VerifyTestsPass();
-
-            // Verify that no results are found
             VerifyTestsFail();
 
             // Stop timer
@@ -62,7 +59,6 @@ namespace TCCApplication.TestScripts
         {
             // Search for valid member Alma
             _memberList.MemberSearch("Alma");
-             string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
             _pageValidation.VerifyResultsAreFound();
             TestMemberAccordionsWork();
 
@@ -77,8 +73,7 @@ namespace TCCApplication.TestScripts
         {
             // Search for invalid member QWERTY
             _memberList.MemberSearch("QWERTY");
-            string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
-            _pageValidation.VerifyTextIsDisplayed("No matching records found.", actualText);
+            _pageValidation.VerifyNoResultsFound();
         }
 
         private void TestMemberAccordionsWork()
