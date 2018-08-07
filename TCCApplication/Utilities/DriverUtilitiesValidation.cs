@@ -7,6 +7,7 @@
 using System;
 using System.Text;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace TCCApplication.Utilities
 {

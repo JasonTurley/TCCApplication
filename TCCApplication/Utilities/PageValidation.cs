@@ -12,7 +12,6 @@ namespace TCCApplication
     public class PageValidation
     {
         private IWebDriver _driver;
-        private Result _results = new Result();
 
         private DriverUtilities _driverUtils;
         private DriverUtilitiesValidation _utilsValidation;
@@ -35,7 +34,6 @@ namespace TCCApplication
             _utilsValidation.ImplicitWait(5);
             string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.XPath, "//*[@id='wid-memberList']/header/h2");
             VerifyTextIsDisplayed("Member List", actualText);
-            _results.IncrementAmountPassed();
         }
 
         /// <summary>
@@ -44,7 +42,6 @@ namespace TCCApplication
         public void VerifyAtLoginScreen()
         {
             Assert.AreEqual("https://tcc.alpha.devca.net/", _driver.Url);
-            _results.IncrementAmountPassed();
         }
 
         /// <summary>

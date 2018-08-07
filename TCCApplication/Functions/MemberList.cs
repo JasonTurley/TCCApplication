@@ -2,7 +2,7 @@
 /// MemberList.cs - Enables users to search for colleges on TCC's Member List page:w
 /// </summary>
 
-using System;
+using System.Threading;
 using OpenQA.Selenium;
 using TCCApplication.Data;
 using TCCApplication.Utilities;
@@ -36,9 +36,9 @@ namespace TCCApplication
             // Enter member name into search box
             _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", name + Keys.Enter);
             //_utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "aMembersSearch");
-            //_utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']", 10);
 
             // Click result link
+            _utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']", 30);
             _utilsValidation.Click(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']");
         }
 
@@ -65,6 +65,7 @@ namespace TCCApplication
 
             foreach (string id in AccoridionIDs)
             {
+                //_utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.ID, id, 30);
                 _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, id);
                 totalClicked++;
             }

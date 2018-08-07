@@ -12,8 +12,6 @@ namespace TCCApplication
         private static string _reportTime = System.DateTime.Now.ToString("MM-dd-yyyy.hh.mm.ss");
         private static string _resultFilename;
 
-        private static uint AmountPassed;     // Number of tests passed
-
         /// <summary>
         /// Creates a new test result file in the Results directory
         /// </summary>
@@ -77,31 +75,6 @@ namespace TCCApplication
             {
                 writer.WriteLine("<p>" + scriptName + " - "+ passed.ToString() + " of " + total.ToString() + " steps <span style=\"color: green;\">PASSED</p>");
             }
-        }
-
-        /// <summary>
-        /// Increments the number of test cases that have passed
-        /// </summary>
-        public void IncrementAmountPassed()
-        {
-            AmountPassed++;
-        }
-
-        /// <summary>
-        /// Returns the amount of tests that have passed
-        /// </summary>
-        /// <returns></returns>
-        public uint GetAmountPassed()
-        {
-            return AmountPassed;
-        }
-
-        /// <summary>
-        /// Resets the static variable for the next test script
-        /// </summary>
-        public void ResetAmountPassed()
-        {
-            AmountPassed = 0;
         }
     }
 }

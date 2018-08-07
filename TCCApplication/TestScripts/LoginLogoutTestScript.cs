@@ -16,7 +16,8 @@ namespace TCCApplication.TestScripts
         private UserLoginLogout _userLoginLogout;
         private PageValidation _pageValidation;
 
-        private const uint TotalTests = 3;
+        private const uint NumTests = 3;
+        private uint AmountPassed = 0;
 
         public LoginLogoutTestScript(IWebDriver driver)
         {
@@ -39,16 +40,8 @@ namespace TCCApplication.TestScripts
             // Start timer
             DateTime startTime = DateTime.Now;
 
-            // Test login pass
-            TestLogInPassed();
-
-            // Test login fail
-            TestLogInFailed();
-
-            // Test logout pass
-            TestLogOutPassed();
-
-            // TODO: Test logout fail
+            VerifyTestsPass();
+            VerifyTestsFail();
 
             // Stop timer
             DateTime stopTime = DateTime.Now;
@@ -56,35 +49,32 @@ namespace TCCApplication.TestScripts
             _results.TotalExecutionTime(duration);
 
             // Output results
-            _results.WriteTestResults("Login_Logout_Test", _results.GetAmountPassed(), TotalTests);
-            _results.ResetAmountPassed();
+            _results.WriteTestResults("Login_Logout_Test", AmountPassed, NumTests);
         }
 
         /// <summary>
-        /// Test that user can log into TCC
+        /// Runs all tests that are expected to pass
         /// </summary>
-        private void TestLogInPassed()
+        private void VerifyTestsPass()
         {
+            // Test log in works
             _userLoginLogout.LoginUser(_userData.GetEmail(), _userData.GetPassword());
             _pageValidation.VerifyLoginPassed();
-        }
+            AmountPassed++;
 
-        /// <summary>
-        /// Test that an invalid user cannot log into TCC
-        /// </summary>
-        private void TestLogInFailed()
-        {
-            _userLoginLogout.LoginUser("invalid-email", "invalid password");
-            _pageValidation.VerifyAtLoginScreen();
-        }
-
-        /// <summary>
-        /// Test that a user can log out of TCC
-        /// </summary>
-        private void TestLogOutPassed()
-        {
+            // Test log out works
             _userLoginLogout.LoginUser(_userData.GetEmail(), _userData.GetPassword());
             _userLoginLogout.LogoutUser();
+            _pageValidation.VerifyAtLoginScreen();
+            AmountPassed++;
+        }
+
+        /// <summary>
+        /// Runs all tests that are expected to fail
+        /// </summary>
+        private void VerifyTestsFail()
+        {
+            _userLoginLogout.LoginUser("invalid-email", "invalid password");
             _pageValidation.VerifyAtLoginScreen();
         }
     }

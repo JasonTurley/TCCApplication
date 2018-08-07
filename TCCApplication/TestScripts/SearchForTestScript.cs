@@ -20,6 +20,7 @@ namespace TCCApplication.TestScripts
         private SchoolData _schoolData;
 
         private const uint NumTests = 10;
+        private uint AmountPassed = 0;
 
         public SearchForTestScript(IWebDriver driver)
         {
@@ -54,9 +55,7 @@ namespace TCCApplication.TestScripts
             _results.TotalExecutionTime(duration);
 
             // Output results
-            _results.WriteTestResults("Search_For", _results.GetAmountPassed(), NumTests);
-            _results.ResetAmountPassed();
-
+            _results.WriteTestResults("Search_For", AmountPassed, NumTests);
         }
 
         /// <summary>
@@ -68,21 +67,22 @@ namespace TCCApplication.TestScripts
             _searchFor.SearchForPerson("applicant", _userData.GetEmail(), _userData.GetFirstName(), _userData.GetLastName(), _userData.GetID(),
                                         _userData.GetPostalCode(), _userData.GetCEEBCode());
             _pageValidation.VerifyResultsAreFound();
-
+            AmountPassed++;
 
             // Test recommender search passed
             _searchFor.SearchForPerson("rec", _recData.GetEmail(), _recData.GetFirstName(), _recData.GetLastName(), _recData.GetID(), "", "");
             _pageValidation.VerifyResultsAreFound();
-
+            AmountPassed++;
 
             // Test high school search passed
             _searchFor.SearchForSchool("High school", _schoolData.GetCEEBCode(), _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
             _pageValidation.VerifyResultsAreFound();
-
+            AmountPassed++;
 
             // Test college search passed
             _searchFor.SearchForSchool("college", _schoolData.GetCEEBCode(), _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
             _pageValidation.VerifyResultsAreFound();
+            AmountPassed++;
         }
 
         /// <summary>
@@ -93,21 +93,22 @@ namespace TCCApplication.TestScripts
             // Test applicant search failed
             _searchFor.SearchForPerson("applicant", "invalid-email", "fname", "lname", "12345", "60111", "54321");
             _pageValidation.VerifyNoResultsFound();
-
+            AmountPassed++;
 
             // Test recommender search failed
             _searchFor.SearchForPerson("recommender", "invalid-email", "fname", "lname", "12345", "60111", "54321");
             _pageValidation.VerifyNoResultsFound();
-
+            AmountPassed++;
 
             // Test high school search failed
             _searchFor.SearchForSchool("High school", "12345", _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
             _pageValidation.VerifyNoResultsFound();
-
+            AmountPassed++;
 
             // Test college search failed
             _searchFor.SearchForSchool("colleges", "54321", _schoolData.GetName(), _schoolData.GetCity(), _schoolData.GetState());
             _pageValidation.VerifyNoResultsFound();
+            AmountPassed++;
         }
     }
 }

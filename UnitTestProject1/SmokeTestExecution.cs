@@ -17,7 +17,7 @@ namespace SmokeTest
         private DriverUtilitiesValidation _utilsValidation;
 
         /// <summary>
-        /// Set up Firefox browser
+        /// Initialize driver
         /// </summary>
         [OneTimeSetUp]
         public void SetUp()
@@ -60,7 +60,7 @@ namespace SmokeTest
         }
 
         /// <summary>
-        /// Cleanup resources
+        /// Cleanup 
         /// </summary>
         [OneTimeTearDown]
         public void TearDown()

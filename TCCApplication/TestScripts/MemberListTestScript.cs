@@ -17,7 +17,10 @@ namespace TCCApplication.TestScripts
         private MemberList _memberList;
         private PageValidation _pageValidation;
         private DriverUtilitiesValidation _utilsValidation;
-        
+
+        private const uint NumTests = 5;
+        private uint AmountPassed = 0;
+
         public MemberListTestScript(IWebDriver driver)
         {
             this._driver = driver;
@@ -27,15 +30,14 @@ namespace TCCApplication.TestScripts
             this._utilsValidation = new DriverUtilitiesValidation(_driver);
         }
 
-
         /// <summary>
         /// Run all tests associated with the MemberList class.
         /// </summary>
         public void Run()
         {
             // Create test result file
-            //_results.CreateResultFile("MemberListTestInput");
-            //_results.WriteMainHeading("Testing Accordion Buttons");
+            _results.CreateResultFile("MemberListTestInput");
+            _results.WriteMainHeading("Testing Accordion Buttons");
 
             // Start timer
             DateTime startTime = DateTime.Now;
@@ -46,10 +48,10 @@ namespace TCCApplication.TestScripts
             // Stop timer
             DateTime stopTime = DateTime.Now;
             TimeSpan duration = stopTime - startTime;
-            //_results.TotalExecutionTime(duration);
+            _results.TotalExecutionTime(duration);
 
             // Write results to file
-            //_results.WriteTestResults("Member_List", 1, 1);
+            _results.WriteTestResults("Member_List", AmountPassed, NumTests);
         }
 
         /// <summary>
@@ -60,10 +62,15 @@ namespace TCCApplication.TestScripts
             // Search for valid member Alma
             _memberList.MemberSearch("Alma");
             _pageValidation.VerifyResultsAreFound();
-            TestMemberAccordionsWork();
+            AmountPassed++;
 
-            // Search for valid member 
+            TestMemberAccordionsWork();      
 
+            //_memberList.MemberSearch("Amherst college");
+            //_pageValidation.VerifyResultsAreFound();
+            //AmountPassed++;
+
+            //TestMemberAccordionsWork();      
         }
 
         /// <summary>
@@ -74,16 +81,20 @@ namespace TCCApplication.TestScripts
             // Search for invalid member QWERTY
             _memberList.MemberSearch("QWERTY");
             _pageValidation.VerifyNoResultsFound();
+            AmountPassed++;
         }
 
+        /// <summary>
+        /// Tests that a members accordion buttons expand and collapse when clicked.
+        /// Assumes that user is already on a valid member's page.
+        /// </summary>
         private void TestMemberAccordionsWork()
         {
             uint expectedTotal = 11;
-            uint actualTotal;
+            uint actualTotal = _memberList.CountClickableAccordions();
 
-            //_memberList.MemberSearch("Siena");
-            actualTotal = _memberList.CountClickableAccordions();
             Assert.AreEqual(expectedTotal, actualTotal); 
+            AmountPassed++;
         }
     }
 }
