@@ -39,23 +39,23 @@ namespace TCCApplication.TestScripts
         public void Run()
         {
             // Create test result file
-            //_results.CreateResultFile("SearchForTestInput");
-            //_results.WriteMainHeading("Searching For...");
+            _results.CreateResultFile("SearchForTestInput");
+            _results.WriteMainHeading("Searching For...");
 
             // Start timer
             DateTime startTime = DateTime.Now;
 
             VerifyTestsPass();
-            //VerifyTestsFail();
+            VerifyTestsFail();
 
             // Stop timer
             DateTime stopTime = DateTime.Now;
             TimeSpan duration = stopTime - startTime;
-            //_results.TotalExecutionTime(duration);
+            _results.TotalExecutionTime(duration);
 
             // Output results
-            //_results.WriteTestResults("Search_For", _results.GetAmountPassed(), NumTests);
-            //_results.ResetAmountPassed();
+            _results.WriteTestResults("Search_For", _results.GetAmountPassed(), NumTests);
+            _results.ResetAmountPassed();
 
         }
 

@@ -41,13 +41,10 @@ namespace TCCApplication.TestScripts
             DateTime startTime = DateTime.Now;
 
             // Verify that member is found
-            TestMemberIsFound();
+            VerifyTestsPass();
 
             // Verify that no results are found
-            TestMemberIsNotFound();
-
-            // Verify expected amount of accorion menus were clicked
-            TestMemberAccordionsWork();
+            VerifyTestsFail();
 
             // Stop timer
             DateTime stopTime = DateTime.Now;
@@ -58,30 +55,40 @@ namespace TCCApplication.TestScripts
             //_results.WriteTestResults("Member_List", 1, 1);
         }
 
+        /// <summary>
+        /// Runs all tests that are expected to pass
+        /// </summary>
+        private void VerifyTestsPass()
+        {
+            // Search for valid member Alma
+            _memberList.MemberSearch("Alma");
+             string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
+            _pageValidation.VerifyResultsAreFound();
+            TestMemberAccordionsWork();
+
+            // Search for valid member 
+
+        }
+
+        /// <summary>
+        /// Runs all tests that are expected to fail
+        /// </summary>
+        private void VerifyTestsFail()
+        {
+            // Search for invalid member QWERTY
+            _memberList.MemberSearch("QWERTY");
+            string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
+            _pageValidation.VerifyTextIsDisplayed("No matching records found.", actualText);
+        }
+
         private void TestMemberAccordionsWork()
         {
             uint expectedTotal = 11;
             uint actualTotal;
 
-            _memberList.MemberSearch("Siena");
+            //_memberList.MemberSearch("Siena");
             actualTotal = _memberList.CountClickableAccordions();
             Assert.AreEqual(expectedTotal, actualTotal); 
-        }
-
-        private void TestMemberIsFound()
-        {
-            _memberList.MemberSearch("Alma");
-
-             string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
-            _pageValidation.VerifyTextIsNotDisplayed("No matching records found.", actualText);
-        }
-
-        private void TestMemberIsNotFound()
-        {
-            _memberList.MemberSearch("QWERTY");
-
-            string actualText = _utilsValidation.GetText(DriverUtilities.ElementAccessorType.ClassName, "dataTables_empty");
-            _pageValidation.VerifyTextIsDisplayed("No matching records found.", actualText);
         }
     }
 }
