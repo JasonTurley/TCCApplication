@@ -59,18 +59,8 @@ namespace TCCApplication.TestScripts
         /// </summary>
         private void VerifyTestsPass()
         {
-            // Search for valid member Alma
-            _memberList.MemberSearch("Alma");
-            _pageValidation.VerifyResultsAreFound();
-            AmountPassed++;
-
-            TestMemberAccordionsWork();      
-
-            //_memberList.MemberSearch("Amherst college");
-            //_pageValidation.VerifyResultsAreFound();
-            //AmountPassed++;
-
-            //TestMemberAccordionsWork();      
+            TestMember("Siena");
+            TestMember("Alma");
         }
 
         /// <summary>
@@ -84,6 +74,16 @@ namespace TCCApplication.TestScripts
             AmountPassed++;
         }
 
+        private void TestMember(string memberName)
+        {
+            // lookup the member
+            _memberList.MemberSearch(memberName);
+            _pageValidation.VerifyResultsAreFound();
+            AmountPassed++;
+
+            // verify that all their accordions are clickable
+            TestMemberAccordionsWork();     
+        }
         /// <summary>
         /// Tests that a members accordion buttons expand and collapse when clicked.
         /// Assumes that user is already on a valid member's page.

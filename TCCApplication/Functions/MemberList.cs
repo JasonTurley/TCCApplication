@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// MemberList.cs - Enables users to search for colleges on TCC's Member List page:w
 /// </summary>
-
+using System;
 using System.Threading;
 using OpenQA.Selenium;
 using TCCApplication.Data;
@@ -35,7 +35,6 @@ namespace TCCApplication
 
             // Enter member name into search box
             _utilsValidation.EnterText(DriverUtilities.ElementAccessorType.ID, "member-list-filter", name + Keys.Enter);
-            //_utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, "aMembersSearch");
 
             // Click result link
             _utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.XPath, "//*[@data-bind='text: Name']", 30);
@@ -48,6 +47,7 @@ namespace TCCApplication
         public uint CountClickableAccordions()
         {
             uint totalClicked = 0;
+
             string[] AccoridionIDs = 
             {
                 "abasicConfig",
@@ -65,9 +65,20 @@ namespace TCCApplication
 
             foreach (string id in AccoridionIDs)
             {
-                //_utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.ID, id, 30);
-                _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, id);
-                totalClicked++;
+                try
+                {
+                    _utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.ID, id, 30);
+                    _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, id);
+                    totalClicked++;
+                    Thread.Sleep(200);
+                }
+                catch (UnhandledAlertException ex)
+                {
+                    IAlert alert = _driver.SwitchTo().Alert();
+                    alert.Dismiss();
+
+                    Console.WriteLine(ex.Message);
+                }
             }
 
             return totalClicked;

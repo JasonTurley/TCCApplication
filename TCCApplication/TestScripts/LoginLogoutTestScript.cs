@@ -76,6 +76,7 @@ namespace TCCApplication.TestScripts
         {
             _userLoginLogout.LoginUser("invalid-email", "invalid password");
             _pageValidation.VerifyAtLoginScreen();
+            AmountPassed++;
         }
     }
 }

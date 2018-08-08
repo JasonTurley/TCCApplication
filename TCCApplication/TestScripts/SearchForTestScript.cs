@@ -19,7 +19,7 @@ namespace TCCApplication.TestScripts
         private RecommenderData _recData;
         private SchoolData _schoolData;
 
-        private const uint NumTests = 10;
+        private const uint NumTests = 8;
         private uint AmountPassed = 0;
 
         public SearchForTestScript(IWebDriver driver)
