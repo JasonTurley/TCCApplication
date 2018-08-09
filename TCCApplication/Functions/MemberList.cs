@@ -67,10 +67,10 @@ namespace TCCApplication
             {
                 try
                 {
-                    _utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.ID, id, 30);
+                    _utilsValidation.ExplicitWait(DriverUtilities.ElementAccessorType.ID, id, 60);
                     _utilsValidation.Click(DriverUtilities.ElementAccessorType.ID, id);
                     totalClicked++;
-                    Thread.Sleep(200);
+                    //Thread.Sleep(200);        // works, but not an optimal solution
                 }
                 catch (UnhandledAlertException ex)
                 {

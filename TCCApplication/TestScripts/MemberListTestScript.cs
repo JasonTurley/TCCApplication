@@ -37,7 +37,7 @@ namespace TCCApplication.TestScripts
         {
             // Create test result file
             _results.CreateResultFile("MemberListTestInput");
-            _results.WriteMainHeading("Testing Accordion Buttons");
+            _results.WriteMainHeading("Testing Member Search Functionality...");
 
             // Start timer
             DateTime startTime = DateTime.Now;
